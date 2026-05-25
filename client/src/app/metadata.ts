@@ -2,16 +2,26 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: "The Average Guy | Cafe • Lounge • Community • Events",
-    template: "%s | The Average Guy"
+    default: "The Monarch Mug | Coffee • Conversations • Community",
+    template: "%s | The Monarch Mug"
   },
-  description: "A modern aesthetic cafe and community hangout space in Bhubaneswar. Experience the best coffee, live music, and networking culture.",
-  keywords: ["Cafe", "Bhubaneswar", "Lounge", "Events", "Community", "Coffee Shop", "The Average Guy"],
+  description: "The Monarch Mug is a modern white-themed luxury cafe in Bhubaneswar known for its elegant interiors, premium coffee culture, aesthetic ambiance, and refined social experience.",
+  keywords: [
+    "The Monarch Mug",
+    "Cafe Bhubaneswar",
+    "Luxury Cafe",
+    "White Aesthetic Cafe",
+    "Minimalist Cafe",
+    "Coffee Culture",
+    "Work Friendly Cafe",
+    "Premium Coffee",
+    "Bhubaneswar Lifestyle"
+  ],
   openGraph: {
-    title: "The Average Guy",
-    description: "Bhubaneswar's Premier Community Lounge & Cafe Experience.",
-    url: "https://theaverageguy.in",
-    siteName: "The Average Guy",
+    title: "The Monarch Mug",
+    description: "A Modern Luxury Cafe Experience in Bhubaneswar.",
+    url: "https://themonarchmug.com",
+    siteName: "The Monarch Mug",
     locale: "en_IN",
     type: "website",
   },

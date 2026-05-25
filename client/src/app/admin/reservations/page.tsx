@@ -54,68 +54,68 @@ export default function AdminReservationsPage() {
   return (
     <div className="space-y-10">
       <div>
-        <h1 className="text-4xl font-black tracking-tighter uppercase">Reservations</h1>
-        <p className="text-white/40">Manage table bookings and guest inquiries.</p>
+        <h1 className="text-4xl font-serif font-bold tracking-tight">Reservations</h1>
+        <p className="text-muted-foreground">Manage table bookings and guest inquiries.</p>
       </div>
 
       {loading ? (
         <div className="flex justify-center py-20">
-          <Loader2 className="animate-spin text-brand-orange" size={40} />
+          <Loader2 className="animate-spin text-brand-gold" size={40} />
         </div>
       ) : (
         <div className="space-y-4">
-          {reservations.length === 0 && <p className="text-white/20 text-center py-20">No reservations found.</p>}
+          {reservations.length === 0 && <p className="text-muted-foreground/60 text-center py-20 italic">No reservations found.</p>}
           {reservations.map((res) => (
-            <Card key={res._id} className="bg-zinc-900 border-white/5 p-8 text-white grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
+            <Card key={res._id} className="bg-white/50 backdrop-blur-md border-brand-latte/50 p-8 text-foreground grid grid-cols-1 md:grid-cols-4 gap-8 items-center rounded-3xl hover:shadow-xl hover:shadow-black/5 transition-all duration-500">
               <div className="space-y-1">
-                 <h3 className="text-xl font-bold">{res.name}</h3>
-                 <div className="flex items-center gap-2 text-white/40 text-sm">
+                 <h3 className="text-xl font-serif font-bold">{res.name}</h3>
+                 <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium">
                     <Users size={14} />
                     <span>{res.guests} Guests</span>
                  </div>
               </div>
 
               <div className="space-y-1">
-                 <div className="flex items-center gap-2 text-white/60">
-                    <Calendar size={16} />
-                    <span className="font-medium">{new Date(res.date).toLocaleDateString()}</span>
+                 <div className="flex items-center gap-2 text-muted-foreground/80">
+                    <Calendar size={16} className="text-brand-gold" />
+                    <span className="font-semibold text-sm">{new Date(res.date).toLocaleDateString()}</span>
                  </div>
-                 <div className="flex items-center gap-2 text-white/60">
-                    <Clock size={16} />
-                    <span className="font-medium">{res.time}</span>
+                 <div className="flex items-center gap-2 text-muted-foreground/80">
+                    <Clock size={16} className="text-brand-gold" />
+                    <span className="font-semibold text-sm">{res.time}</span>
                  </div>
               </div>
 
               <div className="space-y-1">
-                 <div className="flex items-center gap-2 text-white/60">
-                    <Phone size={16} />
-                    <span className="text-sm">{res.phone}</span>
+                 <div className="flex items-center gap-2 text-muted-foreground/80">
+                    <Phone size={16} className="text-brand-gold" />
+                    <span className="text-sm font-medium">{res.phone}</span>
                  </div>
                  {res.email && (
-                    <div className="flex items-center gap-2 text-white/60">
-                      <Mail size={16} />
-                      <span className="text-sm truncate max-w-[150px]">{res.email}</span>
+                    <div className="flex items-center gap-2 text-muted-foreground/80">
+                      <Mail size={16} className="text-brand-gold" />
+                      <span className="text-sm font-medium truncate max-w-[150px]">{res.email}</span>
                     </div>
                  )}
               </div>
 
               <div className="flex justify-end gap-3">
                  <Badge className={
-                   res.status === 'confirmed' ? "bg-green-500/10 text-green-500 border-green-500/20" :
+                   res.status === 'confirmed' ? "bg-green-500/10 text-green-600 border-green-500/20" :
                    res.status === 'cancelled' ? "bg-red-500/10 text-red-500 border-red-500/20" :
-                   "bg-yellow-500/10 text-yellow-500 border-yellow-500/20"
+                   "bg-yellow-500/10 text-yellow-600 border-yellow-500/20"
                  }>
                    {res.status.toUpperCase()}
                  </Badge>
 
                  <div className="flex gap-1">
                     {res.status !== 'confirmed' && (
-                      <Button onClick={() => handleStatusChange(res._id, 'confirmed')} variant="ghost" size="icon" className="h-8 w-8 text-green-500 hover:bg-green-500/10">
-                        <CheckCircle size={16} />
+                      <Button onClick={() => handleStatusChange(res._id, 'confirmed')} variant="ghost" size="icon" className="h-9 w-9 text-green-600 hover:bg-green-500/5 rounded-xl">
+                        <CheckCircle size={18} />
                       </Button>
                     )}
-                    <Button onClick={() => handleDelete(res._id)} variant="ghost" size="icon" className="h-8 w-8 text-red-500 hover:bg-red-500/10">
-                      <Trash2 size={16} />
+                    <Button onClick={() => handleDelete(res._id)} variant="ghost" size="icon" className="h-9 w-9 text-red-500 hover:bg-red-500/5 rounded-xl">
+                      <Trash2 size={18} />
                     </Button>
                  </div>
               </div>

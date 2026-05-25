@@ -3,35 +3,65 @@ import { Footer } from "@/components/layout/Footer";
 import { GalleryPreview } from "@/components/home/GalleryPreview";
 
 export default function GalleryPage() {
+  const aestheticImages = [
+    { src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop', title: 'The Main Hall' },
+    { src: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=2071&auto=format&fit=crop', title: 'Morning Rays' },
+    { src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop', title: 'Curated Seating' },
+    { src: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2069&auto=format&fit=crop', title: 'Minimalist Workspace' },
+    { src: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop', title: 'Evening Glow' },
+    { src: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2069&auto=format&fit=crop', title: 'Architectural Perspective' },
+  ];
+
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-brand-ivory">
       <Navbar />
-      <div className="pt-32 px-6 md:px-12 max-w-7xl mx-auto text-center">
-        <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase">
-          VISUAL <span className="text-brand-orange">JOURNEY</span>
+
+      {/* Editorial Header */}
+      <div className="pt-48 pb-12 px-6 md:px-12 max-w-7xl mx-auto text-center">
+        <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">The Visuals</span>
+        <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-medium text-foreground tracking-tight leading-none">
+          A Frame of <br />
+          <span className="italic">Serenity</span>
         </h1>
-        <p className="text-white/50 max-w-2xl mx-auto mt-6 text-lg">
-          A glimpse into the soul of The Average Guy—where every corner tells a story and every moment is a memory.
+        <p className="text-foreground/40 max-w-xl mx-auto mt-12 text-sm md:text-base font-light italic leading-relaxed">
+          Exploring the interplay of light, architecture, and premium coffee culture. Each frame is a story of quiet luxury.
         </p>
       </div>
+
       <GalleryPreview />
-      <div className="pb-24 px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            'https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1987&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1511081138522-86197a8456a1?q=80&w=1974&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1525610553991-2bede1a236e2?q=80&w=2070&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=2071&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1501339819302-ee4b8dd5a1b6?q=80&w=2070&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1974&auto=format&fit=crop',
-          ].map((src, i) => (
-            <div key={i} className="aspect-[3/4] overflow-hidden rounded-3xl group relative">
-               <img src={src} alt="Gallery" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+      {/* Masonry-style Grid */}
+      <div className="pb-32 px-6 md:px-12 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+          {aestheticImages.map((img, i) => (
+            <div key={i} className="group cursor-pointer">
+              <div className="aspect-[3/4] overflow-hidden rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.02)] mb-6">
+                <img
+                  src={img.src}
+                  alt={img.title}
+                  className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-110"
+                />
+              </div>
+              <div className="flex justify-between items-center px-2">
+                <h4 className="text-sm font-serif font-medium text-foreground italic group-hover:text-brand-gold transition-colors">{img.title}</h4>
+                <span className="text-[9px] uppercase tracking-widest text-foreground/20 font-bold">0{i+1}</span>
+              </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Narrative Section */}
+      <div className="py-48 bg-white overflow-hidden">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-2xl md:text-4xl font-serif font-medium text-foreground leading-relaxed italic opacity-80">
+            &quot;We design spaces that don&apos;t just look beautiful, but feel like a sanctuary for the soul.&quot;
+          </p>
+          <div className="w-12 h-[1px] bg-brand-gold mx-auto mt-12" />
+          <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-foreground/40 mt-6 block">The Monarch Design Philosophy</span>
+        </div>
+      </div>
+
       <Footer />
     </main>
   );

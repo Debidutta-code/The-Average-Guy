@@ -36,7 +36,7 @@ export default function AdminLoginPage() {
         toast.error(data.message || "Invalid credentials.");
         setLoading(false);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to connect to server.");
       setLoading(false);
     }
@@ -48,10 +48,10 @@ export default function AdminLoginPage() {
       <Card className="w-full max-w-md bg-zinc-900 border-white/5 text-white">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-black tracking-tighter uppercase">
-            ADMIN <span className="text-brand-orange">PORTAL</span>
+            ADMIN <span className="text-brand-gold">PORTAL</span>
           </CardTitle>
           <CardDescription className="text-white/40">
-            Secure access for The Average Guy management.
+            Secure access for OOPRE Kitchen & Bar management.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -63,7 +63,7 @@ export default function AdminLoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@theaverageguy.in"
+                placeholder="admin@oopre.in"
                 className="bg-black/50 border-white/10"
                 required
               />
@@ -79,7 +79,7 @@ export default function AdminLoginPage() {
                 required
               />
             </div>
-            <Button type="submit" disabled={loading} className="w-full bg-brand-orange hover:bg-white hover:text-black font-bold h-12">
+            <Button type="submit" disabled={loading} className="w-full bg-brand-gold hover:bg-white hover:text-black font-bold h-12">
               {loading ? "Authenticating..." : "Login to Dashboard"}
             </Button>
           </form>

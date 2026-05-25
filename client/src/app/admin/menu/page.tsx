@@ -19,12 +19,22 @@ import { Badge } from "@/components/ui/badge";
 import { apiFetch } from "@/lib/api";
 import { toast } from "sonner";
 
+interface MenuItem {
+  _id: string;
+  title: string;
+  price: number;
+  category: string;
+  isVeg: boolean;
+  description?: string;
+  image?: string;
+}
+
 export default function AdminMenuPage() {
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [editingItem, setEditingItem] = useState<any>(null);
+  const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -39,7 +49,7 @@ export default function AdminMenuPage() {
     try {
       const response = await apiFetch('/menu');
       setItems(response.data);
-    } catch (error) {
+    } catch {
       toast.error("Failed to fetch menu");
     } finally {
       setLoading(false);
@@ -47,7 +57,14 @@ export default function AdminMenuPage() {
   };
 
   useEffect(() => {
-    fetchMenu();
+    let mounted = true;
+    const loadData = async () => {
+      if (mounted) {
+        await fetchMenu();
+      }
+    };
+    loadData();
+    return () => { mounted = false; };
   }, []);
 
   const handleSave = async () => {
@@ -69,7 +86,7 @@ export default function AdminMenuPage() {
       fetchMenu();
       setIsDialogOpen(false);
       resetForm();
-    } catch (error) {
+    } catch {
       toast.error("Failed to save item");
     } finally {
       setSaving(false);
@@ -82,7 +99,7 @@ export default function AdminMenuPage() {
       await apiFetch(`/menu/${id}`, { method: 'DELETE' });
       toast.success("Item deleted");
       fetchMenu();
-    } catch (error) {
+    } catch {
       toast.error("Failed to delete item");
     }
   };
@@ -99,7 +116,7 @@ export default function AdminMenuPage() {
     setEditingItem(null);
   };
 
-  const handleEdit = (item: any) => {
+  const handleEdit = (item: MenuItem) => {
     setEditingItem(item);
     setFormData({
       title: item.title,
@@ -117,15 +134,15 @@ export default function AdminMenuPage() {
       <div className="flex justify-between items-end">
         <div>
           <h1 className="text-4xl font-black tracking-tighter uppercase">Menu Management</h1>
-          <p className="text-white/40">Manage your cafe's food and drink offerings.</p>
+          <p className="text-white/40">Manage your cafe&apos;s food and drink offerings.</p>
         </div>
 
         <Dialog open={isDialogOpen} onOpenChange={(open) => {
           setIsDialogOpen(open);
           if (!open) resetForm();
         }}>
-          <DialogTrigger asChild>
-            <Button className="bg-brand-orange hover:bg-white hover:text-black font-bold">
+          <DialogTrigger>
+            <Button className="bg-brand-gold hover:bg-white hover:text-black font-bold">
               <Plus size={18} className="mr-2" /> Add Item
             </Button>
           </DialogTrigger>
@@ -174,7 +191,7 @@ export default function AdminMenuPage() {
                     id="veg"
                     checked={formData.isVeg}
                     onChange={(e) => setFormData({...formData, isVeg: e.target.checked})}
-                    className="w-5 h-5 accent-brand-orange"
+                    className="w-5 h-5 accent-brand-gold"
                   />
                   <Label htmlFor="veg">Vegetarian</Label>
                 </div>
@@ -194,7 +211,7 @@ export default function AdminMenuPage() {
               <Button
                 onClick={handleSave}
                 disabled={saving}
-                className="bg-brand-orange w-full h-12 font-bold"
+                className="bg-brand-gold w-full h-12 font-bold"
               >
                 {saving ? <Loader2 className="animate-spin" /> : editingItem ? 'Update Item' : 'Add to Menu'}
               </Button>
@@ -205,15 +222,15 @@ export default function AdminMenuPage() {
 
       {loading ? (
         <div className="flex justify-center py-20">
-          <Loader2 className="animate-spin text-brand-orange" size={40} />
+          <Loader2 className="animate-spin text-brand-gold" size={40} />
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {items.length === 0 && <p className="text-white/20 text-center py-20 w-full col-span-2">No menu items found.</p>}
           {items.map((item) => (
-            <Card key={item._id} className="bg-zinc-900 border-white/5 p-6 text-white hover:border-brand-orange/50 transition-all">
+            <Card key={item._id} className="bg-zinc-900 border-white/5 p-6 text-white hover:border-brand-gold/50 transition-all">
               <div className="flex justify-between items-start mb-4">
-                <div className="w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center text-brand-orange">
+                <div className="w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center text-brand-gold">
                   <Coffee size={24} />
                 </div>
                 <div className="flex gap-2">
@@ -234,7 +251,7 @@ export default function AdminMenuPage() {
                   </Badge>
                 </div>
                 <p className="text-white/40 text-sm capitalize">{item.category}</p>
-                <p className="text-2xl font-black text-brand-orange">₹{item.price}</p>
+                <p className="text-2xl font-black text-brand-gold">₹{item.price}</p>
               </div>
             </Card>
           ))}

@@ -4,14 +4,20 @@ import React, { useState, useEffect } from 'react';
 import { apiFetch } from '@/lib/api';
 import { CommunityBanner } from '@/components/community/CommunityBanner';
 
+interface CommunitySettings {
+  enabled: boolean;
+  title: string;
+  description: string;
+  whatsappLink: string;
+  buttonText: string;
+  bannerImage: string;
+}
+
 export function CommunityBannerLoader() {
-  const [settings, setSettings] = useState<any>(null);
+  const [settings, setSettings] = useState<CommunitySettings | null>(null);
 
   useEffect(() => {
-    fetchSettings();
-  }, []);
-
-  const fetchSettings = async () => {
+    const fetchSettings = async () => {
     try {
       const data = await apiFetch('/community');
       if (data && data.length > 0 && data[0].enabled) {
@@ -21,6 +27,8 @@ export function CommunityBannerLoader() {
       console.error('Error fetching community banner settings:', error);
     }
   };
+  fetchSettings();
+}, []);
 
   if (!settings) return null;
 

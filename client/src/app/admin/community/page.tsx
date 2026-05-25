@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { MessageCircle, Save, Globe, Smartphone, Bell, Image as ImageIcon, Loader2 } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Globe, Bell, MessageCircle, Save, Loader2 } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -29,10 +28,7 @@ export default function AdminCommunityPage() {
   });
 
   useEffect(() => {
-    fetchSettings();
-  }, []);
-
-  const fetchSettings = async () => {
+    const fetchSettings = async () => {
     try {
       const data = await apiFetch('/community');
       if (data && data.length > 0) {
@@ -45,6 +41,8 @@ export default function AdminCommunityPage() {
       setLoading(false);
     }
   };
+  fetchSettings();
+}, []);
 
   const handleSave = async () => {
     setSaving(true);
@@ -72,7 +70,7 @@ export default function AdminCommunityPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <Loader2 className="animate-spin text-brand-orange" size={48} />
+        <Loader2 className="animate-spin text-brand-gold" size={48} />
       </div>
     );
   }
@@ -83,13 +81,13 @@ export default function AdminCommunityPage() {
       <div className="max-w-4xl mx-auto space-y-12">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <h1 className="text-4xl font-black tracking-tighter uppercase">COMMUNITY <span className="text-brand-orange">SETTINGS</span></h1>
+            <h1 className="text-4xl font-black tracking-tighter uppercase">COMMUNITY <span className="text-brand-gold">SETTINGS</span></h1>
             <p className="text-white/40 mt-2">Manage your WhatsApp community presence and user interactions.</p>
           </div>
           <Button
             onClick={handleSave}
             disabled={saving}
-            className="bg-brand-orange hover:bg-white text-white hover:text-black font-bold h-14 px-8 rounded-xl shadow-lg shadow-brand-orange/20 transition-all duration-300"
+            className="bg-brand-gold hover:bg-white text-white hover:text-black font-bold h-14 px-8 rounded-xl shadow-lg shadow-brand-gold/20 transition-all duration-300"
           >
             {saving ? <Loader2 className="animate-spin mr-2" /> : <Save className="mr-2" />}
             Save Changes
@@ -101,7 +99,7 @@ export default function AdminCommunityPage() {
           <Card className="bg-zinc-900 border-white/5 overflow-hidden">
             <CardHeader className="border-b border-white/5 bg-white/5">
               <CardTitle className="text-lg flex items-center gap-2">
-                <Globe className="text-brand-orange" size={20} />
+                <Globe className="text-brand-gold" size={20} />
                 Visibility Control
               </CardTitle>
             </CardHeader>
@@ -134,7 +132,7 @@ export default function AdminCommunityPage() {
           <Card className="bg-zinc-900 border-white/5 overflow-hidden">
             <CardHeader className="border-b border-white/5 bg-white/5">
               <CardTitle className="text-lg flex items-center gap-2">
-                <Bell className="text-brand-orange" size={20} />
+                <Bell className="text-brand-gold" size={20} />
                 Interaction Settings
               </CardTitle>
             </CardHeader>
@@ -157,7 +155,7 @@ export default function AdminCommunityPage() {
         <Card className="bg-zinc-900 border-white/5 overflow-hidden">
           <CardHeader className="border-b border-white/5 bg-white/5">
             <CardTitle className="text-lg flex items-center gap-2">
-              <MessageCircle className="text-brand-orange" size={20} />
+              <MessageCircle className="text-brand-gold" size={20} />
               Community Content
             </CardTitle>
           </CardHeader>

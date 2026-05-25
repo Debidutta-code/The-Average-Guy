@@ -5,19 +5,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { motion } from 'framer-motion';
 
 const menuItems = {
-  coffee: [
-    { name: 'Cold Brew Premium', price: '₹220', desc: 'Slow-steeped for 18 hours for maximum flavor.' },
-    { name: 'Vanilla Bean Latte', price: '₹240', desc: 'Double espresso with house-made vanilla syrup.' },
-    { name: 'Spanish Latte', price: '₹260', desc: 'A sweet and creamy condensed milk masterpiece.' },
+  greek: [
+    { name: 'Moussaka Classic', price: '₹540', desc: 'Layers of eggplant, minced meat, and béchamel sauce.' },
+    { name: 'Souvlaki Platter', price: '₹480', desc: 'Grilled skewers served with pita, tzatziki, and Greek salad.' },
+    { name: 'Spanakopita', price: '₹380', desc: 'Spinach and feta cheese wrapped in flaky phyllo pastry.' },
   ],
-  food: [
-    { name: 'Avocado Toast', price: '₹350', desc: 'Sourdough bread, mashed avocado, poached egg.' },
-    { name: 'Peri Peri Burger', price: '₹280', desc: 'Spicy grilled chicken with charcoal bun.' },
-    { name: 'Truffle Fries', price: '₹190', desc: 'Hand-cut potatoes tossed in truffle oil.' },
+  mains: [
+    { name: 'Wood-Fired Pepperoni Pizza', price: '₹520', desc: 'Hand-stretched dough with premium pepperoni and mozzarella.' },
+    { name: 'Fettuccine Alfredo', price: '₹460', desc: 'Rich and creamy parmesan sauce with fresh parsley.' },
+    { name: 'Rooftop Special Burger', price: '₹490', desc: 'Double wagyu beef patty with truffle mayo.' },
   ],
-  desserts: [
-    { name: 'Lotus Biscoff Cheesecake', price: '₹310', desc: 'Creamy cheesecake topped with biscoff spread.' },
-    { name: 'Dark Chocolate Brownie', price: '₹180', desc: 'Warm fudgy brownie served with vanilla gelato.' },
+  cocktails: [
+    { name: 'Mykonos Sunset', price: '₹550', desc: 'Premium gin, elderflower, and fresh grapefruit.' },
+    { name: 'The Oopre Sour', price: '₹580', desc: 'Bourbon, spiced honey, and aromatic bitters.' },
+    { name: 'Santorini Spritz', price: '₹520', desc: 'Prosecco, Aperol, and a splash of Mediterranean soda.' },
   ],
 };
 
@@ -26,19 +27,19 @@ export function MenuShowcase() {
     <section className="py-24 px-6 md:px-12 bg-black">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16 space-y-4">
-          <h3 className="text-brand-orange font-bold uppercase tracking-widest text-sm">Taste The Premium</h3>
-          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none">
-            CRAFTED <span className="text-white/20">MENU</span>
+          <h3 className="text-brand-gold font-bold uppercase tracking-widest text-sm text-center">Global Flavors</h3>
+          <h2 className="text-4xl md:text-6xl font-serif font-black text-white tracking-tighter uppercase leading-none text-center">
+            CRAFTED <span className="text-brand-blue">MENU</span>
           </h2>
         </div>
 
-        <Tabs defaultValue="coffee" className="w-full">
+        <Tabs defaultValue="greek" className="w-full">
           <TabsList className="w-full justify-center bg-transparent gap-8 mb-12 border-b border-white/10 rounded-none h-auto p-0 pb-4">
             {Object.keys(menuItems).map((category) => (
               <TabsTrigger
                 key={category}
                 value={category}
-                className="bg-transparent text-white/40 data-[state=active]:text-brand-orange data-[state=active]:bg-transparent border-none text-xl font-black uppercase tracking-tighter transition-all px-0"
+                className="bg-transparent text-white/40 data-[state=active]:text-brand-blue data-[state=active]:bg-transparent border-none text-xl font-serif font-black uppercase tracking-tighter transition-all px-0"
               >
                 {category}
               </TabsTrigger>
@@ -58,9 +59,9 @@ export function MenuShowcase() {
                     className="group"
                   >
                     <div className="flex justify-between items-end mb-2">
-                      <h4 className="text-xl font-bold text-white group-hover:text-brand-orange transition-colors">{item.name}</h4>
+                      <h4 className="text-xl font-serif font-bold text-white group-hover:text-brand-blue transition-colors uppercase">{item.name}</h4>
                       <div className="flex-grow border-b border-dotted border-white/20 mx-4 mb-1" />
-                      <span className="text-brand-orange font-black">{item.price}</span>
+                      <span className="text-brand-gold font-black font-serif">{item.price}</span>
                     </div>
                     <p className="text-white/40 text-sm italic">{item.desc}</p>
                   </motion.div>

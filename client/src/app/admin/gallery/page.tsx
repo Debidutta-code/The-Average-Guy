@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Plus, Trash2, Image as ImageIcon } from 'lucide-react';
+import { Plus, Trash2 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
 const dummyGallery = [
@@ -11,7 +11,7 @@ const dummyGallery = [
 ];
 
 export default function AdminGalleryPage() {
-  const [images, setImages] = useState(dummyGallery);
+  const [images] = useState(dummyGallery);
 
   return (
     <div className="space-y-10">
@@ -21,7 +21,7 @@ export default function AdminGalleryPage() {
           <p className="text-white/40">Upload and organize cafe visuals.</p>
         </div>
 
-        <Button className="bg-brand-orange hover:bg-white hover:text-black font-bold">
+        <Button className="bg-brand-gold hover:bg-white hover:text-black font-bold">
           <Plus size={18} className="mr-2" /> Upload Photos
         </Button>
       </div>

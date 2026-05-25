@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MessageCircle, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 interface CommunityPopupModalProps {
   title: string;
@@ -56,7 +55,7 @@ export function CommunityPopupModal({
             className="fixed bottom-8 left-8 right-8 md:left-auto md:right-8 md:bottom-8 md:w-[400px] z-[101] bg-zinc-900 border border-white/10 rounded-[32px] p-8 shadow-2xl overflow-hidden"
           >
             {/* Background Glow */}
-            <div className="absolute -top-24 -right-24 w-48 h-48 bg-brand-orange/20 rounded-full blur-[60px]" />
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-brand-gold/20 rounded-full blur-[60px]" />
 
             <button
               onClick={closePopup}
@@ -66,7 +65,7 @@ export function CommunityPopupModal({
             </button>
 
             <div className="relative space-y-6">
-              <div className="w-16 h-16 bg-brand-orange rounded-2xl flex items-center justify-center text-white shadow-xl shadow-brand-orange/20">
+              <div className="w-16 h-16 bg-brand-gold rounded-2xl flex items-center justify-center text-white shadow-xl shadow-brand-gold/20">
                 <MessageCircle size={32} fill="currentColor" />
               </div>
 
@@ -79,15 +78,16 @@ export function CommunityPopupModal({
                 </p>
               </div>
 
-              <Button
-                asChild
-                className="w-full bg-white hover:bg-brand-orange text-black hover:text-white font-bold h-14 rounded-xl transition-all duration-300 group"
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closePopup}
+                className="flex items-center justify-center w-full bg-white hover:bg-brand-gold text-black hover:text-white font-bold h-14 rounded-xl transition-all duration-300 group"
               >
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" onClick={closePopup}>
-                  Join Now
-                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </Button>
+                Join Now
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </a>
 
               <p className="text-[10px] text-white/20 text-center uppercase tracking-widest font-bold">
                 Exclusive community updates

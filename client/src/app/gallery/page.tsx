@@ -8,10 +8,10 @@ export default function GalleryPage() {
       <Navbar />
       <div className="pt-32 px-6 md:px-12 max-w-7xl mx-auto text-center">
         <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase">
-          VISUAL <span className="text-brand-orange">JOURNEY</span>
+          VISUAL <span className="text-brand-gold">JOURNEY</span>
         </h1>
         <p className="text-white/50 max-w-2xl mx-auto mt-6 text-lg">
-          A glimpse into the soul of The Average Guy—where every corner tells a story and every moment is a memory.
+          A glimpse into the soul of OOPRE—where every corner tells a story and every moment is a memory.
         </p>
       </div>
       <GalleryPreview />

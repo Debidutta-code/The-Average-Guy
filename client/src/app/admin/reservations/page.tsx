@@ -8,24 +8,49 @@ import { apiFetch } from "@/lib/api";
 import { toast } from "sonner";
 import { Button } from '@/components/ui/button';
 
+interface Reservation {
+  _id: string;
+  name: string;
+  guests: number;
+  date: string;
+  time: string;
+  phone: string;
+  email?: string;
+  status: string;
+}
+
 export default function AdminReservationsPage() {
-  const [reservations, setReservations] = useState<any[]>([]);
+  const [reservations, setReservations] = useState<Reservation[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchReservations = async () => {
+  useEffect(() => {
+    let mounted = true;
+    const fetchReservations = async () => {
+      try {
+        const response = await apiFetch('/reservations');
+        if (mounted) {
+          setReservations(response.data);
+        }
+      } catch {
+        toast.error("Failed to fetch reservations");
+      } finally {
+        if (mounted) {
+          setLoading(false);
+        }
+      }
+    };
+    fetchReservations();
+    return () => { mounted = false; };
+  }, []);
+
+  const fetchReservationsData = async () => {
     try {
       const response = await apiFetch('/reservations');
       setReservations(response.data);
-    } catch (error) {
+    } catch {
       toast.error("Failed to fetch reservations");
-    } finally {
-      setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchReservations();
-  }, []);
 
   const handleStatusChange = async (id: string, status: string) => {
     try {
@@ -34,8 +59,8 @@ export default function AdminReservationsPage() {
         body: JSON.stringify({ status })
       });
       toast.success(`Reservation ${status}`);
-      fetchReservations();
-    } catch (error) {
+      fetchReservationsData();
+    } catch {
       toast.error("Failed to update status");
     }
   };
@@ -45,8 +70,8 @@ export default function AdminReservationsPage() {
     try {
       await apiFetch(`/reservations/${id}`, { method: 'DELETE' });
       toast.success("Reservation deleted");
-      fetchReservations();
-    } catch (error) {
+      fetchReservationsData();
+    } catch {
       toast.error("Failed to delete reservation");
     }
   };
@@ -60,7 +85,7 @@ export default function AdminReservationsPage() {
 
       {loading ? (
         <div className="flex justify-center py-20">
-          <Loader2 className="animate-spin text-brand-orange" size={40} />
+          <Loader2 className="animate-spin text-brand-gold" size={40} />
         </div>
       ) : (
         <div className="space-y-4">

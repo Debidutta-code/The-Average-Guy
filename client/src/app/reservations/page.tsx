@@ -32,26 +32,26 @@ export default function ReservationsPage() {
           <div>
             <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
               SECURE <br />
-              <span className="text-brand-orange">YOUR SPOT.</span>
+              <span className="text-brand-gold">YOUR SPOT.</span>
             </h1>
             <p className="text-lg text-white/50 leading-relaxed mb-12">
               Book a table for your next coffee date, work session, or group hangout. For events or large parties (10+ people), please call us directly.
             </p>
             <div className="space-y-6">
                <div className="flex items-center gap-4 text-white">
-                  <div className="w-12 h-12 rounded-full bg-brand-orange/20 flex items-center justify-center text-brand-orange">
+                  <div className="w-12 h-12 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold">
                     <span className="font-bold">01</span>
                   </div>
                   <p className="text-xl font-bold">Pick your date & time</p>
                </div>
                <div className="flex items-center gap-4 text-white">
-                  <div className="w-12 h-12 rounded-full bg-brand-orange/20 flex items-center justify-center text-brand-orange">
+                  <div className="w-12 h-12 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold">
                     <span className="font-bold">02</span>
                   </div>
                   <p className="text-xl font-bold">Specify number of guests</p>
                </div>
                <div className="flex items-center gap-4 text-white">
-                  <div className="w-12 h-12 rounded-full bg-brand-orange/20 flex items-center justify-center text-brand-orange">
+                  <div className="w-12 h-12 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold">
                     <span className="font-bold">03</span>
                   </div>
                   <p className="text-xl font-bold">Get instant confirmation</p>
@@ -61,7 +61,7 @@ export default function ReservationsPage() {
 
           <div className="bg-zinc-900 p-8 md:p-12 rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 p-8 opacity-5">
-              <span className="text-8xl font-black text-white">AVG</span>
+              <span className="text-8xl font-black text-white">OOPRE</span>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
@@ -99,7 +99,7 @@ export default function ReservationsPage() {
                 <Label htmlFor="notes" className="text-white/60">Special Requests (Optional)</Label>
                 <Textarea id="notes" placeholder="Any dietary preferences or special occasions..." className="bg-white/5 border-white/10 text-white min-h-[100px]" />
               </div>
-              <Button type="submit" disabled={loading} className="w-full h-14 bg-brand-orange hover:bg-white hover:text-black text-white font-bold text-lg rounded-xl transition-all">
+              <Button type="submit" disabled={loading} className="w-full h-14 bg-brand-gold hover:bg-white hover:text-black text-white font-bold text-lg rounded-xl transition-all">
                 {loading ? "Processing..." : "Complete Reservation"}
               </Button>
             </form>

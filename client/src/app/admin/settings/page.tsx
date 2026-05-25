@@ -22,28 +22,28 @@ export default function AdminSettingsPage() {
             <div className="space-y-6">
                <div className="space-y-2">
                   <Label>Business Name</Label>
-                  <Input defaultValue="The Average Guy" className="bg-black/50 border-white/10" />
+                  <Input defaultValue="OOPRE Kitchen & Bar" className="bg-black/50 border-white/10" />
                </div>
                <div className="space-y-2">
                   <Label>Tagline</Label>
-                  <Input defaultValue="Cafe • Lounge • Community • Events" className="bg-black/50 border-white/10" />
+                  <Input defaultValue="Dine, Wine & Shine" className="bg-black/50 border-white/10" />
                </div>
                <div className="space-y-2">
                   <Label>Address</Label>
-                  <Textarea defaultValue="Plot No. 125, 200ft Road, near Sidheswar Temple, Patharagadia, Bhubaneswar, Odisha 751024, India" className="bg-black/50 border-white/10" />
+                  <Textarea defaultValue="4th Floor, Rooftop, Patia / Chandrasekharpur, Bhubaneswar, Odisha" className="bg-black/50 border-white/10" />
                </div>
                <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                      <Label>Phone</Label>
-                     <Input defaultValue="+91 97066 13566" className="bg-black/50 border-white/10" />
+                     <Input defaultValue="+91 74400 26026" className="bg-black/50 border-white/10" />
                   </div>
                   <div className="space-y-2">
                      <Label>Opening Hours</Label>
-                     <Input defaultValue="11:00 AM – 10:00 PM" className="bg-black/50 border-white/10" />
+                     <Input defaultValue="12:00 PM – 11:30 PM" className="bg-black/50 border-white/10" />
                   </div>
                </div>
             </div>
-            <Button className="bg-brand-orange w-full font-bold h-12">Update Details</Button>
+            <Button className="bg-brand-gold w-full font-bold h-12">Update Details</Button>
          </Card>
 
          <Card className="bg-zinc-900 border-white/5 p-8 text-white space-y-8">
@@ -60,7 +60,7 @@ export default function AdminSettingsPage() {
                </div>
                <div className="space-y-2">
                   <Label>WhatsApp Number</Label>
-                  <Input defaultValue="+91 97066 13566" className="bg-black/50 border-white/10" />
+                  <Input defaultValue="+91 74400 26026" className="bg-black/50 border-white/10" />
                </div>
                <div className="space-y-2">
                   <Label>BookMyShow (External)</Label>

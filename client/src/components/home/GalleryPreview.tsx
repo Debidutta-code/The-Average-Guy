@@ -4,11 +4,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const galleryImages = [
-  { src: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070&auto=format&fit=crop', size: 'col-span-2 row-span-2' },
-  { src: 'https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=1974&auto=format&fit=crop', size: 'col-span-1 row-span-1' },
-  { src: 'https://images.unsplash.com/photo-1525610553991-2bede1a236e2?q=80&w=2070&auto=format&fit=crop', size: 'col-span-1 row-span-1' },
-  { src: 'https://images.unsplash.com/photo-1551887196-72e32afd7c3a?q=80&w=2021&auto=format&fit=crop', size: 'col-span-1 row-span-2' },
-  { src: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0?q=80&w=2071&auto=format&fit=crop', size: 'col-span-1 row-span-1' },
+  { src: 'https://images.unsplash.com/photo-1533628635777-112b2239b1c7?q=80&w=2070&auto=format&fit=crop', size: 'col-span-2 row-span-2' },
+  { src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop', size: 'col-span-1 row-span-1' },
+  { src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070&auto=format&fit=crop', size: 'col-span-1 row-span-1' },
+  { src: 'https://images.unsplash.com/photo-1482933220747-669527f5511b?q=80&w=1974&auto=format&fit=crop', size: 'col-span-1 row-span-2' },
+  { src: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=2069&auto=format&fit=crop', size: 'col-span-1 row-span-1' },
 ];
 
 export function GalleryPreview() {
@@ -16,9 +16,9 @@ export function GalleryPreview() {
     <section className="py-24 px-6 md:px-12 bg-black">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 space-y-4">
-          <h3 className="text-brand-orange font-bold uppercase tracking-widest text-sm">Visual Journey</h3>
-          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none">
-            CURATED <span className="text-white/20">VIBES</span>
+          <h3 className="text-brand-gold font-bold uppercase tracking-widest text-sm text-center">Visual Journey</h3>
+          <h2 className="text-4xl md:text-6xl font-serif font-black text-white tracking-tighter uppercase leading-none text-center">
+            ROOFTOP <span className="text-brand-blue">ENERGY</span>
           </h2>
         </div>
 
@@ -34,7 +34,7 @@ export function GalleryPreview() {
             >
               <img
                 src={image.src}
-                alt="Cafe Gallery"
+                alt="OOPRE Gallery"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">

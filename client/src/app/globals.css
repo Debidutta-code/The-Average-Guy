@@ -55,10 +55,13 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Premium Palette */
-  --color-brand-orange: #FF6B00;
+  /* OOPRE Mediterranean Palette */
+  --color-brand-blue: #003087;
+  --color-brand-dark-blue: #0A2540;
+  --color-brand-teal: #008080;
+  --color-brand-terracotta: #E2725B;
   --color-brand-gold: #D4AF37;
-  --color-brand-charcoal: #121212;
+  --color-brand-off-white: #FAF9F6;
 }
 
 /*

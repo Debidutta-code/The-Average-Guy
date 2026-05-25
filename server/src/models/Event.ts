@@ -20,7 +20,7 @@ const EventSchema: Schema = new Schema(
     description: { type: String, required: true },
     date: { type: Date, required: true },
     time: { type: String, required: true },
-    location: { type: String, default: 'The Average Guy, Bhubaneswar' },
+    location: { type: String, default: 'OOPRE Kitchen & Bar, Bhubaneswar' },
     coverImage: { type: String, required: true },
     artist: { type: String, required: true },
     tags: [{ type: String }],

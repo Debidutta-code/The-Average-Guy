@@ -11,13 +11,13 @@ export default function TermsOfServicePage() {
 
       <div className="pt-40 pb-20 px-6 max-w-4xl mx-auto space-y-12">
         <div className="space-y-4">
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase">Terms of <span className="text-brand-orange">Service</span></h1>
+          <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase">Terms of <span className="text-brand-gold">Service</span></h1>
           <p className="text-white/40 italic">Last updated: May 2026</p>
         </div>
 
         <section className="space-y-6 text-white/70 leading-relaxed text-lg">
           <p>
-            Welcome to The Average Guy. By accessing our website or using our services, you agree to comply with and be bound by the following terms and conditions.
+            Welcome to OOPRE Kitchen & Bar. By accessing our website or using our services, you agree to comply with and be bound by the following terms and conditions.
           </p>
 
           <div className="space-y-4 pt-8">

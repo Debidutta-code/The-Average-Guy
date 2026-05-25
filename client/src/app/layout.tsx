@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { PageTransition } from "@/components/providers/PageTransition";
+import { CommunityWrapper } from "@/components/community/CommunityWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
           <PageTransition>
             {children}
           </PageTransition>
+          <CommunityWrapper />
         </SmoothScrollProvider>
       </body>
     </html>

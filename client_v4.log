@@ -1,0 +1,987 @@
+
+> client@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+✓ Ready in 722ms
+
+ GET / 200 in 1737ms (next.js: 627ms, application-code: 1109ms)
+ GET /events 200 in 190ms (next.js: 33ms, application-code: 157ms)
+ GET /menu 200 in 211ms (next.js: 32ms, application-code: 178ms)
+ GET /admin/login 200 in 204ms (next.js: 35ms, application-code: 169ms)
+⨯ ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  [90m3 |[0m [36mimport[0m [33mReact[0m [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m [33mNavbar[0m [36mfrom[0m [32m"@/components/layout/Navbar"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mFooter[0m [36mfrom[0m [32m"@/components/layout/Footer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mPrivacyPolicyPage[0m() {
+  [90m8 |[0m   [36mreturn[0m (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-client] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+
+
+./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  [90m3 |[0m [36mimport[0m [33mReact[0m [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m [33mNavbar[0m [36mfrom[0m [32m"@/components/layout/Navbar"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mFooter[0m [36mfrom[0m [32m"@/components/layout/Footer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mPrivacyPolicyPage[0m() {
+  [90m8 |[0m   [36mreturn[0m (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-ssr] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+
+
+./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mNavbar[0m [36mfrom[0m [32m"@/components/layout/Navbar"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mFooter[0m [36mfrom[0m [32m"@/components/layout/Footer"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mPrivacyPolicyPage[0m() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-client] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+
+
+./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mNavbar[0m [36mfrom[0m [32m"@/components/layout/Navbar"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mFooter[0m [36mfrom[0m [32m"@/components/layout/Footer"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mPrivacyPolicyPage[0m() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-ssr] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+
+[browser] ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  3 | import React from 'react';
+  4 | import Navbar from "@/components/layout/Navbar";
+> 5 | import Footer from "@/components/layout/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+  8 |   return (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-client] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  3 | import React from 'react';
+  4 | import Navbar from "@/components/layout/Navbar";
+> 5 | import Footer from "@/components/layout/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+  8 |   return (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-ssr] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  2 |
+  3 | import React from 'react';
+> 4 | import Navbar from "@/components/layout/Navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Footer from "@/components/layout/Footer";
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-client] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  2 |
+  3 | import React from 'react';
+> 4 | import Navbar from "@/components/layout/Navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Footer from "@/components/layout/Footer";
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-ssr] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  3 | import React from 'react';
+  4 | import Navbar from "@/components/layout/Navbar";
+> 5 | import Footer from "@/components/layout/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+  8 |   return (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-client] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  3 | import React from 'react';
+  4 | import Navbar from "@/components/layout/Navbar";
+> 5 | import Footer from "@/components/layout/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+  8 |   return (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-ssr] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  2 |
+  3 | import React from 'react';
+> 4 | import Navbar from "@/components/layout/Navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Footer from "@/components/layout/Footer";
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-client] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  2 |
+  3 | import React from 'react';
+> 4 | import Navbar from "@/components/layout/Navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Footer from "@/components/layout/Footer";
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-ssr] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+ GET /privacy-policy 500 in 4.4s (next.js: 4.1s, application-code: 274ms)
+[browser] Uncaught Error: ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  3 | import React from 'react';
+  4 | import Navbar from "@/components/layout/Navbar";
+> 5 | import Footer from "@/components/layout/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+  8 |   return (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-client] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./src/app/privacy-policy/page.tsx:5:1)
+    at <unknown> (Error: (./src/app/privacy-policy/page.tsx:5:1)
+[browser] ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  3 | import React from 'react';
+  4 | import Navbar from "@/components/layout/Navbar";
+> 5 | import Footer from "@/components/layout/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+  8 |   return (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-client] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  3 | import React from 'react';
+  4 | import Navbar from "@/components/layout/Navbar";
+> 5 | import Footer from "@/components/layout/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+  8 |   return (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-ssr] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  2 |
+  3 | import React from 'react';
+> 4 | import Navbar from "@/components/layout/Navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Footer from "@/components/layout/Footer";
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-client] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  2 |
+  3 | import React from 'react';
+> 4 | import Navbar from "@/components/layout/Navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Footer from "@/components/layout/Footer";
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-ssr] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  3 | import React from 'react';
+  4 | import Navbar from "@/components/layout/Navbar";
+> 5 | import Footer from "@/components/layout/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+  8 |   return (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-client] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  3 | import React from 'react';
+  4 | import Navbar from "@/components/layout/Navbar";
+> 5 | import Footer from "@/components/layout/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+  8 |   return (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-ssr] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  2 |
+  3 | import React from 'react';
+> 4 | import Navbar from "@/components/layout/Navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Footer from "@/components/layout/Footer";
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-client] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  2 |
+  3 | import React from 'react';
+> 4 | import Navbar from "@/components/layout/Navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Footer from "@/components/layout/Footer";
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-ssr] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  3 | import React from 'react';
+  4 | import Navbar from "@/components/layout/Navbar";
+> 5 | import Footer from "@/components/layout/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+  8 |   return (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-client] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:5:1
+Export default doesn't exist in target module
+  3 | import React from 'react';
+  4 | import Navbar from "@/components/layout/Navbar";
+> 5 | import Footer from "@/components/layout/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+  8 |   return (
+
+The export default was not found in module [project]/src/components/layout/Footer.tsx [app-ssr] (ecmascript).
+Did you mean to import Footer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  2 |
+  3 | import React from 'react';
+> 4 | import Navbar from "@/components/layout/Navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Footer from "@/components/layout/Footer";
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-client] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+[browser] ./src/app/privacy-policy/page.tsx:4:1
+Export default doesn't exist in target module
+  2 |
+  3 | import React from 'react';
+> 4 | import Navbar from "@/components/layout/Navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Footer from "@/components/layout/Footer";
+  6 |
+  7 | export default function PrivacyPolicyPage() {
+
+The export default was not found in module [project]/src/components/layout/Navbar.tsx [app-ssr] (ecmascript).
+Did you mean to import Navbar?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/privacy-policy/page.tsx [Client Component Browser]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/privacy-policy/page.tsx [Client Component SSR]
+    ./src/app/privacy-policy/page.tsx [Server Component]
+✓ Compiled in 2.3s
+ GET / 200 in 157ms (next.js: 6ms, application-code: 150ms)
+ GET /events 200 in 140ms (next.js: 6ms, application-code: 134ms)
+ GET /menu 200 in 191ms (next.js: 8ms, application-code: 183ms)
+ GET /admin/login 200 in 105ms (next.js: 6ms, application-code: 99ms)
+ GET /privacy-policy 200 in 207ms (next.js: 31ms, application-code: 176ms)
+ GET / 200 in 153ms (next.js: 6ms, application-code: 146ms)
+ GET /events 200 in 136ms (next.js: 4ms, application-code: 133ms)
+ GET /menu 200 in 125ms (next.js: 3ms, application-code: 122ms)
+ GET /admin/login 200 in 76ms (next.js: 3ms, application-code: 73ms)
+ GET /privacy-policy 200 in 69ms (next.js: 3ms, application-code: 66ms)
+ GET / 200 in 119ms (next.js: 4ms, application-code: 116ms)
+ GET /events 200 in 91ms (next.js: 3ms, application-code: 88ms)
+ GET /menu 200 in 105ms (next.js: 3ms, application-code: 102ms)
+ GET /admin/login 200 in 85ms (next.js: 3ms, application-code: 82ms)
+ GET /privacy-policy 200 in 75ms (next.js: 3ms, application-code: 71ms)
+Persisting failed: Unable to write SST file 00000227.sst
+
+Caused by:
+    No such file or directory (os error 2)
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/events/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/events/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/events/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/events/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/menu/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/menu/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/menu/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/menu/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/admin/login/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/admin/login/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/admin/login/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/admin/login/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/privacy-policy/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/privacy-policy/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/privacy-policy/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/privacy-policy/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/events/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/events/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/events/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/events/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/menu/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/menu/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/menu/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/menu/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/admin/login/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/admin/login/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/admin/login/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/admin/login/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/privacy-policy/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/privacy-policy/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/app/privacy-policy/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/app/privacy-policy/page/build-manifest.json'
+}
+⨯ Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/app/client/.next/dev/server/pages/_app/build-manifest.json'
+}
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+
+thread 'tokio-runtime-worker' (275922) panicked at turbopack/crates/turbo-tasks-backend/src/backend/operation/mod.rs:197:17:
+Failed to restore task data (corrupted database or bug): Data for TaskId 253463)
+
+Caused by:
+    0: Looking up task storage for TaskId 253463 from database failed
+    1: Unable to open static sorted file referenced from 00000191.meta
+    2: Unable to open static sorted file 00000189.sst
+    3: Failed to open SST file /app/client/.next/dev/cache/turbopack/ee6e79b1/00000189.sst
+    4: No such file or directory (os error 2)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'tokio-runtime-worker' (275922) panicked at turbopack/crates/turbo-tasks-backend/src/backend/operation/mod.rs:197:17:
+Failed to restore task data (corrupted database or bug): Data for TaskId 253463)
+
+Caused by:
+    0: Looking up task storage for TaskId 253463 from database failed
+    1: Unable to open static sorted file referenced from 00000191.meta
+    2: Unable to open static sorted file 00000189.sst
+    3: Failed to open SST file /app/client/.next/dev/cache/turbopack/ee6e79b1/00000189.sst
+    4: No such file or directory (os error 2)
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)

@@ -22,3 +22,4 @@ You're attempting to animate multiple children within AnimatePresence, but its m
  ✓ Compiled /menu in 493ms (1681 modules)
 You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
  GET /menu 200 in 694ms
+ ✓ Compiled in 13.5s (1687 modules)

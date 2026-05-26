@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 
 const dummyEvents = [
@@ -31,56 +30,62 @@ const dummyEvents = [
 
 export function EventsSection() {
   return (
-    <section className="py-24 px-6 md:px-12 bg-zinc-950">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <div className="space-y-4">
-            <h3 className="text-brand-gold font-bold uppercase tracking-widest text-sm">Happening Soon</h3>
-            <h2 className="text-4xl md:text-6xl font-serif font-black text-white leading-[0.9] tracking-tighter uppercase">
-              ROOFTOP <br />
-              <span className="text-brand-blue">VIBES</span>
+    <section className="py-24 bg-brand-dark-blue relative overflow-hidden">
+      {/* Decorative Greek Meander Background */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-brand-gold opacity-20" />
+
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-start mb-20 gap-8">
+          <div className="max-w-3xl">
+            <h2 className="text-6xl md:text-9xl font-serif font-light text-white leading-[0.8] tracking-tighter uppercase mb-6">
+              Live <br /> <span className="text-brand-blue">Moments</span>
             </h2>
+            <p className="text-brand-orange font-bold tracking-[0.3em] uppercase text-sm">Where the Night Comes Alive</p>
           </div>
-          <Link href="/events" className="text-brand-gold font-bold text-lg p-0 h-auto group flex items-center">
-            View All Events <ArrowUpRight className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          <Link href="/events" className="group flex items-center gap-4 text-white text-lg font-bold uppercase tracking-widest mt-10 md:mt-20">
+            Full Calendar
+            <div className="w-10 h-[2px] bg-brand-gold group-hover:w-16 transition-all duration-500" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {dummyEvents.map((event, i) => (
-            <motion.div
-              key={event.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.2, duration: 0.8 }}
-              className="group relative overflow-hidden rounded-2xl bg-zinc-900 border border-white/5 aspect-[4/5]"
-            >
-              <img
-                src={event.image}
-                alt={event.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.3] group-hover:grayscale-0"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:h-[800px]">
+          {/* Main Large Card */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="md:col-span-7 relative overflow-hidden rounded-sm group h-[400px] md:h-full"
+          >
+             <img src={dummyEvents[0].image} alt={dummyEvents[0].title} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" />
+             <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-blue via-transparent to-transparent z-10" />
+             <div className="absolute bottom-10 left-10 z-20">
+                <span className="text-brand-gold text-xs font-bold tracking-widest uppercase mb-4 block">{dummyEvents[0].date}</span>
+                <h3 className="text-4xl md:text-6xl font-serif text-white uppercase mb-4">{dummyEvents[0].title}</h3>
+                <p className="text-white/60 mb-6 max-w-md">{dummyEvents[0].category}</p>
+                <Link href="/reservations" className="inline-block bg-white text-black px-8 py-3 font-bold hover:bg-brand-blue hover:text-white transition-all">BOOK TABLE</Link>
+             </div>
+          </motion.div>
 
-              <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                <span className="text-brand-gold text-xs font-bold uppercase tracking-widest mb-2 block">{event.category}</span>
-                <h4 className="text-2xl font-serif font-bold text-white mb-4 leading-tight">{event.title}</h4>
-
-                <div className="flex items-center text-white/50 text-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <Calendar size={16} className="mr-2" />
-                  <span>{event.date}</span>
-                </div>
-
-                <Link
-                  href={`/events/${event.id}`}
-                  className="inline-flex items-center text-white font-bold text-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          {/* Right Column Stack */}
+          <div className="md:col-span-5 grid grid-rows-2 gap-6">
+             {dummyEvents.slice(1, 3).map((event, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.2 }}
+                  className="relative overflow-hidden rounded-sm group"
                 >
-                  Book Now <ArrowUpRight size={16} className="ml-1" />
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+                   <img src={event.image} alt={event.title} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-blue/80 via-transparent to-transparent z-10" />
+                   <div className="absolute bottom-6 left-6 z-20">
+                      <span className="text-brand-orange text-[10px] font-bold tracking-widest uppercase mb-2 block">{event.date}</span>
+                      <h3 className="text-2xl font-serif text-white uppercase">{event.title}</h3>
+                   </div>
+                </motion.div>
+             ))}
+          </div>
         </div>
       </div>
     </section>

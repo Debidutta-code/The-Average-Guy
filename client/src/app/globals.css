@@ -55,13 +55,15 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* OOPRE Mediterranean Palette */
-  --color-brand-blue: #003087;
-  --color-brand-dark-blue: #0A2540;
-  --color-brand-teal: #008080;
+  /* OOPRE Mediterranean Palette - New Cinematic Direction */
+  --color-brand-blue: #005BA1; /* Santorini Blue */
+  --color-brand-dark-blue: #05162D; /* Aegean Navy */
+  --color-brand-coral: #FF7F50;
   --color-brand-terracotta: #E2725B;
+  --color-brand-orange: #FF8C00; /* Golden Hour */
   --color-brand-gold: #D4AF37;
-  --color-brand-off-white: #FAF9F6;
+  --color-brand-olive: #556B2F;
+  --color-brand-ivory: #FFFFF0;
 }
 
 /*
@@ -161,6 +163,12 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  .font-serif {
+    font-family: var(--font-cormorant), serif;
+  }
+  .font-sans {
+    font-family: var(--font-jakarta), sans-serif;
   }
 }
 

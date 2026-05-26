@@ -16,11 +16,15 @@ const MenuItemSchema = new mongoose.Schema({
 });
 
 const EventSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  date: String,
-  image: String,
-  category: String,
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  date: { type: Date, required: true },
+  time: { type: String, required: true },
+  location: { type: String, default: 'OOPRE Kitchen & Bar, Bhubaneswar' },
+  coverImage: { type: String, required: true },
+  artist: { type: String, required: true },
+  tags: [{ type: String }],
+  status: { type: String, default: 'upcoming' },
 });
 
 const SettingsSchema = new mongoose.Schema({
@@ -48,9 +52,33 @@ const menuItems = [
 ];
 
 const events = [
-  { title: 'Neon Nights: DJ Bash', description: 'Energetic DJ night under the stars.', date: 'Every Friday, 9:00 PM', category: 'Nightlife' },
-  { title: 'Sunset Acoustic Sessions', description: 'Soulful live music during sunset.', date: 'Every Sunday, 6:00 PM', category: 'Music' },
-  { title: 'The Greek Feast', description: 'Special Mediterranean food festival.', date: 'June 15, 2026', category: 'Themed Night' },
+  {
+    title: 'Neon Nights: DJ Bash',
+    description: 'Energetic DJ night under the stars with Bhubaneswar’s top mixers.',
+    date: new Date('2026-06-12'),
+    time: '9:00 PM',
+    coverImage: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80',
+    artist: 'DJ Aris',
+    tags: ['Nightlife', 'DJ', 'Party']
+  },
+  {
+    title: 'Sunset Acoustic Sessions',
+    description: 'Soulful live music during sunset on the rooftop deck.',
+    date: new Date('2026-06-14'),
+    time: '6:00 PM',
+    coverImage: 'https://images.unsplash.com/photo-1514525253361-bee8a48790c3?auto=format&fit=crop&q=80',
+    artist: 'The Acoustic Duo',
+    tags: ['Music', 'Acoustic', 'Sunset']
+  },
+  {
+    title: 'The Greek Feast',
+    description: 'Special Mediterranean food festival featuring authentic recipes.',
+    date: new Date('2026-06-15'),
+    time: '7:00 PM',
+    coverImage: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80',
+    artist: 'Chef Stavros',
+    tags: ['Themed Night', 'Food']
+  },
 ];
 
 async function seed() {

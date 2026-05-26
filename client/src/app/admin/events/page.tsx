@@ -23,6 +23,7 @@ interface Event {
   _id: string;
   title: string;
   date: string;
+  time: string;
   description: string;
   coverImage?: string;
   artist?: string;
@@ -39,6 +40,7 @@ export default function AdminEventsPage() {
   const [formData, setFormData] = useState({
     title: '',
     date: '',
+    time: '',
     description: '',
     coverImage: '',
     artist: ''
@@ -117,6 +119,7 @@ export default function AdminEventsPage() {
     setFormData({
       title: '',
       date: '',
+      time: '',
       description: '',
       coverImage: '',
       artist: ''
@@ -129,6 +132,7 @@ export default function AdminEventsPage() {
     setFormData({
       title: event.title,
       date: event.date.split('T')[0],
+      time: event.time || '',
       description: event.description,
       coverImage: event.coverImage || '',
       artist: event.artist || ''
@@ -187,15 +191,28 @@ export default function AdminEventsPage() {
                        className="bg-white/5 border-white/10 rounded-sm h-12 focus:border-brand-blue/50"
                      />
                    </div>
-                   <div className="space-y-3">
-                     <Label htmlFor="date" className="text-[10px] uppercase tracking-widest font-bold text-white/40">Performance Date</Label>
-                     <Input
-                       id="date"
-                       type="date"
-                       value={formData.date}
-                       onChange={(e) => setFormData({...formData, date: e.target.value})}
-                       className="bg-white/5 border-white/10 rounded-sm h-12 focus:border-brand-blue/50 invert-calendar"
-                     />
+                   <div className="grid grid-cols-2 gap-4">
+                     <div className="space-y-3">
+                       <Label htmlFor="date" className="text-[10px] uppercase tracking-widest font-bold text-white/40">Date</Label>
+                       <Input
+                         id="date"
+                         type="date"
+                         value={formData.date}
+                         onChange={(e) => setFormData({...formData, date: e.target.value})}
+                         className="bg-white/5 border-white/10 rounded-sm h-12 focus:border-brand-blue/50 invert-calendar"
+                       />
+                     </div>
+                     <div className="space-y-3">
+                       <Label htmlFor="time" className="text-[10px] uppercase tracking-widest font-bold text-white/40">Time</Label>
+                       <Input
+                         id="time"
+                         type="text"
+                         value={formData.time}
+                         onChange={(e) => setFormData({...formData, time: e.target.value})}
+                         placeholder="9:00 PM"
+                         className="bg-white/5 border-white/10 rounded-sm h-12 focus:border-brand-blue/50"
+                       />
+                     </div>
                    </div>
                  </div>
                  <div className="space-y-3">
@@ -287,7 +304,7 @@ export default function AdminEventsPage() {
                                      <span className="bg-brand-blue/20 text-brand-blue text-[10px] font-bold tracking-widest px-3 py-1 rounded-sm uppercase">Confirmed</span>
                                      <span className="text-white/20 text-[10px] font-bold tracking-widest uppercase flex items-center gap-1">
                                         <Calendar size={10} className="text-brand-gold" />
-                                        {new Date(event.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                        {new Date(event.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })} at {event.time}
                                      </span>
                                   </div>
                                   <h3 className="text-3xl font-serif text-white uppercase group-hover:text-brand-blue transition-colors">{event.title}</h3>

@@ -56,7 +56,7 @@ export function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div ref={imageRef} className="relative aspect-[4/5] overflow-hidden rounded-2xl">
             <img
-              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=2071&auto=format&fit=crop"
               alt="The Monarch Mug Interior"
               className="w-full h-full object-cover"
             />

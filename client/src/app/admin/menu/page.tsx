@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Plus, Edit, Trash2, Coffee, Loader2 } from 'lucide-react';
+import { MenuItem } from '@/types';
 import {
   Dialog,
   DialogContent,
@@ -20,11 +21,11 @@ import { apiFetch } from "@/lib/api";
 import { toast } from "sonner";
 
 export default function AdminMenuPage() {
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [editingItem, setEditingItem] = useState<any>(null);
+  const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -35,20 +36,22 @@ export default function AdminMenuPage() {
     image: ''
   });
 
-  const fetchMenu = async () => {
+  const fetchMenu = useCallback(async () => {
     try {
       const response = await apiFetch('/menu');
       setItems(response.data);
     } catch (error) {
+      console.error(error);
       toast.error("Failed to fetch menu");
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchMenu();
-  }, []);
+  }, [fetchMenu]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -66,10 +69,11 @@ export default function AdminMenuPage() {
         });
         toast.success("Item added");
       }
-      fetchMenu();
+      await fetchMenu();
       setIsDialogOpen(false);
       resetForm();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to save item");
     } finally {
       setSaving(false);
@@ -81,8 +85,9 @@ export default function AdminMenuPage() {
     try {
       await apiFetch(`/menu/${id}`, { method: 'DELETE' });
       toast.success("Item deleted");
-      fetchMenu();
+      await fetchMenu();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to delete item");
     }
   };
@@ -99,7 +104,7 @@ export default function AdminMenuPage() {
     setEditingItem(null);
   };
 
-  const handleEdit = (item: any) => {
+  const handleEdit = (item: MenuItem) => {
     setEditingItem(item);
     setFormData({
       title: item.title,

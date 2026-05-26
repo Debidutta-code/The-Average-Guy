@@ -34,6 +34,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (!token && !pathname.includes('/admin/login')) {
       router.push('/admin/login');
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsReady(true);
     }
   }, [pathname, router]);

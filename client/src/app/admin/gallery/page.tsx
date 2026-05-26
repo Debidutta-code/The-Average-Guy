@@ -6,8 +6,8 @@ import { Plus, Trash2, Image as ImageIcon } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
 const dummyGallery = [
-  { id: '1', url: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070&auto=format&fit=crop', category: 'interior' },
-  { id: '2', url: 'https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=1974&auto=format&fit=crop', category: 'coffee' },
+  { id: '1', url: 'https://images.unsplash.com/photo-1525648199074-cee30ba79a4a?q=80&w=2070&auto=format&fit=crop', category: 'interior' },
+  { id: '2', url: 'https://images.unsplash.com/photo-1507764923214-c48469539fa4?q=80&w=1974&auto=format&fit=crop', category: 'coffee' },
 ];
 
 export default function AdminGalleryPage() {

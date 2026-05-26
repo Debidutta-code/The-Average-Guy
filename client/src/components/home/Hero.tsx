@@ -59,13 +59,13 @@ export function Hero() {
         ref={imageContainerRef}
         className="absolute inset-0 z-0 overflow-hidden"
       >
-        <div className="absolute inset-0 bg-white/30 z-10" />
+        <div className="absolute inset-0 bg-white/20 z-10" />
         <img
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1525648199074-cee30ba79a4a?q=80&w=2070&auto=format&fit=crop"
           alt="Modern White Cafe Interior"
           className="hero-image w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-brand-ivory z-20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-brand-ivory z-20" />
       </div>
 
       {/* Content */}

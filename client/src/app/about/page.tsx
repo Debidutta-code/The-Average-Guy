@@ -30,7 +30,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
-            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2069&auto=format&fit=crop" alt="The Monarch Mug Ambiance" className="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1508766917616-d22f3f1eea14?q=80&w=2070&auto=format&fit=crop" alt="The Monarch Mug Ambiance" className="w-full h-full object-cover" />
           </div>
         </div>
       </div>

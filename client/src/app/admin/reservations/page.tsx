@@ -1,31 +1,34 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Users, Phone, Mail, Clock, Loader2, Trash2, CheckCircle } from 'lucide-react';
 import { apiFetch } from "@/lib/api";
 import { toast } from "sonner";
 import { Button } from '@/components/ui/button';
+import { Reservation } from '@/types';
 
 export default function AdminReservationsPage() {
-  const [reservations, setReservations] = useState<any[]>([]);
+  const [reservations, setReservations] = useState<Reservation[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchReservations = async () => {
+  const fetchReservations = useCallback(async () => {
     try {
       const response = await apiFetch('/reservations');
       setReservations(response.data);
     } catch (error) {
+      console.error(error);
       toast.error("Failed to fetch reservations");
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchReservations();
-  }, []);
+  }, [fetchReservations]);
 
   const handleStatusChange = async (id: string, status: string) => {
     try {
@@ -34,8 +37,9 @@ export default function AdminReservationsPage() {
         body: JSON.stringify({ status })
       });
       toast.success(`Reservation ${status}`);
-      fetchReservations();
+      await fetchReservations();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to update status");
     }
   };
@@ -45,8 +49,9 @@ export default function AdminReservationsPage() {
     try {
       await apiFetch(`/reservations/${id}`, { method: 'DELETE' });
       toast.success("Reservation deleted");
-      fetchReservations();
+      await fetchReservations();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to delete reservation");
     }
   };
@@ -65,7 +70,7 @@ export default function AdminReservationsPage() {
       ) : (
         <div className="space-y-4">
           {reservations.length === 0 && <p className="text-muted-foreground/60 text-center py-20 italic">No reservations found.</p>}
-          {reservations.map((res) => (
+          {reservations.map((res: Reservation) => (
             <Card key={res._id} className="bg-white/50 backdrop-blur-md border-brand-latte/50 p-8 text-foreground grid grid-cols-1 md:grid-cols-4 gap-8 items-center rounded-3xl hover:shadow-xl hover:shadow-black/5 transition-all duration-500">
               <div className="space-y-1">
                  <h3 className="text-xl font-serif font-bold">{res.name}</h3>

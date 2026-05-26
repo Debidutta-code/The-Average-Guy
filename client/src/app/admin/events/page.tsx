@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Plus, Edit, Trash2, Calendar, Loader2 } from 'lucide-react';
+import { Event } from '@/types';
 import {
   Dialog,
   DialogContent,
@@ -19,11 +20,11 @@ import { apiFetch } from "@/lib/api";
 import { toast } from "sonner";
 
 export default function AdminEventsPage() {
-  const [events, setEvents] = useState<any[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [editingEvent, setEditingEvent] = useState<any>(null);
+  const [editingEvent, setEditingEvent] = useState<Event | null>(null);
 
   // Form states
   const [formData, setFormData] = useState({
@@ -32,23 +33,25 @@ export default function AdminEventsPage() {
     artist: '',
     description: '',
     coverImage: '',
-    status: 'upcoming'
+    status: 'upcoming' as 'upcoming' | 'completed'
   });
 
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       const response = await apiFetch('/events');
       setEvents(response.data);
     } catch (error) {
+      console.error(error);
       toast.error("Failed to fetch events");
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchEvents();
-  }, []);
+  }, [fetchEvents]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -66,10 +69,11 @@ export default function AdminEventsPage() {
         });
         toast.success("Event created");
       }
-      fetchEvents();
+      await fetchEvents();
       setIsDialogOpen(false);
       resetForm();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to save event");
     } finally {
       setSaving(false);
@@ -81,8 +85,9 @@ export default function AdminEventsPage() {
     try {
       await apiFetch(`/events/${id}`, { method: 'DELETE' });
       toast.success("Event deleted");
-      fetchEvents();
+      await fetchEvents();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to delete event");
     }
   };
@@ -99,7 +104,7 @@ export default function AdminEventsPage() {
     setEditingEvent(null);
   };
 
-  const handleEdit = (event: any) => {
+  const handleEdit = (event: Event) => {
     setEditingEvent(event);
     setFormData({
       title: event.title,

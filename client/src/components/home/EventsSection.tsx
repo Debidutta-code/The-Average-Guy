@@ -17,7 +17,7 @@ const dummyEvents = [
     id: '2',
     title: 'Architectural Photography Meet',
     date: 'June 22, 2026',
-    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2069&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop',
     category: 'Creative',
   },
   {

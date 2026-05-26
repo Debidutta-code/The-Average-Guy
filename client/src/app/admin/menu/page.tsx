@@ -129,10 +129,8 @@ export default function AdminMenuPage() {
           setIsDialogOpen(open);
           if (!open) resetForm();
         }}>
-          <DialogTrigger asChild>
-            <Button className="bg-brand-gold hover:bg-foreground text-white font-bold px-8 h-12 rounded-xl transition-all duration-300 shadow-lg shadow-brand-gold/20">
-              <Plus size={18} className="mr-2" /> Add Item
-            </Button>
+          <DialogTrigger render={<Button className="bg-brand-gold hover:bg-foreground text-white font-bold px-8 h-12 rounded-xl transition-all duration-300 shadow-lg shadow-brand-gold/20" />}>
+            <Plus size={18} className="mr-2" /> Add Item
           </DialogTrigger>
           <DialogContent className="bg-white border-brand-latte/50 text-foreground sm:max-w-[600px] rounded-3xl overflow-hidden shadow-2xl">
             <DialogHeader>

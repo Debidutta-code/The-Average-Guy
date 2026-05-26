@@ -38,10 +38,10 @@ export function Navbar() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex flex-col"
+            className="flex flex-col pb-1"
           >
             <span className="text-xs tracking-[0.3em] font-medium text-foreground/60 uppercase leading-none mb-1">The</span>
-            <span className="text-xl md:text-2xl font-serif font-semibold tracking-tight text-foreground leading-none">
+            <span className="text-xl md:text-2xl font-serif font-semibold tracking-tight text-foreground leading-tight">
               Monarch Mug
             </span>
           </motion.div>

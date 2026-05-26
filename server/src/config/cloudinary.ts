@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     // @ts-ignore
-    folder: 'the-average-guy',
+    folder: 'monarch-mug',
     allowed_formats: ['jpg', 'png', 'webp', 'jpeg'],
   },
 });

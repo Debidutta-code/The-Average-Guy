@@ -70,7 +70,7 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-30 text-center px-6 max-w-5xl">
-        <div className="overflow-hidden mb-6">
+        <div className="overflow-hidden mb-6 pb-8">
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -79,7 +79,7 @@ export function Hero() {
           >
             A Modern Luxury Cafe Experience
           </motion.p>
-          <h1 ref={titleRef} className="hero-title text-6xl md:text-8xl lg:text-[10rem] font-serif font-medium text-foreground tracking-tight leading-[0.9]">
+          <h1 ref={titleRef} className="hero-title text-6xl md:text-8xl lg:text-[10rem] font-serif font-medium text-foreground tracking-tight leading-[1.1] pb-4">
             <span className="block">The Monarch</span>
             <span className="block italic ml-4 md:ml-12">Mug</span>
           </h1>

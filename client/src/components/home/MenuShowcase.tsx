@@ -52,8 +52,8 @@ export function MenuShowcase() {
 
   return (
     <section id="menu-showcase-container" className="h-screen w-full overflow-hidden bg-brand-dark-blue flex items-center">
-      <div className="absolute top-10 left-10 md:left-20 z-10">
-          <h2 className="text-5xl md:text-8xl font-serif font-light text-white tracking-tighter uppercase leading-none">
+      <div className="absolute top-10 left-10 md:left-20 z-10 mt-10">
+          <h2 className="text-5xl md:text-8xl font-serif font-light text-white tracking-tighter uppercase leading-none text-shadow-lg">
             Flavors <br/><span className="text-brand-blue ml-10 md:ml-20">of the World</span>
           </h2>
           <p className="text-brand-orange font-bold tracking-[0.3em] uppercase mt-4">A Cinematic Culinary Experience</p>
@@ -65,7 +65,7 @@ export function MenuShowcase() {
             <div key={`${category}-${idx}`} className="flex-shrink-0 w-[80vw] md:w-[450px] group">
                <div className="relative aspect-[4/5] overflow-hidden rounded-sm mb-6">
                   <img
-                    src={"https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2069&auto=format&fit=crop"}
+                    src={"https://b.zmtcdn.com/data/menus/616/18821616/5c803a27efc7b7c84ace1c7a8306e7ae.jpg"}
                     alt={item.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />

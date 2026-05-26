@@ -57,7 +57,7 @@ export function RooftopOdyssey() {
       <div ref={rooftopRef} className="absolute inset-0 z-10">
         <div className="absolute inset-0 bg-black/40 z-10" />
         <img
-          src="https://images.unsplash.com/photo-1533628635777-112b2239b1c7?q=80&w=2070&auto=format&fit=crop"
+          src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/6e/51/fd/marz-performing-live.jpg?w=1400&h=-1&s=1"
           className="w-full h-full object-cover"
           alt="Rooftop Vibe"
         />
@@ -70,7 +70,7 @@ export function RooftopOdyssey() {
       {/* City View Layer */}
       <div ref={cityRef} className="absolute inset-0 z-20">
         <img
-          src="https://images.unsplash.com/photo-1577640905050-83665af366b9?q=80&w=2070&auto=format&fit=crop"
+          src="https://b.zmtcdn.com/data/pictures/6/18821616/31ad6affd41f7940215905f415717d6a.jpeg?fit=around|750:500&crop=750:500;*,*"
           className="w-full h-full object-cover"
           alt="Bhubaneswar City View"
         />

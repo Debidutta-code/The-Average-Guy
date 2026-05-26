@@ -43,15 +43,15 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-6">
+    <div className="min-h-screen bg-brand-ivory flex items-center justify-center p-6 noise-overlay">
       <Toaster position="top-center" richColors />
-      <Card className="w-full max-w-md bg-zinc-900 border-white/5 text-white">
+      <Card className="w-full max-w-md bg-white border-foreground/5 text-foreground shadow-2xl">
         <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-black tracking-tighter uppercase">
-            ADMIN <span className="text-brand-orange">PORTAL</span>
+          <CardTitle className="text-3xl font-serif font-bold tracking-tight uppercase">
+            ADMIN <span className="text-brand-gold italic">PORTAL</span>
           </CardTitle>
-          <CardDescription className="text-white/40">
-            Secure access for The Average Guy management.
+          <CardDescription className="text-foreground/40 italic">
+            Secure access for The Monarch Mug management.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -63,8 +63,8 @@ export default function AdminLoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@theaverageguy.in"
-                className="bg-black/50 border-white/10"
+                placeholder="admin@monarchmug.com"
+                className="bg-brand-ivory border-foreground/10"
                 required
               />
             </div>
@@ -75,11 +75,11 @@ export default function AdminLoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="bg-black/50 border-white/10"
+                className="bg-brand-ivory border-foreground/10"
                 required
               />
             </div>
-            <Button type="submit" disabled={loading} className="w-full bg-brand-orange hover:bg-white hover:text-black font-bold h-12">
+            <Button type="submit" disabled={loading} className="w-full bg-foreground text-background hover:bg-brand-gold font-bold h-12 transition-all">
               {loading ? "Authenticating..." : "Login to Dashboard"}
             </Button>
           </form>

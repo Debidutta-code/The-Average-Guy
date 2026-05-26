@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react';
+import { Mail, Phone, MapPin, Camera, MessageCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
@@ -79,10 +79,10 @@ export default function ContactPage() {
                <h3 className="text-brand-gold font-bold uppercase tracking-[0.2em] text-[10px]">Social Curation</h3>
                <div className="flex gap-6">
                   <a href="#" className="w-12 h-12 rounded-full bg-white shadow-sm border border-black/5 flex items-center justify-center text-foreground/40 hover:text-brand-gold hover:border-brand-gold transition-all duration-300">
-                    <Instagram size={20} />
+                    <Camera size={20} />
                   </a>
                   <a href="#" className="w-12 h-12 rounded-full bg-white shadow-sm border border-black/5 flex items-center justify-center text-foreground/40 hover:text-brand-gold hover:border-brand-gold transition-all duration-300">
-                    <Facebook size={20} />
+                    <MessageCircle size={20} />
                   </a>
                </div>
             </div>

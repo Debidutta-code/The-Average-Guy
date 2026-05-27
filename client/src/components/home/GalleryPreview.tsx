@@ -5,9 +5,18 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 const galleryImages = [
-  { src: 'https://images.unsplash.com/photo-1525610553991-2bede1a233e9?q=80&w=2070&auto=format&fit=crop', size: 'md:col-span-2 md:row-span-2', title: 'The Atrium' },
+  { src: 'https://plus.unsplash.com/premium_photo-1663932464735-e0946d833749?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YnVzeSUyMGNhZmV8ZW58MHx8MHx8fDA%3D', size: 'md:col-span-2 md:row-span-2', title: 'The Atrium' },
   { src: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=2071&auto=format&fit=crop', size: 'md:col-span-1 md:row-span-1', title: 'Morning Light' },
-  { src: 'https://images.unsplash.com/photo-1493857671297-66f198223963?q=80&w=2070&auto=format&fit=crop', size: 'md:col-span-1 md:row-span-1', title: 'Architectural Details' },
+  { src: 'https://plus.unsplash.com/premium_photo-1670574735098-bff8509d6833?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3RyZWV0JTIwY2FmZXxlbnwwfHwwfHx8MA%3D%3D', size: 'md:col-span-1 md:row-span-1', title: 'Architectural Details' },
+  { src: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=2070&auto=format&fit=crop', size: 'md:col-span-1 md:row-span-2', title: 'Workspace' },
+  { src: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop', size: 'md:col-span-1 md:row-span-1', title: 'Quiet Corners' },
+  { src: 'https://plus.unsplash.com/premium_photo-1670574735098-bff8509d6833?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3RyZWV0JTIwY2FmZXxlbnwwfHwwfHx8MA%3D%3D', size: 'md:col-span-1 md:row-span-1', title: 'Architectural Details' },
+  { src: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=2070&auto=format&fit=crop', size: 'md:col-span-1 md:row-span-2', title: 'Workspace' },
+  { src: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop', size: 'md:col-span-1 md:row-span-1', title: 'Quiet Corners' },
+  { src: 'https://plus.unsplash.com/premium_photo-1670574735098-bff8509d6833?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3RyZWV0JTIwY2FmZXxlbnwwfHwwfHx8MA%3D%3D', size: 'md:col-span-1 md:row-span-1', title: 'Architectural Details' },
+  { src: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=2070&auto=format&fit=crop', size: 'md:col-span-1 md:row-span-2', title: 'Workspace' },
+  { src: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop', size: 'md:col-span-1 md:row-span-1', title: 'Quiet Corners' },
+  { src: 'https://plus.unsplash.com/premium_photo-1670574735098-bff8509d6833?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3RyZWV0JTIwY2FmZXxlbnwwfHwwfHx8MA%3D%3D', size: 'md:col-span-1 md:row-span-1', title: 'Architectural Details' },
   { src: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=2070&auto=format&fit=crop', size: 'md:col-span-1 md:row-span-2', title: 'Workspace' },
   { src: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop', size: 'md:col-span-1 md:row-span-1', title: 'Quiet Corners' },
 ];

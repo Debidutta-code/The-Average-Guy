@@ -33,12 +33,12 @@ export function MenuShowcase() {
         </div>
 
         <Tabs defaultValue="coffee" className="w-full">
-          <TabsList className="w-full justify-center bg-transparent gap-8 mb-12 border-b border-white/10 rounded-none h-auto p-0 pb-4">
+          <TabsList className="w-full justify-center bg-transparent gap-8 mb-12 border-b border-primary/20 rounded-none h-auto p-0 pb-4">
             {Object.keys(menuItems).map((category) => (
               <TabsTrigger
                 key={category}
                 value={category}
-                className="bg-transparent text-muted-foreground data-[state=active]:text-primary data-[state=active]:bg-transparent border-none text-xl font-serif font-bold capitalize tracking-tight transition-all px-0"
+                className="bg-transparent text-foreground/60 data-[state=active]:text-primary data-[state=active]:bg-transparent border-none text-xl font-serif font-bold capitalize tracking-tight transition-all px-0 cursor-pointer"
               >
                 {category}
               </TabsTrigger>

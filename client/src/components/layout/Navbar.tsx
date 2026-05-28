@@ -57,7 +57,10 @@ export function Navbar() {
             >
               <Link
                 href={link.href}
-                className="text-sm font-medium text-white/70 hover:text-primary transition-colors duration-300 relative group"
+                className={cn(
+                  "text-sm font-bold transition-colors duration-300 relative group",
+                  isScrolled ? "text-foreground/90 hover:text-primary" : "text-foreground/80 hover:text-primary"
+                )}
               >
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
@@ -82,9 +85,11 @@ export function Navbar() {
         <div className="md:hidden">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-foreground p-2"
+            className="text-foreground p-2 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
           </button>
         </div>
       </div>

@@ -26,6 +26,8 @@ const inter = Inter({
 });
 
 import { metadata as siteMetadata } from "./metadata";
+import Script from "next/script";
+
 export const metadata = siteMetadata;
 
 export default function RootLayout({
@@ -45,6 +47,45 @@ export default function RootLayout({
           </PageTransition>
           <WhatsAppButton />
         </SmoothScrollProvider>
+        <Script id="schema-local-business" type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Restaurant",
+            "name": "Old Town Cafe Bhubaneswar",
+            "image": "https://oldtowncafe.in/og-image.jpg",
+            "@id": "https://oldtowncafe.in",
+            "url": "https://oldtowncafe.in",
+            "telephone": "+919706613566",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Plot No. 125, 200ft Road, near Sidheswar Temple, Patharagadia",
+              "addressLocality": "Bhubaneswar",
+              "postalCode": "751024",
+              "addressCountry": "IN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 20.2954,
+              "longitude": 85.8369
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+              ],
+              "opens": "11:00",
+              "closes": "22:00"
+            },
+            "servesCuisine": "Specialty Coffee, Continental, Indian",
+            "priceRange": "$$"
+          })}
+        </Script>
       </body>
     </html>
   );

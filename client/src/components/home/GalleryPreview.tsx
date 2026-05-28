@@ -5,11 +5,31 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 const galleryImages = [
-  { src: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070&auto=format&fit=crop', size: 'col-span-2 row-span-2' },
-  { src: 'https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=1974&auto=format&fit=crop', size: 'col-span-1 row-span-1' },
-  { src: 'https://images.unsplash.com/photo-1525610553991-2bede1a236e2?q=80&w=2070&auto=format&fit=crop', size: 'col-span-1 row-span-1' },
-  { src: 'https://images.unsplash.com/photo-1551887196-72e32afd7c3a?q=80&w=2021&auto=format&fit=crop', size: 'col-span-1 row-span-2' },
-  { src: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0?q=80&w=2071&auto=format&fit=crop', size: 'col-span-1 row-span-1' },
+  {
+    src: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070&auto=format&fit=crop',
+    size: 'col-span-2 row-span-2',
+    alt: 'Vintage cafe interior with heritage decor and warm lighting'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=1974&auto=format&fit=crop',
+    size: 'col-span-1 row-span-1',
+    alt: 'Freshly brewed artisanal coffee being poured'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1525610553991-2bede1a236e2?q=80&w=2070&auto=format&fit=crop',
+    size: 'col-span-1 row-span-1',
+    alt: 'Cozy library corner with antique books and plants'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1551887196-72e32afd7c3a?q=80&w=2021&auto=format&fit=crop',
+    size: 'col-span-1 row-span-2',
+    alt: 'Outdoor seating area surrounded by lush greenery'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0?q=80&w=2071&auto=format&fit=crop',
+    size: 'col-span-1 row-span-1',
+    alt: 'Close-up of a signature dessert plate at Old Town Cafe'
+  },
 ];
 
 export function GalleryPreview() {
@@ -35,7 +55,7 @@ export function GalleryPreview() {
             >
               <Image
                 src={image.src}
-                alt="Cafe Gallery"
+                alt={image.alt}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />

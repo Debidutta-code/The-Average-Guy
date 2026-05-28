@@ -30,10 +30,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('admin_token');
+    const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
     if (!token && !pathname.includes('/admin/login')) {
       router.push('/admin/login');
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsReady(true);
     }
   }, [pathname, router]);
@@ -47,16 +48,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   };
 
   return (
-    <div className="min-h-screen bg-black flex text-white">
+    <div className="min-h-screen bg-brand-ivory flex text-foreground font-sans">
       {/* Sidebar */}
-      <aside className="w-64 border-r border-white/5 bg-zinc-950 flex flex-col">
-        <div className="p-8">
-          <div className="text-xl font-black tracking-tighter">
-            AVG <span className="text-brand-orange">ADMIN</span>
+      <aside className="w-72 border-r border-black/5 bg-white flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
+        <div className="p-10">
+          <div className="flex flex-col">
+            <span className="text-[10px] tracking-[0.4em] font-bold text-foreground/30 uppercase leading-none mb-1">The</span>
+            <span className="text-xl font-serif font-semibold tracking-tight text-foreground leading-none">
+              Monarch <span className="italic text-brand-gold">Admin</span>
+            </span>
           </div>
         </div>
 
-        <nav className="flex-grow px-4 space-y-2">
+        <nav className="flex-grow px-6 space-y-2">
           {sidebarLinks.map((link) => {
             const Icon = link.icon;
             const isActive = pathname === link.href;
@@ -65,15 +69,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 key={link.name}
                 href={link.href}
                 className={cn(
-                  "flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 group",
+                  "flex items-center justify-between px-5 py-4 rounded-xl transition-all duration-500 group",
                   isActive
-                    ? "bg-brand-orange text-white"
-                    : "text-white/40 hover:bg-white/5 hover:text-white"
+                    ? "bg-foreground text-background shadow-lg shadow-black/10"
+                    : "text-foreground/40 hover:bg-black/5 hover:text-foreground"
                 )}
               >
-                <div className="flex items-center gap-3">
-                  <Icon size={18} />
-                  <span className="text-sm font-bold">{link.name}</span>
+                <div className="flex items-center gap-4">
+                  <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
+                  <span className="text-[11px] font-bold uppercase tracking-widest">{link.name}</span>
                 </div>
                 {isActive && <ChevronRight size={14} />}
               </Link>
@@ -81,20 +85,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           })}
         </nav>
 
-        <div className="p-4 border-t border-white/5">
+        <div className="p-6 border-t border-black/5">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-white/40 hover:bg-red-500/10 hover:text-red-500 transition-all"
+            className="flex items-center gap-4 px-5 py-4 w-full rounded-xl text-foreground/40 hover:bg-red-500/5 hover:text-red-500 transition-all duration-300"
           >
             <LogOut size={18} />
-            <span className="text-sm font-bold">Logout</span>
+            <span className="text-[11px] font-bold uppercase tracking-widest">Logout</span>
           </button>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-grow overflow-auto p-12">
-        {children}
+      <main className="flex-grow overflow-auto p-12 bg-white/40 backdrop-blur-3xl">
+        <div className="max-w-6xl mx-auto">
+          {children}
+        </div>
       </main>
     </div>
   );

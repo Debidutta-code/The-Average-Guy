@@ -9,6 +9,7 @@ import Reservation from '../models/Reservation';
 import Contact from '../models/Contact';
 import HeroSlide from '../models/HeroSlide';
 import BusinessDetails from '../models/BusinessDetails';
+import communityRoutes from './communityRoutes';
 
 const createRouter = (model: any, options: { protected?: boolean; publicPost?: boolean } = {}) => {
   const router = express.Router();
@@ -43,5 +44,6 @@ router.use('/reservations', createRouter(Reservation, { publicPost: true })); //
 router.use('/contact', createRouter(Contact, { publicPost: true })); // Public can contact
 router.use('/hero', createRouter(HeroSlide, { protected: true }));
 router.use('/business', createRouter(BusinessDetails, { protected: true }));
+router.use('/community', communityRoutes);
 
 export default router;

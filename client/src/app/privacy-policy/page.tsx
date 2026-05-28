@@ -17,7 +17,7 @@ export default function PrivacyPolicyPage() {
 
         <section className="space-y-6 text-white/70 leading-relaxed text-lg">
           <p>
-            At The Average Guy, we value your privacy and are committed to protecting your personal data. This Privacy Policy outlines how we collect, use, and safeguard your information when you visit our website or use our services.
+            At OOPRE Kitchen & Bar, we value your privacy and are committed to protecting your personal data. This Privacy Policy outlines how we collect, use, and safeguard your information when you visit our website or use our services.
           </p>
 
           <div className="space-y-4 pt-8">
@@ -57,9 +57,9 @@ export default function PrivacyPolicyPage() {
             <p>
               If you have any questions regarding this Privacy Policy, please contact us at:
             </p>
-            <p className="text-brand-orange font-bold">
-              +91 97066 13566 <br />
-              theaverageguy@gmail.com
+            <p className="text-brand-gold font-bold">
+              +91 74400 26026 <br />
+              hello@oopre.in
             </p>
           </div>
         </section>

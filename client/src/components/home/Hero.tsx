@@ -1,107 +1,132 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Button } from '@/components/ui/button';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 
-gsap.registerPlugin(ScrollTrigger);
+interface Particle {
+  id: number;
+  x: string;
+  y: string;
+  width: number;
+  height: number;
+  duration: number;
+  delay: number;
+}
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const videoRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
+
+  const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Hero reveal animation
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        '.hero-title span',
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, stagger: 0.1, ease: 'power4.out' }
-      )
-      .fromTo(
-        subtitleRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-        '-=0.8'
-      )
-      .fromTo(
-        '.hero-ctas',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-        '-=0.6'
-      );
-
-      // Scroll scaling effect for background image
-      gsap.to(videoRef.current, {
-        scale: 1.1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
+    // Wrap in a microtask/timeout to avoid synchronous setState in effect lint error
+    const timer = setTimeout(() => {
+      const newParticles = [...Array(30)].map((_, i) => ({
+        id: i,
+        x: Math.random() * 100 + '%',
+        y: Math.random() * 100 + '%',
+        width: Math.random() * 4 + 2,
+        height: Math.random() * 4 + 2,
+        duration: Math.random() * 5 + 5,
+        delay: Math.random() * 5
+      }));
+      setParticles(newParticles);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
-      {/* Background Media */}
-      <div
-        ref={videoRef}
-        className="absolute inset-0 z-0 scale-105 transition-transform duration-700"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black z-10" />
-        <img
-          src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop"
-          alt="Luxury Cafe Interior"
-          className="w-full h-full object-cover grayscale-[0.2]"
-        />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-20 text-center px-6 max-w-5xl">
-        <div className="overflow-hidden mb-4">
-          <h1 ref={titleRef} className="hero-title text-5xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter uppercase leading-[0.9]">
-            <span className="block">THE</span>
-            <span className="block text-brand-orange">AVERAGE</span>
-            <span className="block">GUY</span>
-          </h1>
-        </div>
-
-        <p ref={subtitleRef} className="text-lg md:text-2xl text-white/80 font-medium mb-12 tracking-wide max-w-2xl mx-auto">
-          Bhubaneswar’s Premier Community Lounge & Cafe Experience.
-          Where culture meets coffee.
-        </p>
-
-        <div className="hero-ctas flex flex-col sm:row items-center justify-center gap-6">
-          <Link href="/events" className="bg-brand-orange hover:bg-white hover:text-black text-white px-10 py-5 text-lg font-bold rounded-full transition-all duration-500 transform hover:scale-110">
-            Explore Events
-          </Link>
-          <Link href="/reservations" className="border border-white/20 text-white hover:bg-white/10 px-10 py-5 text-lg font-bold rounded-full transition-all duration-500">
-            Reserve Table
-          </Link>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
+    <section ref={containerRef} className="relative h-[150vh] w-full overflow-hidden bg-brand-dark-blue">
+      {/* Background with Parallax */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+        style={{ y, scale }}
+        className="sticky top-0 h-screen w-full"
       >
-        <span className="text-white/40 text-[10px] uppercase tracking-[0.2em] font-bold">Scroll to explore</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-brand-orange to-transparent" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center">
+           <div className="absolute inset-0 bg-gradient-to-b from-brand-dark-blue/60 via-brand-dark-blue/40 to-brand-dark-blue" />
+        </div>
+
+        {/* Floating Particles (Mediterranean Gold Dust) */}
+        {particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            className="absolute rounded-full bg-brand-gold/20 blur-sm"
+            initial={{
+              x: particle.x,
+              y: particle.y,
+              width: particle.width,
+              height: particle.height
+            }}
+            animate={{
+              y: [null, '-20vh'],
+              opacity: [0, 1, 0]
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Infinity,
+              delay: particle.delay
+            }}
+          />
+        ))}
+
+        {/* Content */}
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="mb-6 overflow-hidden"
+          >
+             <span className="text-brand-gold font-bold tracking-[0.6em] uppercase text-xs md:text-sm block mb-4">
+                East India&apos;s 1st Greek Themed Rooftop
+             </span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.7, ease: "easeOut" }}
+            className="text-7xl md:text-[12rem] font-serif font-light text-white leading-none tracking-tighter uppercase mb-8"
+          >
+            OOPRE
+          </motion.h1>
+
+          <motion.div
+             initial={{ opacity: 0 }}
+             animate={{ opacity: 1 }}
+             transition={{ duration: 1, delay: 1.5 }}
+             className="flex flex-col md:flex-row items-center gap-8 md:gap-16"
+          >
+             <div className="text-white/60 text-lg md:text-2xl font-light max-w-xl italic">
+                &ldquo;Dine, Wine & Shine&rdquo; <br/>
+                <span className="text-sm md:text-base not-italic uppercase tracking-widest text-brand-blue font-bold">Bhubaneswar&apos;s Premier Destination</span>
+             </div>
+
+             <div className="flex gap-6">
+                <Link href="/reservations" className="bg-brand-blue text-white px-10 py-4 font-bold tracking-widest hover:bg-brand-gold hover:text-black transition-all duration-500 rounded-sm">
+                   RESERVE NOW
+                </Link>
+             </div>
+          </motion.div>
+
+          {/* Scroll Indicator */}
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30"
+          >
+             <span className="text-[10px] tracking-[0.3em] uppercase text-white font-bold">Discover</span>
+             <div className="w-[1px] h-12 bg-gradient-to-b from-brand-gold to-transparent" />
+          </motion.div>
+        </div>
       </motion.div>
     </section>
   );

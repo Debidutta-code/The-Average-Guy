@@ -9,10 +9,19 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { apiFetch } from "@/lib/api";
 
+interface EventData {
+  title: string;
+  description: string;
+  date: string;
+  artist?: string;
+  coverImage?: string;
+  status?: string;
+}
+
 export default function EventDetailsPage() {
   const { id } = useParams();
   const router = useRouter();
-  const [event, setEvent] = useState<any>(null);
+  const [event, setEvent] = useState<EventData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,7 +41,7 @@ export default function EventDetailsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <Loader2 className="animate-spin text-brand-orange" size={40} />
+        <Loader2 className="animate-spin text-brand-gold" size={40} />
       </div>
     );
   }
@@ -55,7 +64,7 @@ export default function EventDetailsPage() {
       <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto">
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2 text-white/40 hover:text-brand-orange transition-colors mb-12 group"
+          className="flex items-center gap-2 text-white/40 hover:text-brand-gold transition-colors mb-12 group"
         >
           <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
           <span>Back to Events</span>
@@ -68,7 +77,7 @@ export default function EventDetailsPage() {
             className="space-y-8"
           >
             <div className="space-y-4">
-              <span className="text-brand-orange font-bold uppercase tracking-[0.2em] text-sm">
+              <span className="text-brand-gold font-bold uppercase tracking-[0.2em] text-sm">
                 {event.status || 'Upcoming'} Event
               </span>
               <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none">
@@ -82,14 +91,14 @@ export default function EventDetailsPage() {
 
             <div className="grid grid-cols-2 gap-8 py-8 border-y border-white/5">
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-brand-orange">
+                <div className="flex items-center gap-2 text-brand-gold">
                   <Calendar size={18} />
                   <span className="font-bold uppercase text-xs tracking-wider">Date</span>
                 </div>
                 <p className="text-2xl font-bold">{new Date(event.date).toLocaleDateString()}</p>
               </div>
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-brand-orange">
+                <div className="flex items-center gap-2 text-brand-gold">
                   <Users size={18} />
                   <span className="font-bold uppercase text-xs tracking-wider">Artist</span>
                 </div>
@@ -98,7 +107,7 @@ export default function EventDetailsPage() {
             </div>
 
             <div className="pt-4">
-               <Button className="bg-brand-orange hover:bg-white hover:text-black text-black px-12 h-16 rounded-full text-lg font-bold transition-all duration-500 w-full sm:w-auto">
+               <Button className="bg-brand-gold hover:bg-white hover:text-black text-black px-12 h-16 rounded-full text-lg font-bold transition-all duration-500 w-full sm:w-auto">
                   Book Your Spot
                </Button>
             </div>

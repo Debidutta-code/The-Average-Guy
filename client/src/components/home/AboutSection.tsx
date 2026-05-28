@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -55,40 +54,44 @@ export function AboutSection() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div ref={imageRef} className="relative aspect-square md:aspect-video lg:aspect-square overflow-hidden rounded-3xl">
           <img
-            src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=2071&auto=format&fit=crop"
-            alt="Cafe Culture"
+            src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=2070&auto=format&fit=crop"
+            alt="Greek Rooftop"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-brand-orange/10 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-brand-blue/10 mix-blend-overlay" />
         </div>
 
         <div ref={contentRef} className="space-y-8">
           <div className="space-y-4">
-            <h3 className="text-brand-orange font-bold uppercase tracking-widest text-sm">Our Story</h3>
-            <h2 className="text-4xl md:text-6xl font-black text-white leading-[1.1] tracking-tighter">
-              MORE THAN JUST A <br />
-              <span className="text-white/40">CAFE EXPERIENCE.</span>
+            <h3 className="text-brand-gold font-bold uppercase tracking-widest text-sm">East India’s 1st Greek Themed Rooftop</h3>
+            <h2 className="text-4xl md:text-6xl font-serif font-black text-white leading-[1.1] tracking-tighter">
+              GREEK <br />
+              <span className="text-brand-blue">SPIRIT</span>
             </h2>
           </div>
 
-          <p className="text-lg md:text-xl text-white/60 leading-relaxed font-light">
-            The Average Guy is a modern aesthetic cafe and community hangout space in Bhubaneswar. Known for its cozy ambiance, social events, networking culture, and chill vibes.
+          <p className="text-lg md:text-xl text-white/70 leading-relaxed font-light">
+            OOPRE Kitchen & Bar is a lifestyle destination designed to transport you straight to the sun-drenched shores of Mykonos. Located in the heart of Bhubaneswar, we offer a unique blend of Mediterranean elegance and urban energy.
           </p>
 
-          <div className="grid grid-cols-2 gap-8 pt-8">
+          <p className="text-lg md:text-xl text-white/70 leading-relaxed font-light">
+             From the crisp white and blue accents of our decor to the world-class cuisines on our menu, every detail is crafted to create unforgettable memories.
+          </p>
+
+          <div className="grid grid-cols-2 gap-8 pt-4">
             <div>
-              <h4 className="text-3xl font-black text-brand-orange mb-2">4.4+</h4>
-              <p className="text-white/40 text-sm uppercase tracking-wider font-bold">Google Rating</p>
+              <h4 className="text-3xl font-serif font-black text-brand-gold mb-2">SKYLINE</h4>
+              <p className="text-white/40 text-sm uppercase tracking-wider font-bold">Stunning Views</p>
             </div>
             <div>
-              <h4 className="text-3xl font-black text-brand-orange mb-2">150+</h4>
-              <p className="text-white/40 text-sm uppercase tracking-wider font-bold">Happy Reviews</p>
+              <h4 className="text-3xl font-serif font-black text-brand-gold mb-2">WORLD</h4>
+              <p className="text-white/40 text-sm uppercase tracking-wider font-bold">Global Flavors</p>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-4 pt-6">
-            {['Cozy', 'Aesthetic', 'Pet Friendly', 'Work Friendly', 'Chill Vibes'].map((tag) => (
-              <span key={tag} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-bold text-white/80">
+            {['Rooftop', 'Greek Aesthetic', 'Live Music', 'Global Cuisine', 'Sunset Views'].map((tag) => (
+              <span key={tag} className="px-4 py-2 bg-brand-blue/20 border border-brand-blue/30 rounded-full text-xs font-bold text-white/80">
                 {tag}
               </span>
             ))}

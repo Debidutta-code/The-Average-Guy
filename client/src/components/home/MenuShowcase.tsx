@@ -1,74 +1,97 @@
 'use client';
 
-import React from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Link from 'next/link';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const menuItems = {
-  coffee: [
-    { name: 'Cold Brew Premium', price: '₹220', desc: 'Slow-steeped for 18 hours for maximum flavor.' },
-    { name: 'Vanilla Bean Latte', price: '₹240', desc: 'Double espresso with house-made vanilla syrup.' },
-    { name: 'Spanish Latte', price: '₹260', desc: 'A sweet and creamy condensed milk masterpiece.' },
+  greek: [
+    { name: 'Moussaka Classic', price: '₹540', desc: 'Layers of eggplant, minced meat, and béchamel sauce.' },
+    { name: 'Souvlaki Platter', price: '₹480', desc: 'Grilled skewers served with pita, tzatziki, and Greek salad.' },
+    { name: 'Spanakopita', price: '₹380', desc: 'Spinach and feta cheese wrapped in flaky phyllo pastry.' },
   ],
-  food: [
-    { name: 'Avocado Toast', price: '₹350', desc: 'Sourdough bread, mashed avocado, poached egg.' },
-    { name: 'Peri Peri Burger', price: '₹280', desc: 'Spicy grilled chicken with charcoal bun.' },
-    { name: 'Truffle Fries', price: '₹190', desc: 'Hand-cut potatoes tossed in truffle oil.' },
+  mains: [
+    { name: 'Wood-Fired Pepperoni Pizza', price: '₹520', desc: 'Hand-stretched dough with premium pepperoni and mozzarella.' },
+    { name: 'Fettuccine Alfredo', price: '₹460', desc: 'Rich and creamy parmesan sauce with fresh parsley.' },
+    { name: 'Rooftop Special Burger', price: '₹490', desc: 'Double wagyu beef patty with truffle mayo.' },
   ],
-  desserts: [
-    { name: 'Lotus Biscoff Cheesecake', price: '₹310', desc: 'Creamy cheesecake topped with biscoff spread.' },
-    { name: 'Dark Chocolate Brownie', price: '₹180', desc: 'Warm fudgy brownie served with vanilla gelato.' },
+  cocktails: [
+    { name: 'Mykonos Sunset', price: '₹550', desc: 'Premium gin, elderflower, and fresh grapefruit.' },
+    { name: 'The Oopre Sour', price: '₹580', desc: 'Bourbon, spiced honey, and aromatic bitters.' },
+    { name: 'Santorini Spritz', price: '₹520', desc: 'Prosecco, Aperol, and a splash of Mediterranean soda.' },
   ],
 };
 
 export function MenuShowcase() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const scrollWidth = scrollRef.current?.scrollWidth || 0;
+      const windowWidth = window.innerWidth;
+
+      gsap.to(scrollRef.current, {
+        x: -(scrollWidth - windowWidth + 100),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#menu-showcase-container',
+          start: 'top top',
+          end: () => `+=${scrollWidth}`,
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        }
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="py-24 px-6 md:px-12 bg-black">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16 space-y-4">
-          <h3 className="text-brand-orange font-bold uppercase tracking-widest text-sm">Taste The Premium</h3>
-          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none">
-            CRAFTED <span className="text-white/20">MENU</span>
+    <section id="menu-showcase-container" className="h-screen w-full overflow-hidden bg-brand-dark-blue flex items-center">
+      <div className="absolute top-10 left-10 md:left-20 z-10">
+          <h2 className="text-5xl md:text-8xl font-serif font-light text-white tracking-tighter uppercase leading-none">
+            Flavors <br/><span className="text-brand-blue ml-10 md:ml-20">of the World</span>
           </h2>
+          <p className="text-brand-orange font-bold tracking-[0.3em] uppercase mt-4">A Cinematic Culinary Experience</p>
+      </div>
+
+      <div ref={scrollRef} className="flex gap-10 pl-[20vw] md:pl-[30vw] pr-20">
+        {Object.entries(menuItems).flatMap(([category, items]) =>
+          items.map((item, idx) => (
+            <div key={`${category}-${idx}`} className="flex-shrink-0 w-[80vw] md:w-[450px] group">
+               <div className="relative aspect-[4/5] overflow-hidden rounded-sm mb-6">
+                  <img
+                    src={"https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2069&auto=format&fit=crop"}
+                    alt={item.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-6 left-6 right-6 translate-y-10 group-hover:translate-y-0 transition-transform duration-500">
+                     <p className="text-white/70 text-sm font-light italic">{item.desc}</p>
+                  </div>
+               </div>
+               <div className="flex justify-between items-end border-b border-white/10 pb-4">
+                  <div>
+                    <span className="text-brand-gold text-xs font-bold tracking-widest uppercase mb-2 block">{category}</span>
+                    <h4 className="text-2xl font-serif text-white uppercase">{item.name}</h4>
+                  </div>
+                  <span className="text-brand-blue font-serif text-xl">{item.price}</span>
+               </div>
+            </div>
+          ))
+        )}
+
+        <div className="flex-shrink-0 w-[40vw] flex flex-col justify-center items-start pl-20">
+            <h3 className="text-4xl font-serif text-white mb-8">Ready to taste?</h3>
+            <Link href="/menu" className="group flex items-center gap-4 text-white text-xl font-bold uppercase tracking-widest">
+               View Full Menu
+               <div className="w-12 h-[1px] bg-brand-gold group-hover:w-20 transition-all duration-500" />
+            </Link>
         </div>
-
-        <Tabs defaultValue="coffee" className="w-full">
-          <TabsList className="w-full justify-center bg-transparent gap-8 mb-12 border-b border-white/10 rounded-none h-auto p-0 pb-4">
-            {Object.keys(menuItems).map((category) => (
-              <TabsTrigger
-                key={category}
-                value={category}
-                className="bg-transparent text-white/40 data-[state=active]:text-brand-orange data-[state=active]:bg-transparent border-none text-xl font-black uppercase tracking-tighter transition-all px-0"
-              >
-                {category}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-
-          {Object.entries(menuItems).map(([category, items]) => (
-            <TabsContent key={category} value={category} className="mt-0">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
-                {items.map((item, i) => (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="group"
-                  >
-                    <div className="flex justify-between items-end mb-2">
-                      <h4 className="text-xl font-bold text-white group-hover:text-brand-orange transition-colors">{item.name}</h4>
-                      <div className="flex-grow border-b border-dotted border-white/20 mx-4 mb-1" />
-                      <span className="text-brand-orange font-black">{item.price}</span>
-                    </div>
-                    <p className="text-white/40 text-sm italic">{item.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
       </div>
     </section>
   );

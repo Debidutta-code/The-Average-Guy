@@ -4,18 +4,20 @@ import { EventsSection } from "@/components/home/EventsSection";
 import { MenuShowcase } from "@/components/home/MenuShowcase";
 import { GalleryPreview } from "@/components/home/GalleryPreview";
 import { ReviewsSection } from "@/components/home/ReviewsSection";
+import { VisitUs } from "@/components/home/VisitUs";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-background">
       <Navbar />
       <Hero />
       <AboutSection />
       <EventsSection />
       <MenuShowcase />
       <GalleryPreview />
+      <VisitUs />
       <ReviewsSection />
       <Footer />
     </main>

@@ -16,13 +16,13 @@ export default function AdminSettingsPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-         <Card className="bg-zinc-900 border-white/5 p-8 text-white space-y-8">
+         <Card className="bg-zinc-900 border-white/5 p-8 text-foreground space-y-8">
             <h3 className="text-xl font-bold border-b border-white/5 pb-4">Business Information</h3>
 
             <div className="space-y-6">
                <div className="space-y-2">
                   <Label>Business Name</Label>
-                  <Input defaultValue="The Average Guy" className="bg-black/50 border-white/10" />
+                  <Input defaultValue="Old Town Cafe" className="bg-black/50 border-white/10" />
                </div>
                <div className="space-y-2">
                   <Label>Tagline</Label>
@@ -43,10 +43,10 @@ export default function AdminSettingsPage() {
                   </div>
                </div>
             </div>
-            <Button className="bg-brand-orange w-full font-bold h-12">Update Details</Button>
+            <Button className="bg-primary w-full font-bold h-12">Update Details</Button>
          </Card>
 
-         <Card className="bg-zinc-900 border-white/5 p-8 text-white space-y-8">
+         <Card className="bg-zinc-900 border-white/5 p-8 text-foreground space-y-8">
             <h3 className="text-xl font-bold border-b border-white/5 pb-4">Social Media Links</h3>
 
             <div className="space-y-6">

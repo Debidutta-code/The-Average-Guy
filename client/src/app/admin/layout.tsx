@@ -30,12 +30,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('admin_token');
-    if (!token && !pathname.includes('/admin/login')) {
-      router.push('/admin/login');
-    } else {
-      setIsReady(true);
-    }
+    const checkAuth = () => {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
+      if (!token && !pathname.includes('/admin/login')) {
+        router.push('/admin/login');
+      } else {
+        // Use a microtask to avoid synchronous state update in effect
+        queueMicrotask(() => {
+          setIsReady(true);
+        });
+      }
+    };
+    checkAuth();
   }, [pathname, router]);
 
   if (!isReady && !pathname.includes('/admin/login')) return null;
@@ -47,12 +53,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   };
 
   return (
-    <div className="min-h-screen bg-black flex text-white">
+    <div className="min-h-screen bg-background flex text-foreground">
       {/* Sidebar */}
       <aside className="w-64 border-r border-white/5 bg-zinc-950 flex flex-col">
         <div className="p-8">
           <div className="text-xl font-black tracking-tighter">
-            AVG <span className="text-brand-orange">ADMIN</span>
+            OTC <span className="text-primary">ADMIN</span>
           </div>
         </div>
 
@@ -67,8 +73,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 className={cn(
                   "flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 group",
                   isActive
-                    ? "bg-brand-orange text-white"
-                    : "text-white/40 hover:bg-white/5 hover:text-white"
+                    ? "bg-primary text-foreground"
+                    : "text-white/40 hover:bg-white/5 hover:text-foreground"
                 )}
               >
                 <div className="flex items-center gap-3">

@@ -43,15 +43,15 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-6">
+    <div className="min-h-screen bg-background flex items-center justify-center p-6">
       <Toaster position="top-center" richColors />
-      <Card className="w-full max-w-md bg-zinc-900 border-white/5 text-white">
+      <Card className="w-full max-w-md bg-zinc-900 border-white/5 text-foreground">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-black tracking-tighter uppercase">
-            ADMIN <span className="text-brand-orange">PORTAL</span>
+            ADMIN <span className="text-primary">PORTAL</span>
           </CardTitle>
           <CardDescription className="text-white/40">
-            Secure access for The Average Guy management.
+            Secure access for Old Town Cafe management.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -63,7 +63,7 @@ export default function AdminLoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@theaverageguy.in"
+                placeholder="admin@oldtowncafe.in"
                 className="bg-black/50 border-white/10"
                 required
               />
@@ -79,7 +79,7 @@ export default function AdminLoginPage() {
                 required
               />
             </div>
-            <Button type="submit" disabled={loading} className="w-full bg-brand-orange hover:bg-white hover:text-black font-bold h-12">
+            <Button type="submit" disabled={loading} className="w-full bg-primary hover:bg-white hover:text-black font-bold h-12">
               {loading ? "Authenticating..." : "Login to Dashboard"}
             </Button>
           </form>

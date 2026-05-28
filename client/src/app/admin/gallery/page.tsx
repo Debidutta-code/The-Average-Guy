@@ -21,7 +21,7 @@ export default function AdminGalleryPage() {
           <p className="text-white/40">Upload and organize cafe visuals.</p>
         </div>
 
-        <Button className="bg-brand-orange hover:bg-white hover:text-black font-bold">
+        <Button className="bg-primary hover:bg-white hover:text-black font-bold">
           <Plus size={18} className="mr-2" /> Upload Photos
         </Button>
       </div>
@@ -30,7 +30,7 @@ export default function AdminGalleryPage() {
         {images.map((img) => (
           <Card key={img.id} className="bg-zinc-900 border-white/5 overflow-hidden group relative">
             <img src={img.url} alt="Gallery" className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-4">
+            <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-4">
                <div className="flex justify-end">
                   <Button variant="destructive" size="icon" className="h-8 w-8">
                     <Trash2 size={16} />

@@ -4,14 +4,14 @@ import { GalleryPreview } from "@/components/home/GalleryPreview";
 
 export default function GalleryPage() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-background">
       <Navbar />
       <div className="pt-32 px-6 md:px-12 max-w-7xl mx-auto text-center">
-        <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase">
-          VISUAL <span className="text-brand-orange">JOURNEY</span>
+        <h1 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter uppercase">
+          VISUAL <span className="text-primary">JOURNEY</span>
         </h1>
         <p className="text-white/50 max-w-2xl mx-auto mt-6 text-lg">
-          A glimpse into the soul of The Average Guy—where every corner tells a story and every moment is a memory.
+          A glimpse into the soul of Old Town Cafe—where every corner tells a story and every moment is a memory.
         </p>
       </div>
       <GalleryPreview />
@@ -27,7 +27,7 @@ export default function GalleryPage() {
           ].map((src, i) => (
             <div key={i} className="aspect-[3/4] overflow-hidden rounded-3xl group relative">
                <img src={src} alt="Gallery" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity" />
+               <div className="absolute inset-0 bg-background/40 opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
           ))}
         </div>

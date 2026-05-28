@@ -23,22 +23,22 @@ const menuItems = {
 
 export function MenuShowcase() {
   return (
-    <section className="py-24 px-6 md:px-12 bg-black">
+    <section className="py-24 px-6 md:px-12 bg-background textured-bg">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16 space-y-4">
-          <h3 className="text-brand-orange font-bold uppercase tracking-widest text-sm">Taste The Premium</h3>
-          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none">
-            CRAFTED <span className="text-white/20">MENU</span>
+          <span className="text-primary font-bold uppercase tracking-[0.2em] text-sm">Taste The Tradition</span>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-foreground tracking-tight leading-none">
+            Signature <span className="text-primary italic">Selection</span>
           </h2>
         </div>
 
         <Tabs defaultValue="coffee" className="w-full">
-          <TabsList className="w-full justify-center bg-transparent gap-8 mb-12 border-b border-white/10 rounded-none h-auto p-0 pb-4">
+          <TabsList className="w-full justify-center bg-transparent gap-8 mb-12 border-b border-primary/20 rounded-none h-auto p-0 pb-4">
             {Object.keys(menuItems).map((category) => (
               <TabsTrigger
                 key={category}
                 value={category}
-                className="bg-transparent text-white/40 data-[state=active]:text-brand-orange data-[state=active]:bg-transparent border-none text-xl font-black uppercase tracking-tighter transition-all px-0"
+                className="bg-transparent text-foreground/60 data-[state=active]:text-primary data-[state=active]:bg-transparent border-none text-xl font-serif font-bold capitalize tracking-tight transition-all px-0 cursor-pointer"
               >
                 {category}
               </TabsTrigger>
@@ -58,11 +58,11 @@ export function MenuShowcase() {
                     className="group"
                   >
                     <div className="flex justify-between items-end mb-2">
-                      <h4 className="text-xl font-bold text-white group-hover:text-brand-orange transition-colors">{item.name}</h4>
+                      <h4 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">{item.name}</h4>
                       <div className="flex-grow border-b border-dotted border-white/20 mx-4 mb-1" />
-                      <span className="text-brand-orange font-black">{item.price}</span>
+                      <span className="text-primary font-bold">{item.price}</span>
                     </div>
-                    <p className="text-white/40 text-sm italic">{item.desc}</p>
+                    <p className="text-muted-foreground text-sm italic">{item.desc}</p>
                   </motion.div>
                 ))}
               </div>

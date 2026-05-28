@@ -3,16 +3,26 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Calendar, Users, MapPin, ArrowLeft, Loader2 } from 'lucide-react';
+import { Calendar, Users, ArrowLeft, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { apiFetch } from "@/lib/api";
 
+interface EventData {
+  _id: string;
+  title: string;
+  description: string;
+  date: string;
+  artist: string;
+  status: string;
+  coverImage?: string;
+}
+
 export default function EventDetailsPage() {
   const { id } = useParams();
   const router = useRouter();
-  const [event, setEvent] = useState<any>(null);
+  const [event, setEvent] = useState<EventData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,20 +36,22 @@ export default function EventDetailsPage() {
         setLoading(false);
       }
     };
-    if (id) fetchEvent();
+    if (id) {
+       fetchEvent();
+    }
   }, [id]);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <Loader2 className="animate-spin text-brand-orange" size={40} />
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="animate-spin text-primary" size={40} />
       </div>
     );
   }
 
   if (!event) {
     return (
-      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center gap-6">
+      <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center gap-6">
         <h1 className="text-4xl font-bold">Event not found</h1>
         <Button onClick={() => router.push('/events')} variant="outline">
           Back to Events
@@ -49,13 +61,13 @@ export default function EventDetailsPage() {
   }
 
   return (
-    <main className="bg-black min-h-screen text-white">
+    <main className="bg-background min-h-screen text-foreground">
       <Navbar />
 
       <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto">
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2 text-white/40 hover:text-brand-orange transition-colors mb-12 group"
+          className="flex items-center gap-2 text-white/40 hover:text-primary transition-colors mb-12 group"
         >
           <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
           <span>Back to Events</span>
@@ -68,7 +80,7 @@ export default function EventDetailsPage() {
             className="space-y-8"
           >
             <div className="space-y-4">
-              <span className="text-brand-orange font-bold uppercase tracking-[0.2em] text-sm">
+              <span className="text-primary font-bold uppercase tracking-[0.2em] text-sm">
                 {event.status || 'Upcoming'} Event
               </span>
               <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none">
@@ -82,14 +94,14 @@ export default function EventDetailsPage() {
 
             <div className="grid grid-cols-2 gap-8 py-8 border-y border-white/5">
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-brand-orange">
+                <div className="flex items-center gap-2 text-primary">
                   <Calendar size={18} />
                   <span className="font-bold uppercase text-xs tracking-wider">Date</span>
                 </div>
                 <p className="text-2xl font-bold">{new Date(event.date).toLocaleDateString()}</p>
               </div>
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-brand-orange">
+                <div className="flex items-center gap-2 text-primary">
                   <Users size={18} />
                   <span className="font-bold uppercase text-xs tracking-wider">Artist</span>
                 </div>
@@ -98,7 +110,7 @@ export default function EventDetailsPage() {
             </div>
 
             <div className="pt-4">
-               <Button className="bg-brand-orange hover:bg-white hover:text-black text-black px-12 h-16 rounded-full text-lg font-bold transition-all duration-500 w-full sm:w-auto">
+               <Button className="bg-primary hover:bg-white hover:text-black text-black px-12 h-16 rounded-full text-lg font-bold transition-all duration-500 w-full sm:w-auto">
                   Book Your Spot
                </Button>
             </div>

@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import Magnetic from "./Magnetic";
 
 export default function ReservationModal({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
   return (
@@ -59,9 +60,11 @@ export default function ReservationModal({ isOpen, onClose }: { isOpen: boolean,
                 className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-amber-500 transition-colors"
               />
 
-              <button className="w-full bg-amber-500 text-black font-bold tracking-widest py-5 rounded-2xl hover:bg-amber-400 transition-colors uppercase text-xs mt-4">
-                Confirm Booking
-              </button>
+              <Magnetic strength={0.2}>
+                <button className="w-full bg-amber-500 text-black font-bold tracking-widest py-5 rounded-2xl hover:bg-amber-400 transition-colors uppercase text-xs mt-4">
+                  Confirm Booking
+                </button>
+              </Magnetic>
             </form>
           </motion.div>
         </div>

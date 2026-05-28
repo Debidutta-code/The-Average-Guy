@@ -6,8 +6,12 @@ import Hero from "@/components/Hero";
 import Story from "@/components/Story";
 import Menu from "@/components/Menu";
 import Gallery from "@/components/Gallery";
+import Reviews from "@/components/Reviews";
+import Location from "@/components/Location";
 import ExperienceCanvas from "@/components/ExperienceCanvas";
+import LiquidSpill from "@/components/LiquidSpill";
 import ReservationModal from "@/components/ReservationModal";
+import Particles from "@/components/Particles";
 import { useLenis } from "@/hooks/useLenis";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap } from "lucide-react";
@@ -31,6 +35,8 @@ export default function Home() {
           transition={{ duration: 1 }}
         >
           <div className="noise" />
+          <Particles />
+          <LiquidSpill />
           <ExperienceCanvas />
 
           <nav className="fixed top-0 left-0 w-full z-50 p-8 flex justify-between items-center pointer-events-none">
@@ -43,10 +49,12 @@ export default function Home() {
             </button>
           </nav>
 
-          <Hero />
+          <Hero onReserve={() => setIsModalOpen(true)} />
           <Story />
           <Menu />
           <Gallery />
+          <Reviews />
+          <Location />
 
           <footer className="py-20 bg-black border-t border-white/5">
             <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">

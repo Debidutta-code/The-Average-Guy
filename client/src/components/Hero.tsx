@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Magnetic from "./Magnetic";
 
-export default function Hero() {
+export default function Hero({ onReserve }: { onReserve?: () => void }) {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden pt-20">
       <div className="container mx-auto px-6 z-10">
@@ -37,6 +38,22 @@ export default function Hero() {
               </motion.span>
             </span>
           </h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            className="mt-12 flex justify-center gap-6"
+          >
+            <Magnetic>
+              <button
+                onClick={onReserve}
+                className="px-10 py-4 bg-amber-500 text-black font-bold rounded-full tracking-[0.2em] uppercase text-[10px] hover:bg-amber-400 transition-colors"
+              >
+                Book Experience
+              </button>
+            </Magnetic>
+          </motion.div>
         </motion.div>
 
         <motion.div

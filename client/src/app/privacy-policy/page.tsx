@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="bg-black min-h-screen text-white">
+    <main className="bg-background min-h-screen text-foreground">
       <Navbar />
 
       <div className="pt-40 pb-20 px-6 max-w-4xl mx-auto space-y-12">
@@ -17,11 +17,11 @@ export default function PrivacyPolicyPage() {
 
         <section className="space-y-6 text-white/70 leading-relaxed text-lg">
           <p>
-            At The Average Guy, we value your privacy and are committed to protecting your personal data. This Privacy Policy outlines how we collect, use, and safeguard your information when you visit our website or use our services.
+            At Old Town Cafe, we value your privacy and are committed to protecting your personal data. This Privacy Policy outlines how we collect, use, and safeguard your information when you visit our website or use our services.
           </p>
 
           <div className="space-y-4 pt-8">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-tight">1. Information We Collect</h2>
+            <h2 className="text-2xl font-bold text-foreground uppercase tracking-tight">1. Information We Collect</h2>
             <p>
               When you make a reservation, contact us, or sign up for our newsletter, we may collect:
             </p>
@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <div className="space-y-4 pt-8">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-tight">2. How We Use Your Information</h2>
+            <h2 className="text-2xl font-bold text-foreground uppercase tracking-tight">2. How We Use Your Information</h2>
             <p>
               Your information is used to:
             </p>
@@ -46,20 +46,20 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <div className="space-y-4 pt-8">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-tight">3. Data Security</h2>
+            <h2 className="text-2xl font-bold text-foreground uppercase tracking-tight">3. Data Security</h2>
             <p>
               We implement industry-standard security measures to protect your personal data from unauthorized access, disclosure, or alteration. However, no method of transmission over the internet is 100% secure.
             </p>
           </div>
 
           <div className="space-y-4 pt-8 border-t border-white/5 mt-12">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-tight">Contact Us</h2>
+            <h2 className="text-2xl font-bold text-foreground uppercase tracking-tight">Contact Us</h2>
             <p>
               If you have any questions regarding this Privacy Policy, please contact us at:
             </p>
-            <p className="text-brand-orange font-bold">
+            <p className="text-primary font-bold">
               +91 97066 13566 <br />
-              theaverageguy@gmail.com
+              hello@oldtowncafe.in
             </p>
           </div>
         </section>

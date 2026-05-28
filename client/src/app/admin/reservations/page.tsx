@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useTransition } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Users, Phone, Mail, Clock, Loader2, Trash2, CheckCircle } from 'lucide-react';
@@ -8,24 +8,39 @@ import { apiFetch } from "@/lib/api";
 import { toast } from "sonner";
 import { Button } from '@/components/ui/button';
 
-export default function AdminReservationsPage() {
-  const [reservations, setReservations] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+interface ReservationItem {
+  _id: string;
+  name: string;
+  guests: number;
+  date: string;
+  time: string;
+  phone: string;
+  email?: string;
+  status: string;
+}
 
-  const fetchReservations = async () => {
+export default function AdminReservationsPage() {
+  const [reservations, setReservations] = useState<ReservationItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [isPending, startTransition] = useTransition();
+
+  const fetchReservations = useCallback(async () => {
     try {
       const response = await apiFetch('/reservations');
-      setReservations(response.data);
+      startTransition(() => {
+        setReservations(response.data);
+      });
     } catch (error) {
+      console.error(error);
       toast.error("Failed to fetch reservations");
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchReservations();
-  }, []);
+  }, [fetchReservations]);
 
   const handleStatusChange = async (id: string, status: string) => {
     try {
@@ -36,6 +51,7 @@ export default function AdminReservationsPage() {
       toast.success(`Reservation ${status}`);
       fetchReservations();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to update status");
     }
   };
@@ -47,9 +63,12 @@ export default function AdminReservationsPage() {
       toast.success("Reservation deleted");
       fetchReservations();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to delete reservation");
     }
   };
+
+  if (isPending && loading) return <Loader2 className="animate-spin" />;
 
   return (
     <div className="space-y-10">
@@ -60,13 +79,13 @@ export default function AdminReservationsPage() {
 
       {loading ? (
         <div className="flex justify-center py-20">
-          <Loader2 className="animate-spin text-brand-orange" size={40} />
+          <Loader2 className="animate-spin text-primary" size={40} />
         </div>
       ) : (
         <div className="space-y-4">
           {reservations.length === 0 && <p className="text-white/20 text-center py-20">No reservations found.</p>}
           {reservations.map((res) => (
-            <Card key={res._id} className="bg-zinc-900 border-white/5 p-8 text-white grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
+            <Card key={res._id} className="bg-zinc-900 border-white/5 p-8 text-foreground grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
               <div className="space-y-1">
                  <h3 className="text-xl font-bold">{res.name}</h3>
                  <div className="flex items-center gap-2 text-white/40 text-sm">

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Plus, Edit, Trash2, Calendar, Loader2 } from 'lucide-react';
@@ -18,12 +18,22 @@ import { Textarea } from "@/components/ui/textarea";
 import { apiFetch } from "@/lib/api";
 import { toast } from "sonner";
 
+interface EventItem {
+  _id: string;
+  title: string;
+  date: string;
+  artist: string;
+  description: string;
+  coverImage: string;
+  status: string;
+}
+
 export default function AdminEventsPage() {
-  const [events, setEvents] = useState<any[]>([]);
+  const [events, setEvents] = useState<EventItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [editingEvent, setEditingEvent] = useState<any>(null);
+  const [editingEvent, setEditingEvent] = useState<EventItem | null>(null);
 
   // Form states
   const [formData, setFormData] = useState({
@@ -35,20 +45,24 @@ export default function AdminEventsPage() {
     status: 'upcoming'
   });
 
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       const response = await apiFetch('/events');
       setEvents(response.data);
     } catch (error) {
+      console.error(error);
       toast.error("Failed to fetch events");
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    fetchEvents();
-  }, []);
+    const timer = setTimeout(() => {
+      fetchEvents();
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [fetchEvents]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -70,6 +84,7 @@ export default function AdminEventsPage() {
       setIsDialogOpen(false);
       resetForm();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to save event");
     } finally {
       setSaving(false);
@@ -83,6 +98,7 @@ export default function AdminEventsPage() {
       toast.success("Event deleted");
       fetchEvents();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to delete event");
     }
   };
@@ -99,7 +115,7 @@ export default function AdminEventsPage() {
     setEditingEvent(null);
   };
 
-  const handleEdit = (event: any) => {
+  const handleEdit = (event: EventItem) => {
     setEditingEvent(event);
     setFormData({
       title: event.title,
@@ -124,12 +140,12 @@ export default function AdminEventsPage() {
           setIsDialogOpen(open);
           if (!open) resetForm();
         }}>
-          <DialogTrigger asChild>
-            <Button className="bg-brand-orange hover:bg-white hover:text-black font-bold">
+          <DialogTrigger render={
+            <Button className="bg-primary hover:bg-white hover:text-black font-bold">
               <Plus size={18} className="mr-2" /> Add New Event
             </Button>
-          </DialogTrigger>
-          <DialogContent className="bg-zinc-900 border-white/5 text-white sm:max-w-[600px]">
+          } />
+          <DialogContent className="bg-zinc-900 border-white/5 text-foreground sm:max-w-[600px]">
             <DialogHeader>
               <DialogTitle className="text-2xl font-bold">{editingEvent ? 'Edit Event' : 'Create New Event'}</DialogTitle>
             </DialogHeader>
@@ -191,7 +207,7 @@ export default function AdminEventsPage() {
               <Button
                 onClick={handleSave}
                 disabled={saving}
-                className="bg-brand-orange w-full h-12 font-bold"
+                className="bg-primary w-full h-12 font-bold"
               >
                 {saving ? <Loader2 className="animate-spin" /> : 'Save Event'}
               </Button>
@@ -202,15 +218,15 @@ export default function AdminEventsPage() {
 
       {loading ? (
         <div className="flex justify-center py-20">
-          <Loader2 className="animate-spin text-brand-orange" size={40} />
+          <Loader2 className="animate-spin text-primary" size={40} />
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4">
           {events.length === 0 && <p className="text-white/20 text-center py-20">No events found.</p>}
           {events.map((event) => (
-            <Card key={event._id} className="bg-zinc-900 border-white/5 p-6 text-white flex items-center justify-between hover:border-brand-orange/50 transition-all">
+            <Card key={event._id} className="bg-zinc-900 border-white/5 p-6 text-foreground flex items-center justify-between hover:border-white/50 transition-all">
               <div className="flex items-center gap-6">
-                <div className="w-16 h-16 rounded-xl bg-zinc-800 flex items-center justify-center text-brand-orange">
+                <div className="w-16 h-16 rounded-xl bg-zinc-800 flex items-center justify-center text-primary">
                   <Calendar size={24} />
                 </div>
                 <div>
@@ -220,7 +236,7 @@ export default function AdminEventsPage() {
               </div>
 
               <div className="flex gap-2">
-                <Button onClick={() => handleEdit(event)} variant="ghost" size="icon" className="text-white/40 hover:text-white hover:bg-white/5">
+                <Button onClick={() => handleEdit(event)} variant="ghost" size="icon" className="text-white/40 hover:text-foreground hover:bg-white/5">
                   <Edit size={18} />
                 </Button>
                 <Button onClick={() => handleDelete(event._id)} variant="ghost" size="icon" className="text-white/40 hover:text-red-500 hover:bg-red-500/10">

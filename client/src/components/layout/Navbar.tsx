@@ -39,10 +39,10 @@ export function Navbar() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-2xl font-bold tracking-tighter text-white flex flex-col"
+            className="text-2xl font-bold tracking-tighter text-foreground flex flex-col"
           >
-            <span className="text-brand-orange leading-none">THE</span>
-            <span className="leading-none">AVERAGE GUY</span>
+            <span className="text-primary leading-none">OLD TOWN</span>
+            <span className="leading-none">CAFE</span>
           </motion.div>
         </Link>
 
@@ -57,10 +57,10 @@ export function Navbar() {
             >
               <Link
                 href={link.href}
-                className="text-sm font-medium text-white/70 hover:text-brand-orange transition-colors duration-300 relative group"
+                className="text-sm font-medium text-white/70 hover:text-primary transition-colors duration-300 relative group"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-orange transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </Link>
             </motion.div>
           ))}
@@ -71,7 +71,7 @@ export function Navbar() {
           >
             <Link
               href="/reservations"
-              className="px-6 py-2 bg-brand-orange text-white text-sm font-semibold rounded-full hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105"
+              className="px-6 py-2 bg-primary text-foreground text-sm font-semibold rounded-full hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105"
             >
               Reserve Table
             </Link>
@@ -82,7 +82,7 @@ export function Navbar() {
         <div className="md:hidden">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-white p-2"
+            className="text-foreground p-2"
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -104,7 +104,7 @@ export function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-2xl font-bold text-white hover:text-brand-orange transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   {link.name}
                 </Link>
@@ -112,7 +112,7 @@ export function Navbar() {
               <Link
                 href="/reservations"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full py-4 bg-brand-orange text-white text-center font-bold rounded-xl"
+                className="w-full py-4 bg-primary text-foreground text-center font-bold rounded-xl"
               >
                 Reserve Table
               </Link>

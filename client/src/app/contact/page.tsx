@@ -24,13 +24,13 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-background">
       <Toaster position="top-center" richColors />
       <Navbar />
       <div className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="text-center mb-20">
-          <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase mb-6">
-            SAY <span className="text-brand-orange">HELLO.</span>
+          <h1 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter uppercase mb-6">
+            SAY <span className="text-primary">HELLO.</span>
           </h1>
           <p className="text-xl text-white/50 max-w-2xl mx-auto">
             Have a question, feedback, or just want to chat? Reach out to us. We love hearing from our community.
@@ -40,39 +40,39 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-1 space-y-12">
             <div className="space-y-4">
-               <h3 className="text-brand-orange font-bold uppercase tracking-widest text-sm">Contact Info</h3>
+               <h3 className="text-primary font-bold uppercase tracking-widest text-sm">Contact Info</h3>
                <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <MapPin className="text-brand-orange" size={24} />
+                    <MapPin className="text-primary" size={24} />
                     <div>
-                      <p className="text-white font-bold">Visit Us</p>
+                      <p className="text-foreground font-bold">Visit Us</p>
                       <p className="text-white/50 text-sm">Plot No. 125, 200ft Road, Patharagadia, Bhubaneswar, 751024</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <Phone className="text-brand-orange" size={24} />
+                    <Phone className="text-primary" size={24} />
                     <div>
-                      <p className="text-white font-bold">Call Us</p>
+                      <p className="text-foreground font-bold">Call Us</p>
                       <p className="text-white/50 text-sm">+91 97066 13566</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <Mail className="text-brand-orange" size={24} />
+                    <Mail className="text-primary" size={24} />
                     <div>
-                      <p className="text-white font-bold">Email Us</p>
-                      <p className="text-white/50 text-sm">hello@theaverageguy.in</p>
+                      <p className="text-foreground font-bold">Email Us</p>
+                      <p className="text-white/50 text-sm">hello@oldtowncafe.in</p>
                     </div>
                   </div>
                </div>
             </div>
 
             <div className="space-y-4">
-               <h3 className="text-brand-orange font-bold uppercase tracking-widest text-sm">Follow Us</h3>
+               <h3 className="text-primary font-bold uppercase tracking-widest text-sm">Follow Us</h3>
                <div className="flex gap-4">
-                  <a href="#" className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center text-white hover:bg-brand-orange transition-all">
+                  <a href="#" className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center text-foreground hover:bg-primary transition-all">
                     <span className="font-bold text-xs uppercase">IG</span>
                   </a>
-                  <a href="#" className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center text-white hover:bg-brand-orange transition-all">
+                  <a href="#" className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center text-foreground hover:bg-primary transition-all">
                     <span className="font-bold text-xs uppercase">FB</span>
                   </a>
                </div>
@@ -85,22 +85,22 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-white/60">Your Name</Label>
-                    <Input id="name" required placeholder="John Doe" className="bg-white/5 border-white/10 text-white h-12" />
+                    <Input id="name" required placeholder="John Doe" className="bg-white/5 border-white/10 text-foreground h-12" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-white/60">Your Email</Label>
-                    <Input id="email" type="email" required placeholder="john@example.com" className="bg-white/5 border-white/10 text-white h-12" />
+                    <Input id="email" type="email" required placeholder="john@example.com" className="bg-white/5 border-white/10 text-foreground h-12" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="subject" className="text-white/60">Subject</Label>
-                  <Input id="subject" required placeholder="Event Inquiry, Feedback, etc." className="bg-white/5 border-white/10 text-white h-12" />
+                  <Input id="subject" required placeholder="Event Inquiry, Feedback, etc." className="bg-white/5 border-white/10 text-foreground h-12" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message" className="text-white/60">Your Message</Label>
-                  <Textarea id="message" required placeholder="Tell us something..." className="bg-white/5 border-white/10 text-white min-h-[150px]" />
+                  <Textarea id="message" required placeholder="Tell us something..." className="bg-white/5 border-white/10 text-foreground min-h-[150px]" />
                 </div>
-                <Button type="submit" disabled={loading} className="w-full h-14 bg-brand-orange hover:bg-white hover:text-black text-white font-bold text-lg rounded-xl transition-all">
+                <Button type="submit" disabled={loading} className="w-full h-14 bg-primary hover:bg-white hover:text-black text-foreground font-bold text-lg rounded-xl transition-all">
                   {loading ? "Sending..." : "Send Message"}
                 </Button>
               </form>

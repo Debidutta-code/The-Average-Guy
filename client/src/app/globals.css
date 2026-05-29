@@ -16,6 +16,8 @@
   --animate-float: float 6s ease-in-out infinite;
   --animate-glow: glow 4s ease-in-out infinite;
   --animate-reveal: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
+  --animate-spotlight: spotlight 10s ease-in-out infinite;
 
   @keyframes grain {
     0%, 100% { transform: translate(0, 0); }
@@ -40,6 +42,14 @@
   @keyframes reveal {
     0% { transform: translateY(100%); opacity: 0; }
     100% { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes pulse-slow {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.05); opacity: 0.6; }
+  }
+  @keyframes spotlight {
+    0%, 100% { transform: translate(-20%, -20%) rotate(0deg); }
+    50% { transform: translate(20%, 20%) rotate(10deg); }
   }
 }
 
@@ -77,8 +87,20 @@
     text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
   }
 
+  .text-glow-amber {
+    text-shadow: 0 0 20px rgba(255, 191, 0, 0.4);
+  }
+
   .magnetic-button {
     @apply relative overflow-hidden transition-all duration-500 ease-out;
+  }
+
+  .neon-border {
+    @apply border border-brand-gold/30 shadow-[0_0_15px_rgba(212,175,55,0.2)];
+  }
+
+  .spotlight-effect {
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212,175,55,0.1) 0%, transparent 50%);
   }
 }
 

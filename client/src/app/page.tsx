@@ -1,5 +1,7 @@
 import Hero from "@/components/home/Hero";
 import FeaturedDishes from "@/components/home/FeaturedDishes";
+import RooftopShowcase from "@/components/home/RooftopShowcase";
+import NightlifePulse from "@/components/home/NightlifePulse";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -7,6 +9,9 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <Hero />
+
+      {/* Rooftop Highlight - New Hero of Experience */}
+      <RooftopShowcase />
 
       {/* Brand Intro Section */}
       <section className="py-32 bg-brand-black relative">
@@ -46,12 +51,12 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="aspect-[4/5] relative rounded-sm overflow-hidden">
+              <div className="aspect-[4/5] relative rounded-sm overflow-hidden border border-white/5 shadow-2xl">
                 <Image
                   src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop"
                   alt="Embassy Ambience"
                   fill
-                  className="object-cover grayscale"
+                  className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                 />
               </div>
               <div className="absolute -bottom-12 -left-12 w-64 h-80 hidden md:block border border-white/10 p-2 bg-brand-black/80 backdrop-blur-xl">
@@ -69,25 +74,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Culinary Showcase */}
       <FeaturedDishes />
+
+      {/* Nightlife Pulse Section */}
+      <NightlifePulse />
 
       {/* Experience CTA */}
       <section className="py-40 bg-brand-black relative flex items-center justify-center text-center px-6">
-        <div className="absolute inset-0 z-0 overflow-hidden opacity-20">
+        <div className="absolute inset-0 z-0 overflow-hidden opacity-20 grayscale">
             <Image
-                src="https://images.unsplash.com/photo-1574096079513-d8259312b785?q=80&w=2070&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2070&auto=format&fit=crop"
                 alt="Background"
                 fill
                 className="object-cover"
             />
         </div>
         <div className="container mx-auto relative z-10 space-y-12">
-            <h2 className="text-5xl md:text-9xl font-black italic uppercase tracking-tighter leading-tight">
+            <h2 className="text-5xl md:text-9xl font-black italic uppercase tracking-tighter leading-tight text-white">
                 Ready to <br /> <span className="text-brand-gold">Experience?</span>
             </h2>
             <Link
                 href="/reservations"
-                className="inline-block px-12 py-6 bg-brand-gold text-brand-black text-sm uppercase tracking-[0.3em] font-bold hover:bg-white transition-all duration-500 rounded-full"
+                className="inline-block px-12 py-6 bg-brand-gold text-brand-black text-sm uppercase tracking-[0.3em] font-bold hover:bg-white transition-all duration-500 rounded-full shadow-[0_0_40px_rgba(212,175,55,0.3)]"
             >
                 Reserve Your Spot
             </Link>

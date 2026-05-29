@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -41,16 +42,17 @@ const programs = [
 
 export default function Programs() {
   return (
-    <section className="bg-black py-32" id="programs">
-      <div className="container mx-auto px-6">
-        <div className="mb-20 flex flex-col items-end justify-between gap-6 md:flex-row">
+    <section className="bg-black section-padding" id="programs">
+      <div className="container-custom">
+        <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <h2 className="text-5xl font-black text-white md:text-7xl">
+            <h2 className="mb-2">
               TRAINING <br />
               <span className="text-qnts-lime italic">ARSENAL</span>
             </h2>
+            <div className="h-1 w-20 bg-qnts-lime" />
           </div>
-          <p className="max-w-md text-right text-white/50">
+          <p className="max-w-xs md:text-right">
             Engineered programs for every body type. From raw strength to
             flexible flow, find your discipline.
           </p>
@@ -58,7 +60,7 @@ export default function Programs() {
 
         <Swiper
           modules={[Autoplay, Pagination]}
-          spaceBetween={30}
+          spaceBetween={24}
           slidesPerView={1}
           autoplay={{ delay: 3000 }}
           pagination={{ clickable: true }}
@@ -66,26 +68,27 @@ export default function Programs() {
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          className="pb-16"
+          className="pb-12"
         >
           {programs.map((program) => (
             <SwiperSlide key={program.title}>
               <motion.div
-                whileHover={{ y: -10 }}
-                className="group relative aspect-[3/4] overflow-hidden rounded-3xl"
+                whileHover={{ y: -8 }}
+                className="group relative aspect-[4/5] overflow-hidden rounded-3xl"
               >
-                <img
+                <Image
                   src={program.image}
                   alt={program.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
-                <div className="absolute bottom-10 left-10">
-                  <span className="mb-2 inline-block rounded-full bg-qnts-lime/20 px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-qnts-lime backdrop-blur-md">
+                <div className="absolute bottom-8 left-8">
+                  <span className="mb-2 inline-block rounded-full bg-qnts-lime/20 px-3 py-0.5 text-[9px] font-black uppercase tracking-widest text-qnts-lime backdrop-blur-md border border-qnts-lime/20">
                     {program.intensity}
                   </span>
-                  <h3 className="text-4xl font-black italic tracking-tighter text-white">
+                  <h3 className="italic">
                     {program.title}
                   </h3>
                 </div>

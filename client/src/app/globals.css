@@ -12,31 +12,37 @@
     color: var(--foreground);
     background: var(--background);
     @apply antialiased selection:bg-qnts-lime selection:text-black;
+    font-size: 16px; /* Base size */
   }
 
   /* Fluid Typography */
   h1 {
-    @apply text-balance font-black tracking-tighter uppercase;
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    line-height: 1.1;
+    @apply text-balance font-black tracking-tighter uppercase italic;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    line-height: 0.95;
   }
 
   h2 {
-    @apply text-balance font-black tracking-tight uppercase;
-    font-size: clamp(2rem, 6vw, 4rem);
-    line-height: 1.1;
+    @apply text-balance font-black tracking-tight uppercase italic;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1;
   }
 
   h3 {
     @apply font-black tracking-tight uppercase;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    line-height: 1.2;
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    line-height: 1.1;
+  }
+
+  p {
+    @apply leading-relaxed text-white/60;
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
   }
 }
 
 @layer components {
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-16 md:py-24 lg:py-28;
   }
 
   .container-custom {
@@ -48,11 +54,16 @@
   }
 
   .btn-primary {
-    @apply relative overflow-hidden rounded-full bg-qnts-lime px-8 py-4 text-sm font-black uppercase tracking-widest text-black transition-all hover:scale-105 active:scale-95;
+    @apply relative overflow-hidden rounded-full bg-qnts-lime px-8 py-3.5 text-[11px] font-black uppercase tracking-widest text-black transition-all hover:scale-105 active:scale-95;
   }
 
   .btn-secondary {
-    @apply rounded-full border border-white/20 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-widest text-white backdrop-blur-sm transition-all hover:bg-white hover:text-black active:scale-95;
+    @apply rounded-full border border-white/20 bg-white/5 px-8 py-3.5 text-[11px] font-black uppercase tracking-widest text-white backdrop-blur-sm transition-all hover:bg-white hover:text-black active:scale-95;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    color: transparent;
   }
 }
 

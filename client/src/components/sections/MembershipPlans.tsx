@@ -29,46 +29,47 @@ const plans = [
 
 export default function MembershipPlans() {
   return (
-    <section className="bg-[#050505] py-32" id="plans">
-      <div className="container mx-auto px-6">
-        <div className="mb-20 text-center">
-          <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.5em] text-qnts-red">
+    <section className="bg-[#050505] section-padding" id="plans">
+      <div className="container-custom">
+        <div className="mb-16 text-center">
+          <span className="mb-4 inline-block text-[10px] font-black uppercase tracking-[0.5em] text-white/40">
             Investment in Self
           </span>
-          <h2 className="text-5xl font-black text-white md:text-7xl">
+          <h2>
             CHOOSE YOUR <span className="text-qnts-lime italic">TIER</span>
           </h2>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`relative flex flex-col rounded-3xl p-10 transition-all duration-500 hover:-translate-y-2 ${
+              className={`relative flex flex-col rounded-[2.5rem] p-8 md:p-10 transition-all duration-500 hover:-translate-y-2 ${
                 plan.popular
                   ? "bg-qnts-lime ring-4 ring-qnts-lime/20"
-                  : "bg-zinc-900"
+                  : "bg-zinc-900 border border-white/5"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-black px-6 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-white">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-black px-5 py-1.5 text-[9px] font-black uppercase tracking-[0.2em] text-white shadow-xl">
                   Most Popular
                 </div>
               )}
 
               <div className="mb-8">
                 <h3
-                  className={`mb-2 text-2xl font-black uppercase ${
+                  className={`mb-2 ${
                     plan.popular ? "text-black" : "text-white"
                   }`}
                 >
                   {plan.name}
                 </h3>
                 <p
-                  className={`text-sm ${
+                  className={`text-xs ${
                     plan.popular ? "text-black/60" : "text-white/40"
                   }`}
                 >
@@ -76,16 +77,16 @@ export default function MembershipPlans() {
                 </p>
               </div>
 
-              <div className="mb-10 flex items-baseline gap-2">
+              <div className="mb-10 flex items-baseline gap-1.5">
                 <span
-                  className={`text-6xl font-black ${
+                  className={`text-5xl font-black md:text-6xl ${
                     plan.popular ? "text-black" : "text-white"
                   }`}
                 >
                   ₹{plan.price}
                 </span>
                 <span
-                  className={`text-sm font-bold uppercase opacity-60 ${
+                  className={`text-xs font-bold uppercase opacity-60 ${
                     plan.popular ? "text-black" : "text-white"
                   }`}
                 >
@@ -93,16 +94,16 @@ export default function MembershipPlans() {
                 </span>
               </div>
 
-              <div className="mb-10 flex-grow space-y-4">
+              <div className="mb-10 flex-grow space-y-3.5">
                 {plan.features.map((feature) => (
                   <div key={feature} className="flex items-center gap-3">
                     <Check
                       className={plan.popular ? "text-black" : "text-qnts-lime"}
-                      size={18}
+                      size={16}
                     />
                     <span
-                      className={`text-sm font-medium ${
-                        plan.popular ? "text-black/80" : "text-white/70"
+                      className={`text-[13px] font-semibold ${
+                        plan.popular ? "text-black/80" : "text-white/60"
                       }`}
                     >
                       {feature}
@@ -112,9 +113,9 @@ export default function MembershipPlans() {
               </div>
 
               <button
-                className={`w-full rounded-2xl py-5 text-sm font-black uppercase tracking-widest transition-all ${
+                className={`w-full rounded-2xl py-4 text-[11px] font-black uppercase tracking-widest transition-all ${
                   plan.popular
-                    ? "bg-black text-white hover:scale-105"
+                    ? "bg-black text-white hover:scale-[1.02]"
                     : "bg-white text-black hover:bg-qnts-lime"
                 }`}
               >

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const equipments = [
   {
@@ -27,31 +28,33 @@ const equipments = [
 
 export default function EquipmentShowcase() {
   return (
-    <section className="bg-black py-32 overflow-hidden" id="equipment">
-      <div className="container mx-auto px-6 mb-20">
-        <h2 className="text-5xl font-black text-white md:text-7xl">
+    <section className="bg-black section-padding overflow-hidden" id="equipment">
+      <div className="container-custom mb-12">
+        <h2>
           PREMIUM <span className="text-qnts-lime italic">ARSENAL</span>
         </h2>
       </div>
 
-      <div className="flex gap-8 px-6 md:px-20 overflow-x-auto no-scrollbar">
+      <div className="flex gap-6 px-6 md:px-[calc((100vw-1280px)/2+1.5rem)] overflow-x-auto no-scrollbar pb-8">
         {equipments.map((item, i) => (
           <motion.div
             key={item.name}
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="group relative min-w-[300px] md:min-w-[450px] aspect-[16/10] overflow-hidden rounded-3xl"
+            className="group relative min-w-[280px] md:min-w-[400px] aspect-[16/10] overflow-hidden rounded-[2rem] border border-white/5"
           >
-            <img
+            <Image
               src={item.image}
               alt={item.name}
-              className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
+              fill
+              className="object-cover transition-all duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-            <div className="absolute bottom-8 left-8">
-              <h3 className="text-3xl font-black italic text-white">{item.name}</h3>
-              <p className="text-xs font-bold uppercase tracking-widest text-qnts-lime">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+            <div className="absolute bottom-6 left-6">
+              <h3 className="italic mb-1">{item.name}</h3>
+              <p className="text-[9px] font-black uppercase tracking-widest text-qnts-lime">
                 {item.type}
               </p>
             </div>

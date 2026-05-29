@@ -27,24 +27,24 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-[#050505] py-32" id="faq">
-      <div className="container mx-auto max-w-4xl px-6">
-        <h2 className="mb-20 text-center text-5xl font-black text-white md:text-7xl italic">
+    <section className="bg-[#050505] section-padding" id="faq">
+      <div className="container-custom max-w-3xl">
+        <h2 className="mb-16 text-center italic">
           QUESTIONS?
         </h2>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {faqs.map((faq, i) => (
-            <div key={i} className="border-b border-white/10 pb-6">
+            <div key={i} className="border-b border-white/5 last:border-0">
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="flex w-full items-center justify-between py-4 text-left"
+                className="flex w-full items-center justify-between py-6 text-left group"
               >
-                <span className="text-xl font-bold text-white md:text-2xl transition-colors hover:text-qnts-lime">
+                <span className="text-lg font-bold text-white transition-colors group-hover:text-qnts-lime">
                   {faq.q}
                 </span>
-                <span className="text-qnts-lime">
-                  {openIndex === i ? <Minus size={24} /> : <Plus size={24} />}
+                <span className="text-qnts-lime shrink-0 ml-4">
+                  {openIndex === i ? <Minus size={20} /> : <Plus size={20} />}
                 </span>
               </button>
               <AnimatePresence>
@@ -53,9 +53,10 @@ export default function FAQ() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
                     className="overflow-hidden"
                   >
-                    <p className="py-4 text-lg text-white/50">{faq.a}</p>
+                    <p className="pb-8 text-white/50 leading-relaxed max-w-2xl">{faq.a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>

@@ -12,35 +12,35 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-black py-32 overflow-hidden" id="testimonials">
-      <div className="container mx-auto px-6 mb-20 text-center">
-        <h2 className="text-5xl font-black text-white md:text-7xl">
+    <section className="bg-black section-padding overflow-hidden" id="testimonials">
+      <div className="container-custom mb-16 text-center">
+        <h2>
           THE <span className="text-qnts-lime italic">TRIBE</span> SPEAKS
         </h2>
       </div>
 
-      <div className="flex gap-8">
+      <div className="flex">
         <motion.div
           animate={{ x: [0, -1500] }}
-          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-          className="flex gap-8 whitespace-nowrap"
+          transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+          className="flex gap-6 whitespace-nowrap"
         >
           {[...testimonials, ...testimonials].map((t, i) => (
             <div
               key={i}
-              className="min-w-[350px] rounded-[30px] border border-white/5 bg-zinc-900/50 p-10 backdrop-blur-xl"
+              className="min-w-[280px] md:min-w-[320px] rounded-[2rem] border border-white/5 bg-zinc-900/40 p-8 backdrop-blur-xl"
             >
-              <div className="mb-6 flex gap-1">
+              <div className="mb-4 flex gap-0.5">
                 {[...Array(t.rating)].map((_, i) => (
-                  <span key={i} className="text-qnts-lime text-xl">★</span>
+                  <span key={i} className="text-qnts-lime text-xs">★</span>
                 ))}
               </div>
-              <p className="mb-8 text-lg font-medium text-white italic whitespace-normal">
+              <p className="mb-6 text-[15px] font-medium text-white/80 italic whitespace-normal leading-relaxed">
                 &quot;{t.text}&quot;
               </p>
-              <div className="flex items-center gap-4">
-                <div className="h-10 w-10 rounded-full bg-qnts-lime/20" />
-                <span className="font-bold text-white uppercase tracking-widest text-xs">
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-full bg-qnts-lime/10 border border-qnts-lime/20" />
+                <span className="font-black text-white uppercase tracking-widest text-[9px]">
                   {t.name}
                 </span>
               </div>

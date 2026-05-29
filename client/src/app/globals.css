@@ -2,20 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    @apply antialiased selection:bg-qnts-lime selection:text-black;
+  }
+
+  /* Fluid Typography */
+  h1 {
+    @apply text-balance font-black tracking-tighter uppercase;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    line-height: 1.1;
+  }
+
+  h2 {
+    @apply text-balance font-black tracking-tight uppercase;
+    font-size: clamp(2rem, 6vw, 4rem);
+    line-height: 1.1;
+  }
+
+  h3 {
+    @apply font-black tracking-tight uppercase;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    line-height: 1.2;
+  }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .container-custom {
+    @apply mx-auto px-6 max-w-7xl;
+  }
+
+  .glass-card {
+    @apply bg-zinc-900/50 backdrop-blur-xl border border-white/5 rounded-3xl p-6 md:p-8;
+  }
+
+  .btn-primary {
+    @apply relative overflow-hidden rounded-full bg-qnts-lime px-8 py-4 text-sm font-black uppercase tracking-widest text-black transition-all hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply rounded-full border border-white/20 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-widest text-white backdrop-blur-sm transition-all hover:bg-white hover:text-black active:scale-95;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

@@ -48,15 +48,15 @@ export default function Storytelling() {
           start: "top top",
           pin: true,
           pinSpacing: false,
-          snap: 1,
         });
 
         gsap.fromTo(
           section.querySelector(".story-content"),
-          { opacity: 0, y: 100 },
+          { opacity: 0, y: 50 },
           {
             opacity: 1,
             y: 0,
+            duration: 0.8,
             scrollTrigger: {
               trigger: section,
               start: "top center",
@@ -84,20 +84,21 @@ export default function Storytelling() {
               src={story.image}
               alt={story.title}
               fill
-              className="object-cover opacity-30 grayscale transition-all duration-700 hover:scale-110 hover:grayscale-0"
+              className="object-cover opacity-20 grayscale"
+              priority={i === 0}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black" />
           </div>
 
           {/* Content */}
-          <div className="story-content container relative z-10 px-6 text-center">
-            <span className="mb-4 block text-sm font-bold uppercase tracking-[0.5em] text-qnts-lime">
-              0{i + 1}
+          <div className="story-content container-custom relative z-10 text-center">
+            <span className="mb-4 block text-[10px] font-black uppercase tracking-[0.6em] text-qnts-lime">
+              Stage 0{i + 1}
             </span>
-            <h2 className="mb-6 text-7xl font-black uppercase italic tracking-tighter text-white md:text-9xl">
+            <h2 className="mb-6">
               {story.title}
             </h2>
-            <p className="mx-auto max-w-xl text-lg font-medium text-white/60 md:text-2xl">
+            <p className="mx-auto max-w-lg text-white/50">
               {story.desc}
             </p>
           </div>

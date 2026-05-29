@@ -18,27 +18,27 @@ export default function TransformationShowcase() {
   };
 
   return (
-    <section className="bg-black py-32" id="transformations">
-      <div className="container mx-auto px-6">
-        <div className="mb-20 grid gap-10 lg:grid-cols-2">
+    <section className="bg-black section-padding overflow-hidden" id="transformations">
+      <div className="container-custom">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div>
-            <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.5em] text-qnts-lime">
+            <span className="mb-4 inline-block text-[10px] font-black uppercase tracking-[0.5em] text-qnts-lime">
               Proof of Concept
             </span>
-            <h2 className="mb-8 text-5xl font-black text-white md:text-8xl">
+            <h2 className="mb-8">
               RESULTS <br />
-              <span className="text-qnts-red italic">DON&apos;T LIE</span>
+              <span className="text-qnts-lime underline decoration-white/10 underline-offset-8">DON&apos;T LIE</span>
             </h2>
-            <div className="grid grid-cols-2 gap-10">
+            <div className="grid grid-cols-2 gap-8 md:gap-12">
               <div>
-                <div className="text-5xl font-black text-white">18kg</div>
-                <div className="text-[10px] uppercase tracking-[0.2em] text-white/40">
+                <div className="text-4xl font-black text-white md:text-5xl">18kg</div>
+                <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/30">
                   Avg. Fat Loss
                 </div>
               </div>
               <div>
-                <div className="text-5xl font-black text-white">90%</div>
-                <div className="text-[10px] uppercase tracking-[0.2em] text-white/40">
+                <div className="text-4xl font-black text-white md:text-5xl">90%</div>
+                <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/30">
                   Confidence Boost
                 </div>
               </div>
@@ -48,7 +48,7 @@ export default function TransformationShowcase() {
           {/* Interactive Slider */}
           <div
             ref={containerRef}
-            className="group relative aspect-[4/3] cursor-ew-resize overflow-hidden rounded-3xl"
+            className="group relative aspect-[4/3] cursor-ew-resize overflow-hidden rounded-[2.5rem] border border-white/5 md:max-w-xl mx-auto lg:mr-0"
             onMouseMove={handleMove}
             onTouchMove={handleMove}
           >
@@ -60,7 +60,7 @@ export default function TransformationShowcase() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute bottom-6 right-6 rounded-lg bg-qnts-lime px-4 py-2 text-xs font-black uppercase text-black">
+              <div className="absolute bottom-6 right-6 rounded-xl bg-qnts-lime px-4 py-2 text-[10px] font-black uppercase tracking-wider text-black">
                 After
               </div>
             </div>
@@ -76,32 +76,32 @@ export default function TransformationShowcase() {
                 fill
                 className="object-cover grayscale"
               />
-              <div className="absolute bottom-6 left-6 rounded-lg bg-white/20 px-4 py-2 text-xs font-black uppercase text-white backdrop-blur-md">
+              <div className="absolute bottom-6 left-6 rounded-xl bg-white/20 px-4 py-2 text-[10px] font-black uppercase tracking-wider text-white backdrop-blur-md">
                 Before
               </div>
             </div>
 
             {/* Slider Line */}
             <div
-              className="absolute inset-y-0 z-10 w-1 bg-qnts-lime shadow-[0_0_20px_rgba(223,255,0,0.5)]"
+              className="absolute inset-y-0 z-10 w-0.5 bg-qnts-lime shadow-[0_0_20px_rgba(223,255,0,0.5)]"
               style={{ left: `${sliderPos}%` }}
             >
               <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-qnts-lime p-2 text-black shadow-2xl">
-                <MoveHorizontal size={20} />
+                <MoveHorizontal size={16} />
               </div>
             </div>
           </div>
         </div>
 
         {/* Marquee Text */}
-        <div className="mt-32 overflow-hidden border-y border-white/5 py-10">
+        <div className="mt-20 overflow-hidden border-y border-white/5 py-8">
           <motion.div
             animate={{ x: [0, -1000] }}
-            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-            className="flex whitespace-nowrap text-7xl font-black uppercase italic tracking-tighter text-white/5 md:text-9xl"
+            transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+            className="flex whitespace-nowrap text-stroke text-5xl md:text-7xl font-black uppercase italic tracking-tighter"
           >
             {[1, 2, 3, 4, 5].map((i) => (
-              <span key={i} className="mr-20">
+              <span key={i} className="mr-16">
                 Natural Transformation • 90 Day Challenge • Results Don&apos;t Lie •
               </span>
             ))}

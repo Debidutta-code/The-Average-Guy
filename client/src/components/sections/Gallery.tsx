@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const images = [
   "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80",
@@ -13,32 +14,34 @@ const images = [
 
 export default function Gallery() {
   return (
-    <section className="bg-black py-32" id="gallery">
-      <div className="container mx-auto px-6">
-        <div className="mb-20 text-center">
-          <h2 className="text-5xl font-black text-white md:text-7xl">
-            VISUAL <span className="text-qnts-red italic">LEGACY</span>
+    <section className="bg-black section-padding" id="gallery">
+      <div className="container-custom">
+        <div className="mb-16 text-center">
+          <h2>
+            VISUAL <span className="text-qnts-lime italic">LEGACY</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {images.map((img, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`group relative overflow-hidden rounded-3xl bg-zinc-900 ${
-                i === 0 || i === 3 ? "row-span-2" : ""
+              className={`group relative overflow-hidden rounded-[1.5rem] bg-zinc-900 border border-white/5 ${
+                i === 0 || i === 3 ? "aspect-[3/4] md:row-span-2" : "aspect-square md:aspect-video"
               }`}
             >
-              <img
+              <Image
                 src={img}
                 alt="Gallery"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
               />
-              <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity group-hover:opacity-100 flex items-center justify-center">
-                 <span className="text-white text-xs font-black uppercase tracking-[0.5em]">View</span>
+              <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 flex items-center justify-center">
+                 <span className="text-white text-[10px] font-black uppercase tracking-[0.4em]">Cinematic</span>
               </div>
             </motion.div>
           ))}

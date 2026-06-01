@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
+type CursorType = "default" | "pointer" | "view" | "reserve" | "details" | "explore";
+
 export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
-  const [cursorType, setCursorType] = useState<"default" | "pointer" | "view">("default");
+  const [cursorType, setCursorType] = useState<CursorType>("default");
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
@@ -21,6 +23,7 @@ export default function CustomCursor() {
 
     const handleHover = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
+
       const isInteractive =
         target.tagName === "BUTTON" ||
         target.tagName === "A" ||
@@ -28,14 +31,14 @@ export default function CustomCursor() {
         target.closest("a") ||
         target.classList.contains("magnetic");
 
-      const isViewable = target.closest(".group");
+      const dataCursor = target.closest("[data-cursor]")?.getAttribute("data-cursor");
 
-      if (isInteractive) {
+      if (dataCursor) {
+        setIsHovered(true);
+        setCursorType(dataCursor as CursorType);
+      } else if (isInteractive) {
         setIsHovered(true);
         setCursorType("pointer");
-      } else if (isViewable) {
-        setIsHovered(true);
-        setCursorType("view");
       } else {
         setIsHovered(false);
         setCursorType("default");
@@ -50,6 +53,16 @@ export default function CustomCursor() {
       window.removeEventListener("mouseover", handleHover);
     };
   }, [cursorX, cursorY]);
+
+  const getLabel = () => {
+    switch(cursorType) {
+      case "view": return "VIEW";
+      case "explore": return "EXPLORE";
+      case "reserve": return "RESERVE";
+      case "details": return "DETAILS";
+      default: return "";
+    }
+  }
 
   return (
     <motion.div
@@ -66,8 +79,8 @@ export default function CustomCursor() {
       }}
       transition={{ type: "spring", damping: 30, stiffness: 400 }}
     >
-      {cursorType === "view" && (
-        <span className="text-[10px] uppercase tracking-widest text-brand-gold font-bold">View</span>
+      {getLabel() && (
+        <span className="text-[10px] uppercase tracking-widest text-brand-gold font-bold">{getLabel()}</span>
       )}
       {cursorType === "default" && (
         <div className="w-1 h-1 bg-brand-gold rounded-full" />

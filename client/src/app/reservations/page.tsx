@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Users, Clock, Send } from "lucide-react";
+import { Calendar, Users, Clock, Send, Star, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function ReservationsPage() {
@@ -13,6 +13,7 @@ export default function ReservationsPage() {
     time: "",
     guests: "2",
     occasion: "Dinner",
+    bookingType: "Standard Table",
     specialRequest: "",
   });
 
@@ -24,6 +25,7 @@ export default function ReservationsPage() {
   const handleWhatsAppSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const message = `*New Reservation Request - Embassy Bhubaneswar*%0A
+*Booking Type:* ${formData.bookingType}%0A
 *Name:* ${formData.name}%0A
 *Phone:* ${formData.phone}%0A
 *Date:* ${formData.date}%0A
@@ -41,23 +43,37 @@ export default function ReservationsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
           <div className="space-y-12">
             <div className="space-y-4">
-              <h2 className="text-brand-gold text-xs uppercase tracking-[0.5em]">Book Your Experience</h2>
-              <h1 className="text-5xl md:text-8xl font-black italic uppercase tracking-tighter text-white">
-                Reserve <br /> <span className="text-white/20">A Table</span>
+              <h2 className="text-brand-gold text-xs uppercase tracking-[0.5em] font-bold">Book Your Experience</h2>
+              <h1 className="text-5xl md:text-8xl font-black italic uppercase tracking-tighter text-white leading-tight">
+                Reserve <br /> <span className="text-white/20">A Destination</span>
               </h1>
             </div>
 
-            <p className="text-white/50 text-lg leading-relaxed max-w-md">
-              Secure your spot at Bhubaneswar&apos;s most sought-after destination. For larger parties or corporate bookings, please contact our events team directly.
+            <p className="text-white/50 text-lg leading-relaxed max-w-md italic">
+              Secure your spot at Bhubaneswar&apos;s most sought-after destination. From rooftop views to VIP club access.
             </p>
 
-            <div className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 {[
-                    { icon: Calendar, text: "Advanced bookings recommended" },
-                    { icon: Users, text: "Groups of 10+ require prior notice" },
-                    { icon: Clock, text: "Table held for 15 minutes post booking" },
+                    { title: "Standard Dining", desc: "Premium indoor seating with multi-cuisine menu." },
+                    { title: "Rooftop Table", desc: "Open-air luxury with panoramic skyline views." },
+                    { title: "VIP Lounge", desc: "Exclusive access, personal service and privacy." },
+                    { title: "Event Booking", desc: "Birthdays, corporate and private gatherings." }
                 ].map((item, i) => (
-                    <div key={i} className="flex items-center space-x-4 text-white/30 text-xs uppercase tracking-widest">
+                    <div key={i} className="space-y-2">
+                        <h4 className="text-brand-gold text-xs uppercase tracking-widest font-black">{item.title}</h4>
+                        <p className="text-white/30 text-[10px] leading-relaxed">{item.desc}</p>
+                    </div>
+                ))}
+            </div>
+
+            <div className="space-y-6 pt-8 border-t border-white/5">
+                {[
+                    { icon: Calendar, text: "Advanced bookings highly recommended" },
+                    { icon: MapPin, text: "Parking & Valet service available" },
+                    { icon: Clock, text: "15 min grace period for table holdings" },
+                ].map((item, i) => (
+                    <div key={i} className="flex items-center space-x-4 text-white/40 text-[10px] uppercase tracking-widest">
                         <item.icon size={16} className="text-brand-gold" />
                         <span>{item.text}</span>
                     </div>
@@ -71,9 +87,23 @@ export default function ReservationsPage() {
             className="glass-card p-10 space-y-8"
           >
             <form onSubmit={handleWhatsAppSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Booking Type</label>
+                <select
+                  name="bookingType"
+                  value={formData.bookingType}
+                  onChange={handleInputChange}
+                  className="w-full bg-white/5 border border-white/10 p-4 focus:border-brand-gold outline-none transition-colors text-sm text-white"
+                >
+                  {["Standard Table", "Premium Table", "Rooftop Table", "VIP Lounge", "Birthday Booking", "Corporate Booking", "Private Event Booking"].map(t => (
+                    <option key={t} value={t} className="bg-brand-black">{t}</option>
+                  ))}
+                </select>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-white/40">Full Name</label>
+                  <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Full Name</label>
                   <input
                     required
                     name="name"
@@ -84,7 +114,7 @@ export default function ReservationsPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-white/40">Phone Number</label>
+                  <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Phone Number</label>
                   <input
                     required
                     name="phone"
@@ -98,7 +128,7 @@ export default function ReservationsPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-white/40">Date</label>
+                  <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Date</label>
                   <input
                     required
                     type="date"
@@ -109,7 +139,7 @@ export default function ReservationsPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-white/40">Time</label>
+                  <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Time</label>
                   <input
                     required
                     type="time"
@@ -123,7 +153,7 @@ export default function ReservationsPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-white/40">Guests</label>
+                  <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Guests</label>
                   <select
                     name="guests"
                     value={formData.guests}
@@ -135,7 +165,7 @@ export default function ReservationsPage() {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-white/40">Occasion</label>
+                  <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Occasion</label>
                   <select
                     name="occasion"
                     value={formData.occasion}
@@ -148,7 +178,7 @@ export default function ReservationsPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-widest text-white/40">Special Request (Optional)</label>
+                <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Special Request (Optional)</label>
                 <textarea
                   name="specialRequest"
                   value={formData.specialRequest}
@@ -161,7 +191,8 @@ export default function ReservationsPage() {
 
               <Button
                 type="submit"
-                className="w-full py-8 bg-brand-gold text-brand-black font-bold uppercase tracking-[0.2em] text-xs hover:bg-white transition-all duration-500 rounded-none flex items-center justify-center space-x-3"
+                data-cursor="reserve"
+                className="w-full py-8 bg-brand-gold text-brand-black font-black uppercase tracking-[0.2em] text-xs hover:bg-white transition-all duration-500 rounded-none flex items-center justify-center space-x-3 shadow-[0_0_40px_rgba(212,175,55,0.2)]"
               >
                 <Send size={16} />
                 <span>Confirm on WhatsApp</span>

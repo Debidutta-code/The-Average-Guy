@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Users, Clock, Send, Star, MapPin } from "lucide-react";
+import { Calendar, Clock, Send, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function ReservationsPage() {

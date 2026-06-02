@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Calendar, Clock, Ticket, MessageCircle } from "lucide-react";
-import { useState } from "react";
+import { Clock, Ticket, MessageCircle } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const eventCategories = ["All", "DJ Nights", "Live Music", "Ladies Night", "Weekend Specials", "Mixology Sessions", "Private Events"];
@@ -11,7 +11,8 @@ const eventCategories = ["All", "DJ Nights", "Live Music", "Ladies Night", "Week
 const events = [
   {
     title: "Neon Friday Night",
-    date: "FRI, 24 MAR",
+    date: 24,
+    month: "MAR",
     time: "08:00 PM onwards",
     type: "DJ Night",
     category: "DJ Nights",
@@ -21,7 +22,8 @@ const events = [
   },
   {
     title: "Acoustic Sundays",
-    date: "SUN, 26 MAR",
+    date: 26,
+    month: "MAR",
     time: "07:00 PM onwards",
     type: "Live Music",
     category: "Live Music",
@@ -31,7 +33,8 @@ const events = [
   },
   {
     title: "Mixology Masterclass",
-    date: "WED, 29 MAR",
+    date: 29,
+    month: "MAR",
     time: "05:00 PM",
     type: "Special Event",
     category: "Mixology Sessions",
@@ -41,7 +44,8 @@ const events = [
   },
   {
     title: "Glow Ladies Night",
-    date: "THU, 30 MAR",
+    date: 30,
+    month: "MAR",
     time: "08:00 PM onwards",
     type: "Themed Night",
     category: "Ladies Night",
@@ -50,6 +54,24 @@ const events = [
     image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2070&auto=format&fit=crop",
   }
 ];
+
+function DateBadge({ date, month }: { date: number; month: string }) {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (count < date) setCount(prev => prev + 1);
+        }, 30);
+        return () => clearTimeout(timer);
+    }, [count, date]);
+
+    return (
+        <div className="w-20 h-20 bg-brand-gold flex flex-col items-center justify-center rounded-sm shadow-[0_0_30px_rgba(212,175,55,0.3)]">
+            <span className="text-brand-black text-3xl font-black italic leading-none">{count}</span>
+            <span className="text-brand-black text-[10px] font-black uppercase tracking-widest">{month}</span>
+        </div>
+    );
+}
 
 export default function EventsPage() {
   const [activeTab, setActiveTab] = useState("All");
@@ -85,71 +107,91 @@ export default function EventsPage() {
             </TabsList>
         </Tabs>
 
-        <div className="space-y-12">
-          {filtered.map((event, i) => (
-            <motion.div
-              key={event.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="group grid grid-cols-1 md:grid-cols-2 gap-0 border border-white/5 overflow-hidden rounded-sm hover:border-brand-gold/30 transition-colors"
-            >
-              <div className={`relative h-[400px] ${i % 2 !== 0 ? "md:order-2" : ""}`}>
-                <Image
-                  src={event.image}
-                  alt={event.title}
-                  fill
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute top-6 left-6 px-4 py-2 bg-brand-gold text-brand-black text-[10px] font-bold uppercase tracking-widest">
-                  {event.type}
-                </div>
-              </div>
+        <div className="relative">
+          {/* Vertical Timeline Line */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute left-[40px] md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-gold/50 via-brand-gold/20 to-transparent origin-top hidden md:block"
+          />
 
-              <div className="p-12 flex flex-col justify-center space-y-8 bg-white/[0.02]">
-                <div className="space-y-2">
-                    <div className="flex items-center space-x-2 text-brand-gold text-[10px] uppercase tracking-widest">
-                        <Calendar size={12} />
-                        <span>{event.date}</span>
-                        <span className="opacity-30 mx-2">|</span>
-                        <Clock size={12} />
-                        <span>{event.time}</span>
+          <div className="space-y-32">
+            {filtered.map((event, i) => (
+              <motion.div
+                key={event.title}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: i * 0.1 }}
+                className={`flex flex-col md:flex-row items-center gap-12 relative ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
+              >
+                {/* Center Badge */}
+                <div className="absolute left-1/2 -translate-x-1/2 z-10 hidden md:block">
+                    <DateBadge date={event.date} month={event.month} />
+                </div>
+
+                <div className="w-full md:w-1/2">
+                    <div className="group relative h-[400px] overflow-hidden rounded-sm border border-white/5">
+                        <Image
+                            src={event.image}
+                            alt={event.title}
+                            fill
+                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
+                        />
+                        <div className="absolute top-6 left-6 md:hidden">
+                             <DateBadge date={event.date} month={event.month} />
+                        </div>
                     </div>
-                    <h3 className="text-4xl font-bold uppercase italic tracking-tighter text-white">{event.title}</h3>
-                    <p className="text-brand-amber text-[10px] uppercase tracking-widest font-black">{event.entry}</p>
                 </div>
 
-                <p className="text-white/40 leading-relaxed italic">
-                  {event.description}
-                </p>
+                <div className={`w-full md:w-1/2 space-y-6 ${i % 2 !== 0 ? "md:text-right" : "md:text-left"}`}>
+                    <div className="space-y-2">
+                        <div className={`flex items-center space-x-2 text-brand-gold text-[10px] uppercase tracking-widest ${i % 2 !== 0 ? "justify-end" : ""}`}>
+                            <Clock size={12} />
+                            <span>{event.time}</span>
+                            <span className="opacity-30 mx-2">|</span>
+                            <span>{event.type}</span>
+                        </div>
+                        <h3 className="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-white leading-tight">{event.title}</h3>
+                        <p className="text-brand-amber text-[10px] uppercase tracking-widest font-black">{event.entry}</p>
+                    </div>
 
-                <div className="flex flex-col sm:flex-row items-center gap-4">
-                    <button
-                        data-cursor="reserve"
-                        className="w-full sm:w-auto px-8 py-3 bg-white/5 border border-white/10 hover:bg-brand-gold hover:text-brand-black text-[10px] uppercase tracking-widest font-bold transition-all duration-500 rounded-sm flex items-center justify-center space-x-2"
-                    >
-                        <Ticket size={14} />
-                        <span>Book Entry</span>
-                    </button>
-                    <button
-                        onClick={() => handleWhatsApp(event.title)}
-                        className="w-full sm:w-auto px-8 py-3 border border-brand-gold/20 text-brand-gold hover:bg-brand-gold/10 text-[10px] uppercase tracking-widest font-bold transition-all duration-500 rounded-sm flex items-center justify-center space-x-2"
-                    >
-                        <MessageCircle size={14} />
-                        <span>WhatsApp Booking</span>
-                    </button>
+                    <p className="text-white/40 leading-relaxed italic max-w-md mx-auto md:mx-0">
+                        &quot;{event.description}&quot;
+                    </p>
+
+                    <div className={`flex flex-col sm:flex-row items-center gap-4 ${i % 2 !== 0 ? "md:justify-end" : ""}`}>
+                        <button
+                            data-cursor="reserve"
+                            className="w-full sm:w-auto px-10 py-4 bg-white text-brand-black text-[10px] uppercase tracking-widest font-black transition-all duration-500 rounded-none shadow-[0_0_30px_rgba(255,255,255,0.1)] relative group/btn overflow-hidden"
+                        >
+                            <span className="relative z-10 flex items-center space-x-2">
+                                <Ticket size={14} />
+                                <span>Get Access</span>
+                            </span>
+                            <div className="absolute inset-0 bg-brand-gold translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
+                        </button>
+                        <button
+                            onClick={() => handleWhatsApp(event.title)}
+                            className="w-full sm:w-auto px-10 py-4 border border-brand-gold/20 text-brand-gold hover:bg-brand-gold/10 text-[10px] uppercase tracking-widest font-black transition-all duration-500 rounded-none flex items-center justify-center space-x-2"
+                        >
+                            <MessageCircle size={14} />
+                            <span>WhatsApp Booking</span>
+                        </button>
+                    </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-        {/* Private Events CTA */}
-        <section className="mt-32 p-16 border border-brand-gold/20 bg-brand-gold/[0.02] text-center space-y-8 rounded-sm">
-            <h2 className="text-3xl md:text-5xl font-black uppercase italic tracking-tighter text-white">Host Your Own <span className="text-brand-gold">Experience</span></h2>
-            <p className="text-white/40 max-w-xl mx-auto italic">From corporate takeovers to private celebrations, make Embassy yours for the night. Our dedicated events team will craft every detail.</p>
-            <button className="px-12 py-4 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-black text-[10px] uppercase tracking-widest font-bold transition-all duration-500">
+        <section className="mt-40 p-20 border border-brand-gold/10 bg-brand-gold/[0.01] text-center space-y-10 rounded-sm relative overflow-hidden">
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-brand-gold/5 blur-[100px] rounded-full" />
+            <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-white">Host Your Own <span className="text-brand-gold">Experience</span></h2>
+            <p className="text-white/40 max-w-xl mx-auto italic text-lg leading-relaxed">From high-energy corporate takeovers to intimate private celebrations, make Embassy the cinematic canvas for your night.</p>
+            <button className="px-16 py-6 bg-brand-gold text-brand-black hover:bg-white text-[10px] uppercase tracking-widest font-black transition-all duration-500 rounded-none shadow-[0_0_50px_rgba(212,175,55,0.2)]">
                 Enquire Now
             </button>
         </section>

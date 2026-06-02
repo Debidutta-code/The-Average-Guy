@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
 
 const events = [
@@ -38,10 +38,6 @@ const events = [
 
 export default function ExperienceTimeline() {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
 
   return (
     <section ref={containerRef} className="py-40 bg-brand-black overflow-hidden border-y border-white/5">

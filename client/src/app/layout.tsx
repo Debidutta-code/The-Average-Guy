@@ -6,6 +6,7 @@ import CustomCursor from "@/components/shared/CustomCursor";
 import CinematicLoader from "@/components/shared/CinematicLoader";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import BackgroundMotion from "@/components/shared/BackgroundMotion";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
         <SmoothScroll>
           <CinematicLoader />
           <CustomCursor />
+          <BackgroundMotion />
           <div className="grain-overlay" />
           <div className="cinematic-overlay" />
           <Navbar />

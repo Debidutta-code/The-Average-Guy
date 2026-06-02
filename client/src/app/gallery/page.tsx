@@ -98,23 +98,29 @@ export default function GalleryPage() {
                 <motion.div
                 key={image.url}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 100, scale: 1.15 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.6 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{
+                    duration: 0.8,
+                    ease: [0.33, 1, 0.68, 1],
+                    delay: i % 4 * 0.1
+                }}
                 data-cursor="explore"
                 className={`${image.span} relative group overflow-hidden rounded-sm`}
                 >
+                <div className="absolute inset-0 bg-brand-black z-10 transition-transform duration-1000 origin-top group-in-view:scale-y-0" />
                 <Image
                     src={image.url}
                     alt={image.title}
                     fill
                     className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
-                    <div>
-                        <p className="text-brand-gold text-[10px] uppercase tracking-widest font-bold mb-1">{image.category}</p>
-                        <p className="text-white text-xs uppercase tracking-widest font-bold">{image.title}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-brand-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-8">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <p className="text-brand-gold text-[10px] uppercase tracking-widest font-black mb-1">{image.category}</p>
+                        <p className="text-white text-lg font-black italic uppercase tracking-tighter">{image.title}</p>
                     </div>
                 </div>
                 </motion.div>

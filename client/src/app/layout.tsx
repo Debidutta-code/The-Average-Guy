@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import FloatingActions from "@/components/FloatingActions";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -17,14 +20,31 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Dr. (Maj) Partha Mohapatra | Dermatologist & Skin Specialist in Bhubaneswar",
-  description: "Advanced Dermatology Care with Trusted Clinical Expertise. Dr.(Maj) Partha Mohapatra is a leading Dermatologist (Skin & Hair Specialist) in Bhubaneswar. Book your appointment at KAR Clinic OPD.",
-  keywords: ["Dermatologist in Bhubaneswar", "Skin Specialist Bhubaneswar", "Dr. Partha Mohapatra", "Hair Specialist Bhubaneswar", "KAR Clinic Unit 4", "Skin Clinic Bhubaneswar"],
+  metadataBase: new URL('https://drparthamohapatra.com'),
+  title: {
+    default: "Best Dermatologist in Bhubaneswar | Dr. Partha Mohapatra Skin Clinic",
+    template: "%s | Dr. Partha Mohapatra"
+  },
+  description: "Dr. Partha Mohapatra is a trusted dermatologist in Bhubaneswar (Nayapalli, Unit 4) offering acne, hair loss, laser and skin treatments. Book appointment online.",
+  keywords: ["dermatologist bhubaneswar", "skin clinic nayapalli", "hair doctor bhubaneswar", "skin specialist Bhubaneswar", "best dermatologist in Bhubaneswar Odisha", "hair treatment clinic Bhubaneswar", "laser skin treatment Bhubaneswar"],
   openGraph: {
-    title: "Dr. (Maj) Partha Mohapatra | Dermatologist in Bhubaneswar",
-    description: "Premium Skin and Hair Care in Bhubaneswar. 4.9 Rating with 983+ Reviews.",
-    type: "website",
+    title: "Best Dermatologist in Bhubaneswar | Dr. Partha Mohapatra Skin Clinic",
+    description: "Dr. Partha Mohapatra is a trusted dermatologist in Bhubaneswar (Nayapalli, Unit 4) offering acne, hair loss, laser and skin treatments.",
+    url: "https://drparthamohapatra.com",
+    siteName: "Dr. Partha Mohapatra Dermatology Clinic",
+    images: [
+      {
+        url: "/clinic/clinic-1.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dr. Partha Mohapatra Clinic Bhubaneswar",
+      },
+    ],
     locale: "en_IN",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://drparthamohapatra.com",
   }
 };
 
@@ -35,16 +55,18 @@ export default function RootLayout({
 }>) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "MedicalBusiness",
+    "@type": ["MedicalBusiness", "LocalBusiness"],
     "name": "Dr. (Maj) Partha Mohapatra Dermatology Clinic",
-    "image": "https://your-domain.com/clinic/clinic-1.jpg",
-    "@id": "",
-    "url": "https://your-domain.com",
+    "image": "https://drparthamohapatra.com/clinic/clinic-1.jpg",
+    "description": "Premium dermatology and hair specialist in Bhubaneswar offering advanced clinical treatments.",
+    "@id": "https://drparthamohapatra.com",
+    "url": "https://drparthamohapatra.com",
     "telephone": "+91 99999 99999",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Room No. 9, KAR Clinic OPD Building, Near MLA Colony, Near Aakash Institute, Unit 4 area",
       "addressLocality": "Bhubaneswar",
+      "addressRegion": "Odisha",
       "postalCode": "751001",
       "addressCountry": "IN"
     },
@@ -70,7 +92,9 @@ export default function RootLayout({
       "@type": "AggregateRating",
       "ratingValue": "4.9",
       "reviewCount": "983"
-    }
+    },
+    "medicalSpecialty": "Dermatology",
+    "priceRange": "$$"
   };
 
   return (
@@ -84,8 +108,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${poppins.variable} font-sans antialiased bg-white text-slate-900`}
       >
+        <Navbar />
         {children}
+        <Footer />
         <WhatsAppButton />
+        <FloatingActions />
       </body>
     </html>
   );

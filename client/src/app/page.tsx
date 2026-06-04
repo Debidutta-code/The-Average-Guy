@@ -1,7 +1,4 @@
-'use client';
-
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import AppointmentForm from "@/components/AppointmentForm";
@@ -9,15 +6,14 @@ import Reviews from "@/components/Reviews";
 import Gallery from "@/components/Gallery";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import LocalSEOContent from "@/components/LocalSEOContent";
 import { Star, Clock, Calendar, CheckCircle2 } from "lucide-react";
-import { motion } from "framer-motion";
+import Link from "next/link";
+import { FadeIn } from "@/components/wrappers/FadeIn";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Navbar />
-
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -25,7 +21,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-slate-100 flex items-center justify-center text-slate-300">
             <Image
               src="/clinic/clinic-1.jpg"
-              alt="Dr. Partha Mohapatra Clinic"
+              alt="Dr. Partha Mohapatra Clinic Bhubaneswar"
               fill
               className="object-cover"
               priority
@@ -34,31 +30,26 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-6 relative z-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
+          <FadeIn direction="up" className="max-w-3xl">
             <div className="inline-flex items-center space-x-2 bg-medical-50 border border-medical-100 text-medical-600 px-4 py-1.5 rounded-full mb-6">
               <Star size={16} className="fill-medical-500" />
               <span className="text-sm font-semibold">4.9 ⭐ (983 Google Reviews)</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl font-display font-bold text-slate-900 leading-tight mb-6">
-              Dr.(Maj) Partha <br />
-              <span className="text-medical-500">Mohapatra</span>
+              Advanced Dermatology <br />
+              Clinic in <span className="text-medical-500">Bhubaneswar</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-slate-600 mb-8 font-light leading-relaxed">
-              Dermatologist & Skin Specialist providing advanced care with trusted clinical expertise in Bhubaneswar.
+              Dr.(Maj) Partha Mohapatra — Leading Skin & Hair Specialist near Unit 4, Bhubaneswar. Advanced care with trusted clinical expertise.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-10">
-              <a href="#appointment" className="btn-primary flex items-center space-x-2">
+              <Link href="/book" className="btn-primary flex items-center space-x-2">
                 <Calendar size={18} />
                 <span>Book Appointment</span>
-              </a>
+              </Link>
               <a
                 href="https://wa.me/919999999999?text=Hello%20Dr.%20Partha%20Mohapatra,%20I%20would%20like%20to%20book%20a%20dermatology%20consultation."
                 target="_blank"
@@ -79,15 +70,20 @@ export default function Home() {
                 <span className="text-sm font-medium">Verified Specialist</span>
               </div>
             </div>
-          </motion.div>
+
+            {/* Hidden SEO Text for Indexing */}
+            <p className="sr-only">
+              Dr.(Maj) Partha Mohapatra is a leading Dermatologist in Bhubaneswar, Nayapalli offering advanced skin, hair and cosmetic treatments near Unit 4 and surrounding areas.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
       {/* Trust Line Section */}
       <section className="bg-medical-500 py-6">
-        <div className="container mx-auto px-6">
-          <p className="text-white text-center text-lg font-medium">
-            “Advanced Dermatology Care with Trusted Clinical Expertise in Bhubaneswar”
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-white text-lg font-medium">
+            “Trusted Skin Doctor near Unit 4, Bhubaneswar — Advanced Dermatology & Laser Center”
           </p>
         </div>
       </section>
@@ -98,8 +94,8 @@ export default function Home() {
       <Gallery />
       <AppointmentForm />
       <FAQ />
+      <LocalSEOContent />
       <Contact />
-      <Footer />
     </main>
   );
 }

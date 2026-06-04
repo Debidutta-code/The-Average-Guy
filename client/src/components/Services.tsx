@@ -46,10 +46,10 @@ const Services = () => {
       <div className="container mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-4">
-            Our <span className="text-medical-500">Specialized</span> Services
+            Advanced Skin & Hair <span className="text-medical-500">Treatments</span>
           </h2>
           <p className="text-slate-600 text-lg">
-            We provide a wide range of dermatology and trichology services using the latest medical technologies.
+            We provide specialized dermatology and trichology services in Bhubaneswar using the latest medical-grade technology.
           </p>
         </div>
 

@@ -2,24 +2,18 @@
 
 import Image from "next/image";
 import { Award, UserCheck, ShieldCheck } from "lucide-react";
-import { motion } from "framer-motion";
+import { FadeIn } from "./wrappers/FadeIn";
 
 const About = () => {
   return (
     <section id="about" className="section-padding bg-slate-50">
       <div className="container mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative group"
-          >
+          <FadeIn direction="left" className="relative group">
             <div className="aspect-[4/5] relative rounded-2xl overflow-hidden shadow-2xl">
               <Image
                 src="/doctor/profile.jpg"
-                alt="Dr. Partha Mohapatra"
+                alt="Dr. Partha Mohapatra - Best Dermatologist in Bhubaneswar"
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -38,26 +32,20 @@ const About = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6"
-          >
+          <FadeIn direction="right" className="space-y-6">
             <div className="inline-block px-4 py-1 bg-medical-100 text-medical-600 rounded-full text-sm font-bold uppercase tracking-wider">
               Expert Dermatologist
             </div>
             <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 leading-tight">
-              Dr.(Maj) Partha <span className="text-medical-500">Mohapatra</span>
+              Skin & Hair Specialist in <span className="text-medical-500">Bhubaneswar</span>
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed">
-              With a commitment to clinical excellence, Dr. Partha Mohapatra provides comprehensive dermatology and trichology solutions. His clinic focuses on delivering advanced medical-grade treatments tailored to individual patient needs.
+              Dr.(Maj) Partha Mohapatra is widely recognized as a top-tier <strong>skin specialist in Bhubaneswar Odisha</strong>. With a commitment to clinical excellence, he provides comprehensive dermatology and trichology solutions near <strong>Unit 4</strong> and <strong>Nayapalli</strong>.
             </p>
             <p className="text-lg text-slate-600 leading-relaxed">
-              Known for his clinical trust positioning and expertise in complex skin and hair conditions, he combines modern technology with a patient-centric approach to achieve optimal results in skin rejuvenation and hair restoration.
+              His clinic focuses on delivering advanced medical-grade treatments tailored to individual patient needs, combining modern technology with a patient-centric approach to achieve optimal results in skin rejuvenation and hair restoration.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
@@ -79,10 +67,10 @@ const About = () => {
 
             <div className="pt-6">
               <a href="#contact" className="btn-outline inline-block">
-                View Contact Details
+                Visit Our Unit 4 Clinic
               </a>
             </div>
-          </motion.div>
+          </FadeIn>
         </div>
       </div>
     </section>

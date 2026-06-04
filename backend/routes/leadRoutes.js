@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const leadController = require('../controllers/leadController');
+const leadUploadController = require('../controllers/leadUploadController');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const jwt = require('jsonwebtoken');
@@ -26,5 +27,6 @@ router.put('/:id', auth, leadController.updateLead);
 router.delete('/:id', auth, leadController.deleteLead);
 router.post('/:id/email', auth, leadController.sendEmailToLead);
 router.post('/import', auth, upload.single('file'), leadController.importLeadsCSV);
+router.post('/upload-xlsx', auth, upload.single('file'), leadUploadController.uploadXLSX);
 
 module.exports = router;

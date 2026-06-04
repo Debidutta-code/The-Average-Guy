@@ -6,15 +6,36 @@ const fs = require('fs');
 
 const getLeads = async (req, res) => {
   try {
-    const { city, specialty, scoreBadge, status } = req.query;
+    const { city, specialty, scoreBadge, status, hasPhone, search, page = 1, limit = 20 } = req.query;
     let query = {};
     if (city) query.city = city;
     if (specialty) query.specialty = specialty;
     if (scoreBadge) query.scoreBadge = scoreBadge;
     if (status) query.status = status;
+    if (hasPhone !== '' && hasPhone !== undefined) query.hasPhone = hasPhone === 'true';
 
-    const leads = await Lead.find(query).sort({ createdAt: -1 });
-    res.json(leads);
+    if (search) {
+      query.$or = [
+        { doctorName: { $regex: search, $options: 'i' } },
+        { clinicName: { $regex: search, $options: 'i' } },
+        { city: { $regex: search, $options: 'i' } }
+      ];
+    }
+
+    const skip = (page - 1) * limit;
+    const leads = await Lead.find(query)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(parseInt(limit));
+
+    const total = await Lead.countDocuments(query);
+
+    res.json({
+      leads,
+      total,
+      page: parseInt(page),
+      pages: Math.ceil(total / limit)
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

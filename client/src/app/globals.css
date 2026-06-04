@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-medical-500 text-white px-6 py-3 rounded-md font-medium transition-all hover:bg-medical-600 active:scale-95 shadow-md hover:shadow-lg;
+  }
+
+  .btn-outline {
+    @apply border-2 border-medical-500 text-medical-500 px-6 py-3 rounded-md font-medium transition-all hover:bg-medical-50 active:scale-95;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 px-6 md:px-12 lg:px-24;
+  }
+}

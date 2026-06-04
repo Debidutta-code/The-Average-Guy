@@ -28,7 +28,7 @@ const Contact = () => {
                     Unit 4 area, Bhubaneswar, Odisha, India
                   </p>
                   <a
-                    href="https://www.google.com/maps/search/KAR+Clinic+OPD+Building+Unit+4+Bhubaneswar"
+                    href="https://maps.app.goo.gl/FLP4osnz1JwATmBy5"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-sm font-bold text-medical-600 hover:underline pt-2"
@@ -65,7 +65,7 @@ const Contact = () => {
 
           <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[500px] border-8 border-white">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.9248493153573!2d85.8272551!3d20.2618958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1909e03d4948eb%3A0xc3b84f2249e7b233!2sKAR%20Clinic%20%26%20Hospital!5e0!3m2!1sen!2sin!4v1716123456789!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24599.607901771047!2d85.79712371083983!3d20.2766154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a19a76cee1e8e6d%3A0x1f2cbecd1ed5d2ed!2z8J2Xl_Cdl78uKPCdkIzwnZCa8J2QoynwnZej8J2XrvCdl7_wnZiB8J2XtfCdl64g8J2XoPCdl7zwnZe18J2XrvCdl73wnZeu8J2YgfCdl7_wnZeu!5e1!3m2!1sen!2sin!4v1780574829885!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}

@@ -10,19 +10,22 @@ ClinicFlow is a full-stack CRM and Lead Generation System designed specifically 
 
 ## 🚀 Core Features
 
-### 1. Smart Lead Scoring
-Automatically assigns a score (0-10) and badge (Hot/Warm/Cold) based on:
-- **No Website (+3):** High urgency for a new site.
-- **Specialty (+2):** Targeted high-value categories (Dermatologist/Dentist).
-- **High Rating (+2):** Reputable clinics are easier to close.
-- **Tier 2/3 City (+1):** Lower competition.
-- **Has Instagram (+1):** Digitally active doctors.
-- **Existing Website (-2):** Lower conversion potential.
+### 1. Profile-First CRM
+ClinicFlow is a profile-driven CRM. Every lead has a dedicated profile page (`/lead/:id`) which serves as the central hub for all sales activity.
+- **Editable Profiles:** Update any field (name, phone, rating, etc.) inline.
+- **Activity Timeline:** Automatically tracks status changes, field updates, and notes.
+- **Status Pipeline:** Track leads from `New` through `Contacted`, `Follow-up`, `Interested`, and `Converted`.
+- **Call Outcomes:** Log secondary outcomes like `Did Not Pick Up`, `Busy`, or `Wrong Number`.
 
-### 2. CRM Dashboard
-- **Analytics Overview:** Visual distribution of leads by score and status.
-- **Lead Management:** Search, filter, and track status (New, Contacted, Interested, etc.).
-- **Manual & CSV Entry:** Easy bulk import or single entry.
+### 2. Smart Lead Scoring (Strict CRM Logic)
+Scores are calculated purely from clinical data:
+- **🔥 HOT:** Has phone + Rating >= 4.3 + Review count > 20.
+- **🟠 WARM:** Has phone + Rating 3.5 - 4.2.
+- **❄️ COLD:** Missing phone OR Rating < 3.5.
+
+### 3. Advanced Filtering & XLSX Import
+- **Backend-Driven Filters:** Filter by status, score, city, and phone availability. Filters persist in the URL for easy sharing.
+- **Smart XLSX Merge:** Import leads via XLSX. The system automatically merges duplicates (matched by phone or name+city+address) and updates missing fields without creating duplicates.
 
 ### 3. Integrated Outreach
 - **WhatsApp Generator:** Pre-filled templates for instant intro or follow-up messages.

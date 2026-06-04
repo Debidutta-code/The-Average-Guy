@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
 const leadSchema = new mongoose.Schema({
-  doctorName: { type: String, required: true }, // Map 'name' from XLSX
+  doctorName: { type: String, required: true },
   clinicName: { type: String },
   googleMapLink: { type: String },
-  businessType: { type: String }, // Map 'businessType'
+  businessType: { type: String },
   city: { type: String },
   fullAddress: { type: String },
   rating: { type: Number, default: 0 },
   reviewCount: { type: Number, default: 0 },
   mobileNumber: { type: String },
   website: { type: String },
-  details: { type: String }, // Map 'details' manual notes
+  details: { type: String },
 
   hasPhone: { type: Boolean, default: true },
   duplicateFlag: { type: Boolean, default: false },
@@ -19,21 +19,31 @@ const leadSchema = new mongoose.Schema({
   phone: { type: String }, // Backward compatibility
   whatsapp: { type: String },
   email: { type: String },
-  specialty: { type: String, enum: ['Dermatologist', 'Dentist', 'IVF Clinic', 'General Physician', 'Pediatrician', 'Others'], default: 'Others' },
-  source: { type: String, enum: ['Google Maps', 'Practo', 'Manual', 'Other'], default: 'Manual' },
-  hasInstagram: { type: Boolean, default: false },
 
   status: {
     type: String,
-    enum: ['New', 'Contacted', 'Interested', 'Follow-up', 'Closed'],
+    enum: ['New', 'Contacted', 'Follow-up', 'Interested', 'Converted', 'Not Interested'],
     default: 'New'
+  },
+  callOutcome: {
+    type: String,
+    enum: ['Did Not Pick Up', 'Busy', 'Asked to Call Later (TTYL)', 'Wrong Number', 'Interested', 'None'],
+    default: 'None'
   },
   score: { type: Number, default: 0 },
   scoreBadge: { type: String, enum: ['Hot', 'Warm', 'Cold'], default: 'Cold' },
+
   notes: [{
     text: String,
     createdAt: { type: Date, default: Date.now }
   }],
+
+  activityTimeline: [{
+    action: String, // e.g., 'Status Changed', 'Field Updated', 'Note Added', 'Follow-up Scheduled'
+    details: String,
+    createdAt: { type: Date, default: Date.now }
+  }],
+
   followUpDate: { type: Date },
   lastContactedAt: { type: Date },
   emailsSent: [{
@@ -42,7 +52,6 @@ const leadSchema = new mongoose.Schema({
   }]
 }, { timestamps: true });
 
-// Pre-save hook to set hasPhone
 leadSchema.pre('save', function(next) {
     if (!this.mobileNumber && !this.phone) {
         this.hasPhone = false;

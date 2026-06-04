@@ -1,44 +1,27 @@
 const calculateScore = (lead) => {
+  // REMOVE all previous logic
+  // Use ONLY XLSX data rules:
+  // HOT: hasPhone=true, rating>=4.3, reviewCount>20
+  // WARM: hasPhone=true, rating 3.5-4.2
+  // COLD: hasPhone=false OR rating < 3.5 OR missing data
+
+  const rating = parseFloat(lead.rating) || 0;
+  const reviewCount = parseInt(lead.reviewCount) || 0;
+  const hasPhone = !!(lead.mobileNumber || lead.phone);
+
   let score = 0;
-
-  // Rules:
-  // No website → +3
-  if (!lead.website || lead.website.trim() === '') {
-    score += 3;
-  } else {
-    // Has existing website → -2
-    score -= 2;
-  }
-
-  // Dermatologist or Dentist → +2
-  if (['Dermatologist', 'Dentist'].includes(lead.specialty)) {
-    score += 2;
-  }
-
-  // Rating > 4.0 → +2
-  if (lead.rating > 4.0) {
-    score += 2;
-  }
-
-  // Tier 2/3 city → +1 (Assume if not a major metro it's Tier 2/3 for now, or just check city presence)
-  // Let's simplify: if city is provided, we give +1 for now, or if it's NOT Mumbai, Delhi, Bangalore, etc.
-  const metros = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata'];
-  if (lead.city && !metros.includes(lead.city)) {
-    score += 1;
-  }
-
-  // Has Instagram → +1
-  if (lead.hasInstagram) {
-    score += 1;
-  }
-
-  // Clamp score between 0 and 10
-  score = Math.max(0, Math.min(10, score));
-
-  // Badge assignment
   let badge = 'Cold';
-  if (score >= 8) badge = 'Hot';
-  else if (score >= 5) badge = 'Warm';
+
+  if (hasPhone && rating >= 4.3 && reviewCount > 20) {
+    score = 9; // Hot
+    badge = 'Hot';
+  } else if (hasPhone && rating >= 3.5) {
+    score = 6; // Warm
+    badge = 'Warm';
+  } else {
+    score = 3; // Cold
+    badge = 'Cold';
+  }
 
   return { score, badge };
 };

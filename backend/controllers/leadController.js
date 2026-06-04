@@ -1,8 +1,6 @@
 const Lead = require('../models/Lead');
 const { calculateScore } = require('../services/scoringService');
 const { sendColdEmail } = require('../services/emailService');
-const csv = require('csv-parser');
-const fs = require('fs');
 
 const getLeads = async (req, res) => {
   try {
@@ -45,7 +43,12 @@ const createLead = async (req, res) => {
   try {
     const leadData = req.body;
     const { score, badge } = calculateScore(leadData);
-    const lead = new Lead({ ...leadData, score, scoreBadge: badge });
+    const lead = new Lead({
+        ...leadData,
+        score,
+        scoreBadge: badge,
+        activityTimeline: [{ action: 'Lead Created', details: 'Manual entry' }]
+    });
     await lead.save();
     res.status(201).json(lead);
   } catch (err) {
@@ -55,18 +58,69 @@ const createLead = async (req, res) => {
 
 const updateLead = async (req, res) => {
   try {
-    const leadData = req.body;
-    const { score, badge } = calculateScore(leadData);
-    const lead = await Lead.findByIdAndUpdate(
-      req.params.id,
-      { ...leadData, score, scoreBadge: badge },
-      { new: true }
-    );
+    const lead = await Lead.findById(req.params.id);
+    if (!lead) return res.status(404).json({ message: 'Lead not found' });
+
+    const oldStatus = lead.status;
+    const oldFollowUp = lead.followUpDate;
+
+    Object.assign(lead, req.body);
+
+    // Log status change
+    if (req.body.status && req.body.status !== oldStatus) {
+        lead.activityTimeline.push({
+            action: 'Status Changed',
+            details: `From ${oldStatus} to ${req.body.status}`
+        });
+    }
+
+    // Log follow-up change
+    if (req.body.followUpDate && req.body.followUpDate !== oldFollowUp) {
+        lead.activityTimeline.push({
+            action: 'Follow-up Scheduled',
+            details: `Scheduled for ${req.body.followUpDate}`
+        });
+    }
+
+    const { score, badge } = calculateScore(lead);
+    lead.score = score;
+    lead.scoreBadge = badge;
+
+    await lead.save();
     res.json(lead);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
+
+const updateField = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { field, value } = req.body;
+        const lead = await Lead.findById(id);
+        if (!lead) return res.status(404).json({ message: 'Lead not found' });
+
+        const oldValue = lead[field];
+        lead[field] = value;
+
+        lead.activityTimeline.push({
+            action: 'Field Updated',
+            details: `${field} changed from "${oldValue}" to "${value}"`
+        });
+
+        // Recalculate score if relevant fields changed
+        if (['rating', 'reviewCount', 'mobileNumber'].includes(field)) {
+            const { score, badge } = calculateScore(lead);
+            lead.score = score;
+            lead.scoreBadge = badge;
+        }
+
+        await lead.save();
+        res.json(lead);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
 
 const getLeadById = async (req, res) => {
   try {
@@ -84,28 +138,6 @@ const deleteLead = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-};
-
-const importLeadsCSV = (req, res) => {
-  const results = [];
-  if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
-
-  fs.createReadStream(req.file.path)
-    .pipe(csv())
-    .on('data', (data) => results.push(data))
-    .on('end', async () => {
-      try {
-        const leads = results.map(item => {
-          const { score, badge } = calculateScore(item);
-          return { ...item, score, scoreBadge: badge };
-        });
-        await Lead.insertMany(leads);
-        fs.unlinkSync(req.file.path);
-        res.json({ message: `${leads.length} leads imported` });
-      } catch (err) {
-        res.status(500).json({ message: err.message });
-      }
-    });
 };
 
 const getStats = async (req, res) => {
@@ -136,6 +168,10 @@ const sendEmailToLead = async (req, res) => {
       await sendColdEmail(lead.email, subject, text, html);
 
       lead.emailsSent.push({ subject });
+      lead.activityTimeline.push({
+        action: 'Email Sent',
+        details: `Subject: ${subject}`
+      });
       lead.lastContactedAt = new Date();
       if (lead.status === 'New') lead.status = 'Contacted';
       await lead.save();
@@ -146,4 +182,4 @@ const sendEmailToLead = async (req, res) => {
     }
   };
 
-module.exports = { getLeads, createLead, updateLead, getLeadById, deleteLead, importLeadsCSV, getStats, sendEmailToLead };
+module.exports = { getLeads, createLead, updateLead, getLeadById, deleteLead, getStats, sendEmailToLead, updateField };

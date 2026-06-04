@@ -24,6 +24,7 @@ router.get('/stats', auth, leadController.getStats);
 router.post('/', auth, leadController.createLead);
 router.get('/:id', auth, leadController.getLeadById);
 router.put('/:id', auth, leadController.updateLead);
+router.patch('/:id/update-field', auth, leadController.updateField);
 router.delete('/:id', auth, leadController.deleteLead);
 router.post('/:id/email', auth, leadController.sendEmailToLead);
 router.post('/import', auth, upload.single('file'), leadController.importLeadsCSV);

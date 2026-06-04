@@ -1,29 +1,46 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Card } from "@/components/ui/Card"
+import { Suspense } from "react"
+import { useEffect, useState, useRef } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/Button"
-import { Search, Plus, Download, LayoutGrid, List, ChevronLeft, ChevronRight, PhoneOff, FilterX } from "lucide-react"
+import { Search, Plus, Download, LayoutGrid, List, ChevronLeft, ChevronRight, FilterX } from "lucide-react"
 import Link from "next/link"
 import api from "@/utils/api"
 import { LeadCard } from "@/components/LeadCard"
-import LeadDetailsModal from "@/components/LeadDetailsModal"
 import { cn } from "@/utils/cn"
 
-export default function LeadsPage() {
+function LeadsList() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
   const [data, setData] = useState({ leads: [], total: 0, page: 1, pages: 1 })
   const [loading, setLoading] = useState(true)
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState(searchParams.get("search") || "")
   const [view, setView] = useState<'grid' | 'table'>('grid')
-  const [selectedLeadId, setSelectedLeadId] = useState<string | null>(null)
-  const [page, setPage] = useState(1)
-  const [filters, setFilters] = useState({ city: "", specialty: "", status: "", hasPhone: "" })
+  const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"))
+  const [filters, setFilters] = useState({
+    status: searchParams.get("status") || "",
+    scoreBadge: searchParams.get("scoreBadge") || "",
+    hasPhone: searchParams.get("hasPhone") || "",
+  })
 
-  const fetchLeads = async () => {
+  const searchTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const updateURL = (newParams: any) => {
+    const params = new URLSearchParams(searchParams.toString());
+    Object.entries(newParams).forEach(([key, value]) => {
+        if (value) params.set(key, String(value));
+        else params.delete(key);
+    });
+    router.replace(`?${params.toString()}`);
+  }
+
+  const fetchLeads = async (currentPage: number, currentFilters: any, currentSearch: string) => {
     try {
       setLoading(true)
-      const params: any = { page, limit: 12, ...filters }
-      if (search) params.search = search
+      const params: any = { page: currentPage, limit: 12, ...currentFilters }
+      if (currentSearch) params.search = currentSearch
       const res = await api.get('/leads', { params })
       setData(res.data)
     } catch (err) {
@@ -34,30 +51,36 @@ export default function LeadsPage() {
   }
 
   useEffect(() => {
-    fetchLeads()
+    if (searchTimeout.current) clearTimeout(searchTimeout.current);
+    searchTimeout.current = setTimeout(() => {
+        updateURL({ search, page: 1 });
+        fetchLeads(1, filters, search);
+        setPage(1);
+    }, 300);
+    return () => { if(searchTimeout.current) clearTimeout(searchTimeout.current) };
+  }, [search])
+
+  useEffect(() => {
+    const isFirstLoad = !loading && data.leads.length === 0;
+    if(!isFirstLoad) {
+        updateURL({ ...filters, page });
+        fetchLeads(page, filters, search);
+    }
   }, [page, filters])
 
-  const handleStatusUpdate = async (id: string, status: string) => {
-    try {
-        await api.put(`/leads/${id}`, { status });
-        fetchLeads();
-    } catch (err) {
-        console.error(err);
-    }
-  }
-
   const clearFilters = () => {
-    setFilters({ city: "", specialty: "", status: "", hasPhone: "" })
+    setFilters({ status: "", scoreBadge: "", hasPhone: "" })
     setSearch("")
     setPage(1)
+    router.replace('/dashboard/leads');
   }
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold">Leads CRM</h1>
-          <p className="text-gray-500">Modern lead management and tracking</p>
+          <h1 className="text-2xl font-bold">Leads Management</h1>
+          <p className="text-gray-500">Click a card to view full CRM profile</p>
         </div>
         <div className="flex gap-3">
           <Link href="/dashboard/leads/upload">
@@ -78,28 +101,29 @@ export default function LeadsPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
             type="text"
-            placeholder="Search by name, city..."
-            className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:border-gray-700"
+            placeholder="Search leads..."
+            className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:border-gray-700 outline-none"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && fetchLeads()}
           />
         </div>
         <div className="flex flex-wrap gap-2 items-center">
             <select
-                className="text-sm border rounded-lg p-2 dark:bg-gray-800 dark:border-gray-700"
+                className="text-sm border rounded-lg p-2 dark:bg-gray-800 dark:border-gray-700 outline-none"
                 value={filters.status}
                 onChange={(e) => setFilters(f => ({ ...f, status: e.target.value }))}
             >
                 <option value="">All Status</option>
                 <option value="New">New</option>
                 <option value="Contacted">Contacted</option>
+                <option value="Follow-up">Follow-up</option>
                 <option value="Interested">Interested</option>
-                <option value="Closed">Closed</option>
+                <option value="Converted">Converted</option>
+                <option value="Not Interested">Not Interested</option>
             </select>
 
             <select
-                className="text-sm border rounded-lg p-2 dark:bg-gray-800 dark:border-gray-700"
+                className="text-sm border rounded-lg p-2 dark:bg-gray-800 dark:border-gray-700 outline-none"
                 value={filters.scoreBadge}
                 onChange={(e) => setFilters(f => ({ ...f, scoreBadge: e.target.value }))}
             >
@@ -109,16 +133,17 @@ export default function LeadsPage() {
                 <option value="Cold">Cold</option>
             </select>
 
-            <Button
-                variant={filters.hasPhone === 'false' ? 'secondary' : 'outline'}
-                size="sm"
-                className="gap-2"
-                onClick={() => setFilters(f => ({ ...f, hasPhone: f.hasPhone === 'false' ? '' : 'false' }))}
+            <select
+                className="text-sm border rounded-lg p-2 dark:bg-gray-800 dark:border-gray-700 outline-none"
+                value={filters.hasPhone}
+                onChange={(e) => setFilters(f => ({ ...f, hasPhone: e.target.value }))}
             >
-                <PhoneOff className="w-4 h-4" /> No Contact
-            </Button>
+                <option value="">All Contact</option>
+                <option value="true">Has Phone</option>
+                <option value="false">No Phone</option>
+            </select>
 
-            <Button variant="ghost" size="sm" onClick={clearFilters} className="text-gray-400">
+            <Button variant="ghost" size="sm" onClick={clearFilters} className="text-gray-400 p-2">
                 <FilterX className="w-4 h-4" />
             </Button>
 
@@ -142,7 +167,7 @@ export default function LeadsPage() {
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {[1,2,3,4,5,6,7,8].map(i => (
-                <div key={i} className="h-64 bg-gray-100 dark:bg-gray-800 animate-pulse rounded-xl" />
+                <div key={i} className="h-48 bg-gray-100 dark:bg-gray-800 animate-pulse rounded-xl" />
             ))}
         </div>
       ) : (
@@ -153,8 +178,6 @@ export default function LeadsPage() {
                         <LeadCard
                             key={lead._id}
                             lead={lead}
-                            onClick={() => setSelectedLeadId(lead._id)}
-                            onStatusUpdate={handleStatusUpdate}
                         />
                     ))}
                 </div>
@@ -167,22 +190,18 @@ export default function LeadsPage() {
                                 <th className="px-6 py-4">City</th>
                                 <th className="px-6 py-4">Score</th>
                                 <th className="px-6 py-4">Status</th>
-                                <th className="px-6 py-4 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                             {data.leads.map((lead: any) => (
-                                <tr key={lead._id} className="hover:bg-gray-50 dark:hover:bg-gray-800/30 cursor-pointer" onClick={() => setSelectedLeadId(lead._id)}>
-                                    <td className="px-6 py-4 font-medium">{lead.doctorName}</td>
+                                <tr key={lead._id} className="hover:bg-gray-50 dark:hover:bg-gray-800/30 cursor-pointer" onClick={() => router.push(`/lead/${lead._id}`)}>
+                                    <td className="px-6 py-4 font-bold">{lead.doctorName}</td>
                                     <td className="px-6 py-4 text-sm text-gray-500">{lead.city}</td>
                                     <td className="px-6 py-4">
                                         <Badge variant={lead.scoreBadge.toLowerCase() as any}>{lead.scoreBadge}</Badge>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <span className="text-sm">{lead.status}</span>
-                                    </td>
-                                    <td className="px-6 py-4 text-right">
-                                        <Button variant="ghost" size="sm">Details</Button>
+                                        <Badge variant="default">{lead.status}</Badge>
                                     </td>
                                 </tr>
                             ))}
@@ -197,7 +216,6 @@ export default function LeadsPage() {
                 </div>
             )}
 
-            {/* Pagination */}
             {data.pages > 1 && (
                 <div className="flex items-center justify-between pt-6">
                     <p className="text-sm text-gray-500">
@@ -238,13 +256,14 @@ export default function LeadsPage() {
             )}
         </>
       )}
-
-      <LeadDetailsModal
-        id={selectedLeadId || ""}
-        isOpen={!!selectedLeadId}
-        onClose={() => setSelectedLeadId(null)}
-        onUpdate={fetchLeads}
-      />
     </div>
   )
+}
+
+export default function LeadsPage() {
+    return (
+        <Suspense fallback={<div>Loading leads...</div>}>
+            <LeadsList />
+        </Suspense>
+    )
 }

@@ -1,6 +1,5 @@
 const Lead = require('../models/Lead');
 const { parseXLSX } = require('../utils/xlsxParser');
-const { checkDuplicate } = require('../utils/dedupeLogic');
 const { calculateScore } = require('../services/scoringService');
 const fs = require('fs');
 
@@ -10,11 +9,10 @@ const uploadXLSX = async (req, res) => {
   try {
     const rawData = parseXLSX(req.file.path);
     let newLeadsCount = 0;
-    let duplicatesCount = 0;
+    let mergedCount = 0;
     let missingMobileCount = 0;
 
     for (const item of rawData) {
-      // Map XLSX headers to model fields
       const leadData = {
         googleMapLink: item.googleMapLink,
         doctorName: item.name,
@@ -26,26 +24,53 @@ const uploadXLSX = async (req, res) => {
         mobileNumber: item.mobileNumber ? String(item.mobileNumber) : null,
         website: item.website,
         details: item.details,
-        source: 'Google Maps',
-        specialty: item.businessType?.includes('Dermatologist') ? 'Dermatologist' :
-                   item.businessType?.includes('Dentist') ? 'Dentist' : 'Others'
       };
 
-      const isDuplicate = await checkDuplicate(leadData);
-
-      if (isDuplicate) {
-        duplicatesCount++;
-        continue;
+      // Match by phoneNumber OR name + city + address
+      let existing = null;
+      if (leadData.mobileNumber) {
+        existing = await Lead.findOne({ mobileNumber: leadData.mobileNumber });
       }
 
-      if (!leadData.mobileNumber) {
-        missingMobileCount++;
+      if (!existing) {
+        existing = await Lead.findOne({
+            doctorName: leadData.doctorName,
+            city: leadData.city,
+            fullAddress: leadData.fullAddress
+        });
       }
 
       const { score, badge } = calculateScore(leadData);
-      const lead = new Lead({ ...leadData, score, scoreBadge: badge });
-      await lead.save();
-      newLeadsCount++;
+
+      if (existing) {
+        // Merge records: Update missing fields only
+        let updated = false;
+        for (let key in leadData) {
+            if (!existing[key] && leadData[key]) {
+                existing[key] = leadData[key];
+                updated = true;
+            }
+        }
+        if (updated) {
+            existing.activityTimeline.push({
+                action: 'Fields Merged',
+                details: 'Incomplete fields updated via XLSX import'
+            });
+            await existing.save();
+        }
+        mergedCount++;
+      } else {
+        if (!leadData.mobileNumber) missingMobileCount++;
+
+        const lead = new Lead({
+            ...leadData,
+            score,
+            scoreBadge: badge,
+            activityTimeline: [{ action: 'Lead Created', details: 'Imported via XLSX' }]
+        });
+        await lead.save();
+        newLeadsCount++;
+      }
     }
 
     fs.unlinkSync(req.file.path);
@@ -53,7 +78,7 @@ const uploadXLSX = async (req, res) => {
     res.json({
       processed: rawData.length,
       added: newLeadsCount,
-      duplicates: duplicatesCount,
+      merged: mergedCount,
       missingMobile: missingMobileCount
     });
   } catch (err) {

@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import { Card, CardHeader, CardContent } from "@/components/ui/Card"
 import { Button } from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge"
-import { ArrowLeft, Phone, Mail, MessageCircle, Calendar, Edit2, Trash2, Star, Globe, ExternalLink, MapPin, Clock, CheckCircle2 } from "lucide-react"
+import { ArrowLeft, Phone, Mail, MessageCircle, Calendar, Edit2, Trash2, Star, Globe, ExternalLink, MapPin, Clock, CheckCircle2, Copy } from "lucide-react"
 import Link from "next/link"
 import api from "@/utils/api"
 import { format } from "date-fns"
@@ -27,8 +27,6 @@ export default function LeadProfilePage() {
     } catch (err) {
       console.error(err)
     } finally {
-      // Simulate slow load for skeleton verification
-      // await new Promise(r => setTimeout(r, 2000));
       setLoading(false)
     }
   }, [id])
@@ -43,6 +41,7 @@ export default function LeadProfilePage() {
       setLead(res.data)
     } catch (err) {
       console.error(err)
+      alert("Failed to update field")
     }
   }
 
@@ -85,6 +84,11 @@ export default function LeadProfilePage() {
     }
   }
 
+  const copyToClipboard = (text: string, label: string) => {
+    navigator.clipboard.writeText(text);
+    alert(`${label} copied to clipboard`);
+  }
+
   if (loading) return <LeadProfileSkeleton />
   if (!lead) return <div className="p-8 text-center">Lead not found. <Link href="/dashboard/leads" className="text-blue-600 underline">Back to leads</Link></div>
 
@@ -108,7 +112,7 @@ export default function LeadProfilePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
-          <Card className="border-none shadow-sm overflow-hidden">
+          <Card className="border-none shadow-sm overflow-hidden bg-white dark:bg-gray-900">
             <div className="h-32 bg-gradient-to-r from-blue-600 to-indigo-700" />
             <CardContent className="relative pt-16 p-8">
                 <div className="absolute -top-12 left-8 bg-white dark:bg-gray-800 p-2 rounded-2xl shadow-lg">
@@ -123,7 +127,13 @@ export default function LeadProfilePage() {
                             <h1 className="text-3xl font-black">{lead.doctorName}</h1>
                             <Badge variant={lead.scoreBadge.toLowerCase() as any} className="px-3 py-1 text-sm">{lead.scoreBadge}</Badge>
                         </div>
-                        <p className="text-xl text-gray-500 font-medium">{lead.clinicName || lead.businessType}</p>
+                        <button
+                            onClick={() => copyToClipboard(lead.clinicName || lead.businessType, "Clinic name")}
+                            className="text-xl text-gray-500 font-medium hover:text-blue-600 transition-colors flex items-center gap-2 group"
+                        >
+                            {lead.clinicName || lead.businessType}
+                            <Copy className="w-4 h-4 opacity-0 group-hover:opacity-100" />
+                        </button>
                         <div className="flex items-center text-gray-400 gap-4 text-sm font-medium">
                             <span className="flex items-center"><MapPin className="w-4 h-4 mr-1" /> {lead.city}</span>
                             <span className="flex items-center"><Star className="w-4 h-4 mr-1 text-yellow-500 fill-current" /> {lead.rating} ({lead.reviewCount} reviews)</span>
@@ -149,7 +159,7 @@ export default function LeadProfilePage() {
                         <div className="flex-1 flex justify-between items-center">
                             <span className="truncate text-blue-600 text-sm font-medium pr-4">{lead.googleMapLink || 'N/A'}</span>
                             {lead.googleMapLink && (
-                                <a href={lead.googleMapLink} target="_blank" className="p-2 hover:bg-gray-100 rounded-lg"><ExternalLink className="w-4 h-4" /></a>
+                                <a href={lead.googleMapLink} target="_blank" className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"><ExternalLink className="w-4 h-4" /></a>
                             )}
                         </div>
                     </div>
@@ -226,13 +236,40 @@ export default function LeadProfilePage() {
           <Card>
             <CardHeader title="Quick Actions" />
             <CardContent className="grid grid-cols-2 gap-3">
-                <ActionBtn icon={<Phone className="w-4 h-4" />} label="Call" color="blue" onClick={() => window.location.href=`tel:${lead.mobileNumber || lead.phone}`} disabled={!lead.hasPhone} />
-                <ActionBtn icon={<MessageCircle className="w-4 h-4" />} label="WhatsApp" color="green" onClick={() => {
-                    const text = `Hi Dr. ${lead.doctorName}, I noticed your clinic in ${lead.city}...`;
-                    window.open(`https://wa.me/${lead.mobileNumber || lead.phone}?text=${encodeURIComponent(text)}`, '_blank');
-                }} disabled={!lead.hasPhone} />
-                <ActionBtn icon={<Mail className="w-4 h-4" />} label="Email" color="purple" onClick={() => window.location.href=`mailto:${lead.email}`} disabled={!lead.email} />
-                <ActionBtn icon={<Globe className="w-4 h-4" />} label="Website" color="gray" onClick={() => window.open(lead.website, '_blank')} disabled={!lead.website} />
+                <ActionBtn
+                    icon={<Phone className="w-4 h-4" />}
+                    label="Call"
+                    tooltip={lead.mobileNumber || lead.phone || 'N/A'}
+                    color="blue"
+                    onClick={() => window.location.href=`tel:${lead.mobileNumber || lead.phone}`}
+                    disabled={!lead.hasPhone}
+                />
+                <ActionBtn
+                    icon={<MessageCircle className="w-4 h-4" />}
+                    label="WhatsApp"
+                    color="green"
+                    onClick={() => {
+                        const text = `Hi Dr. ${lead.doctorName}, I noticed your clinic in ${lead.city}...`;
+                        window.open(`https://wa.me/${lead.mobileNumber || lead.phone}?text=${encodeURIComponent(text)}`, '_blank');
+                    }}
+                    disabled={!lead.hasPhone}
+                />
+                <ActionBtn
+                    icon={<Mail className="w-4 h-4" />}
+                    label="Email"
+                    color="purple"
+                    onClick={() => window.location.href=`mailto:${lead.email}`}
+                    disabled={!lead.email}
+                />
+                <ActionBtn
+                    icon={<Globe className="w-4 h-4" />}
+                    label="Website"
+                    tooltip={lead.website || 'N/A'}
+                    secondaryAction={() => copyToClipboard(lead.website, "Website URL")}
+                    color="gray"
+                    onClick={() => window.open(lead.website, '_blank')}
+                    disabled={!lead.website}
+                />
             </CardContent>
           </Card>
 
@@ -248,6 +285,15 @@ export default function LeadProfilePage() {
                 <Button className="w-full gap-2" onClick={handleAddNote}>
                     <CheckCircle2 className="w-4 h-4" /> Save Note
                 </Button>
+
+                <div className="space-y-4 mt-6 max-h-60 overflow-y-auto pr-2">
+                    {lead.notes?.slice().reverse().map((n: any, i: number) => (
+                        <div key={i} className="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl text-sm">
+                            <p>{n.text}</p>
+                            <p className="text-[10px] text-gray-400 mt-2 font-bold uppercase tracking-wider">{format(new Date(n.createdAt), 'PPp')}</p>
+                        </div>
+                    ))}
+                </div>
             </CardContent>
           </Card>
         </div>
@@ -287,7 +333,9 @@ function EditableField({ label, value, onSave }: { label: string, value: string,
     useEffect(() => { setVal(value || '') }, [value]);
 
     const handleSave = () => {
-        onSave(val);
+        if (val !== value) {
+            onSave(val);
+        }
         setIsEditing(false);
     }
 
@@ -298,14 +346,14 @@ function EditableField({ label, value, onSave }: { label: string, value: string,
                 {isEditing ? (
                     <input
                         autoFocus
-                        className="flex-1 border-b border-blue-600 bg-transparent text-sm font-medium outline-none py-1 min-w-0"
+                        className="flex-1 border-b border-blue-600 bg-transparent text-sm font-medium outline-none py-1 min-w-0 dark:text-white"
                         value={val}
                         onChange={(e) => setVal(e.target.value)}
                         onBlur={handleSave}
                         onKeyDown={(e) => e.key === 'Enter' && handleSave()}
                     />
                 ) : (
-                    <span className="truncate text-sm font-bold pr-4">{value || 'N/A'}</span>
+                    <span className="truncate text-sm font-bold pr-4 dark:text-gray-100">{value || 'N/A'}</span>
                 )}
                 {!isEditing && (
                     <button
@@ -320,21 +368,38 @@ function EditableField({ label, value, onSave }: { label: string, value: string,
     )
 }
 
-function ActionBtn({ icon, label, color, onClick, disabled }: any) {
+function ActionBtn({ icon, label, color, onClick, disabled, tooltip, secondaryAction }: any) {
     const colors: any = {
-        blue: 'bg-blue-50 text-blue-600 hover:bg-blue-100',
-        green: 'bg-green-50 text-green-600 hover:bg-green-100',
-        purple: 'bg-purple-50 text-purple-600 hover:bg-purple-100',
-        gray: 'bg-gray-50 text-gray-600 hover:bg-gray-100',
+        blue: 'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/40',
+        green: 'bg-green-50 text-green-600 hover:bg-green-100 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/40',
+        purple: 'bg-purple-50 text-purple-600 hover:bg-purple-100 dark:bg-purple-900/20 dark:text-purple-400 dark:hover:bg-purple-900/40',
+        gray: 'bg-gray-50 text-gray-600 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700',
     }
     return (
-        <button
-            onClick={onClick}
-            disabled={disabled}
-            className={`flex flex-col items-center justify-center p-4 rounded-2xl transition-colors gap-2 ${colors[color]} disabled:opacity-30 disabled:grayscale disabled:cursor-not-allowed`}
-        >
-            {icon}
-            <span className="text-[10px] font-black uppercase tracking-tighter">{label}</span>
-        </button>
+        <div className="relative group/btn">
+            <button
+                onClick={onClick}
+                disabled={disabled}
+                className={`w-full flex flex-col items-center justify-center p-4 rounded-2xl transition-all gap-2 ${colors[color]} disabled:opacity-30 disabled:grayscale disabled:cursor-not-allowed`}
+            >
+                {icon}
+                <span className="text-[10px] font-black uppercase tracking-tighter">{label}</span>
+            </button>
+
+            {tooltip && !disabled && (
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[200px] bg-gray-900 text-white text-[10px] p-2 rounded shadow-xl opacity-0 group-hover/btn:opacity-100 transition-opacity pointer-events-none z-10 font-medium">
+                    {tooltip}
+                </div>
+            )}
+
+            {secondaryAction && !disabled && (
+                <button
+                    onClick={(e) => { e.stopPropagation(); secondaryAction(); }}
+                    className="absolute top-2 right-2 p-1 bg-white/20 rounded hover:bg-white/40 opacity-0 group-hover/btn:opacity-100 transition-opacity"
+                >
+                    <Copy className="w-3 h-3" />
+                </button>
+            )}
+        </div>
     )
 }

@@ -52,13 +52,8 @@ const leadSchema = new mongoose.Schema({
   }]
 }, { timestamps: true });
 
-leadSchema.pre('save', function(next) {
-    if (!this.mobileNumber && !this.phone) {
-        this.hasPhone = false;
-    } else {
-        this.hasPhone = true;
-    }
-    next();
+leadSchema.pre('save', function() {
+    this.hasPhone = !!(this.mobileNumber || this.phone);
 });
 
 module.exports = mongoose.model('Lead', leadSchema);

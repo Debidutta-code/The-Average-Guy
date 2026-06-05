@@ -27,7 +27,6 @@ router.put('/:id', auth, leadController.updateLead);
 router.patch('/:id/update-field', auth, leadController.updateField);
 router.delete('/:id', auth, leadController.deleteLead);
 router.post('/:id/email', auth, leadController.sendEmailToLead);
-router.post('/import', auth, upload.single('file'), leadController.importLeadsCSV);
 router.post('/upload-xlsx', auth, upload.single('file'), leadUploadController.uploadXLSX);
 
 module.exports = router;

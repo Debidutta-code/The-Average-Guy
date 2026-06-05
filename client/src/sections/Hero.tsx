@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+    <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-primary-light/30 -z-10 rounded-l-[100px] hidden lg:block" />
       <div className="absolute top-1/4 left-10 w-24 h-24 bg-primary/5 rounded-full blur-3xl -z-10" />

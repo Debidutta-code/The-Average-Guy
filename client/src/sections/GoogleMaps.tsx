@@ -12,7 +12,7 @@ const GoogleMaps = () => {
           <div className="flex-1 w-full order-2 lg:order-1">
              <div className="relative w-full aspect-[16/9] lg:aspect-square rounded-[40px] overflow-hidden shadow-2xl border-8 border-slate-50">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.6663242006764!2d85.8268!3d20.2525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a19a71000000001%3A0x0!2zMjHCsDE1JzA5LjAiTiA4NcKwNDknMzYuNSJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7486.1057282182555!2d85.83329217419968!3d20.256642213851748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a19a740bfffffff%3A0xe111f1329e54c006!2sKapoor&#39;s%20Dental%20Care%20Centre!5e0!3m2!1sen!2sin!4v1780652701738!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -56,7 +56,7 @@ const GoogleMaps = () => {
                 </div>
               </div>
               <a
-                href="https://www.google.com/maps/dir/?api=1&destination=20.2525,85.8268"
+                href="https://maps.app.goo.gl/fQc5FVCiBB7tG2w56"
                 target="_blank"
                 className="inline-flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-full font-bold hover:bg-slate-800 transition-all shadow-xl"
               >

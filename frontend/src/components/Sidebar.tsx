@@ -3,12 +3,13 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/utils/cn"
-import { LayoutDashboard, Users, PieChart, Settings, LogOut } from "lucide-react"
+import { LayoutDashboard, Users, PieChart, Settings, LogOut, Search } from "lucide-react"
 import { useAuth } from "@/context/AuthContext"
 
 const menuItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Leads", href: "/dashboard/leads", icon: Users },
+  { name: "Scraper", href: "/dashboard/scraper", icon: Search },
   { name: "Analytics", href: "/dashboard/analytics", icon: PieChart },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ]

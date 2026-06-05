@@ -4,12 +4,10 @@ import { Suspense } from "react"
 import { useEffect, useState, useRef } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/Button"
-import { Badge } from "@/components/ui/Badge"
-import { Search, Plus, Download, LayoutGrid, List, ChevronLeft, ChevronRight, FilterX } from "lucide-react"
+import { Search, Plus, Download, ChevronLeft, ChevronRight, FilterX, MessageCircle, Phone, Globe, ExternalLink, Star, PhoneOff } from "lucide-react"
 import Link from "next/link"
 import api from "@/utils/api"
-import { LeadCard } from "@/components/LeadCard"
-import { cn } from "@/utils/cn"
+import { Badge } from "@/components/ui/Badge"
 
 function LeadsList() {
   const router = useRouter()
@@ -18,7 +16,6 @@ function LeadsList() {
   const [data, setData] = useState({ leads: [], total: 0, page: 1, pages: 1 })
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState(searchParams.get("search") || "")
-  const [view, setView] = useState<'grid' | 'table'>('grid')
   const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"))
   const [filters, setFilters] = useState({
     status: searchParams.get("status") || "",
@@ -80,8 +77,8 @@ function LeadsList() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold">Leads Management</h1>
-          <p className="text-gray-500">Click a card to view full CRM profile</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Leads Management</h1>
+          <p className="text-gray-500">Manage doctor leads and clinic pipeline</p>
         </div>
         <div className="flex gap-3">
           <Link href="/dashboard/leads/upload">
@@ -102,8 +99,8 @@ function LeadsList() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
             type="text"
-            placeholder="Search leads..."
-            className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:border-gray-700 outline-none"
+            placeholder="Search by doctor or city..."
+            className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-1 focus:ring-blue-500"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -144,118 +141,151 @@ function LeadsList() {
                 <option value="false">No Phone</option>
             </select>
 
-            <Button variant="ghost" size="sm" onClick={clearFilters} className="text-gray-400 p-2">
+            <Button variant="ghost" size="sm" onClick={clearFilters} className="text-gray-400 p-2 hover:text-red-500">
                 <FilterX className="w-4 h-4" />
             </Button>
-
-            <div className="flex border rounded-lg overflow-hidden ml-2">
-                <button
-                    className={cn("p-2", view === 'grid' ? "bg-gray-100 dark:bg-gray-800" : "bg-white dark:bg-gray-900")}
-                    onClick={() => setView('grid')}
-                >
-                    <LayoutGrid className="w-4 h-4" />
-                </button>
-                <button
-                    className={cn("p-2", view === 'table' ? "bg-gray-100 dark:bg-gray-800" : "bg-white dark:bg-gray-900")}
-                    onClick={() => setView('table')}
-                >
-                    <List className="w-4 h-4" />
-                </button>
-            </div>
         </div>
       </div>
 
-      {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[1,2,3,4,5,6,7,8].map(i => (
-                <div key={i} className="h-48 bg-gray-100 dark:bg-gray-800 animate-pulse rounded-xl" />
-            ))}
-        </div>
-      ) : (
-        <>
-            {view === 'grid' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {data.leads.map((lead: any) => (
-                        <LeadCard
-                            key={lead._id}
-                            lead={lead}
-                        />
-                    ))}
-                </div>
-            ) : (
-                <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden shadow-sm">
-                    <table className="w-full text-left">
-                        <thead className="bg-gray-50 dark:bg-gray-800/50 text-xs uppercase text-gray-500 font-bold">
-                            <tr>
-                                <th className="px-6 py-4">Name</th>
-                                <th className="px-6 py-4">City</th>
-                                <th className="px-6 py-4">Score</th>
-                                <th className="px-6 py-4">Status</th>
+      <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden shadow-sm">
+        <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+                <thead className="bg-gray-50/50 dark:bg-gray-800/50 text-[10px] uppercase text-gray-500 font-black tracking-widest border-b border-gray-100 dark:border-gray-800">
+                    <tr>
+                        <th className="px-6 py-4">Doctor / Clinic</th>
+                        <th className="px-6 py-4">City</th>
+                        <th className="px-6 py-4">Rating</th>
+                        <th className="px-6 py-4 text-center">Contact</th>
+                        <th className="px-6 py-4 text-center">Score</th>
+                        <th className="px-6 py-4 text-center">Status</th>
+                        <th className="px-6 py-4 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
+                    {loading ? (
+                        [...Array(6)].map((_, i) => (
+                            <tr key={i} className="animate-pulse">
+                                <td colSpan={7} className="px-6 py-8">
+                                    <div className="h-4 bg-gray-100 dark:bg-gray-800 rounded w-3/4 mx-auto" />
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
-                            {data.leads.map((lead: any) => (
-                                <tr key={lead._id} className="hover:bg-gray-50 dark:hover:bg-gray-800/30 cursor-pointer" onClick={() => router.push(`/lead/${lead._id}`)}>
-                                    <td className="px-6 py-4 font-bold">{lead.doctorName}</td>
-                                    <td className="px-6 py-4 text-sm text-gray-500">{lead.city}</td>
-                                    <td className="px-6 py-4">
-                                        <Badge variant={lead.scoreBadge.toLowerCase() as any}>{lead.scoreBadge}</Badge>
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        <Badge variant="default">{lead.status}</Badge>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+                        ))
+                    ) : data.leads.map((lead: any) => (
+                        <tr key={lead._id} className="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors group">
+                            <td className="px-6 py-4">
+                                <div className="font-bold text-sm text-gray-900 dark:text-gray-100">{lead.doctorName}</div>
+                                <div className="text-xs text-gray-500 truncate max-w-[200px]">{lead.clinicName || lead.businessType}</div>
+                            </td>
+                            <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">
+                                {lead.city}
+                            </td>
+                            <td className="px-6 py-4">
+                                <div className="flex items-center gap-1 text-sm font-bold text-yellow-500">
+                                    <Star className="w-3.5 h-3.5 fill-current" />
+                                    {lead.rating}
+                                </div>
+                                <div className="text-[10px] text-gray-400 font-medium">{lead.reviewCount} reviews</div>
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                                {lead.hasPhone ? (
+                                    <div className="flex justify-center gap-2">
+                                        <button
+                                            onClick={() => window.location.href=`tel:${lead.mobileNumber || lead.phone}`}
+                                            className="p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
+                                        >
+                                            <Phone className="w-4 h-4" />
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                const text = `Hi Dr. ${lead.doctorName}, I noticed your clinic in ${lead.city}...`;
+                                                window.open(`https://wa.me/${lead.mobileNumber || lead.phone}?text=${encodeURIComponent(text)}`, '_blank');
+                                            }}
+                                            className="p-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors"
+                                        >
+                                            <MessageCircle className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <span className="text-xs text-red-400 font-medium inline-flex items-center gap-1">
+                                        <PhoneOff className="w-3 h-3" /> N/A
+                                    </span>
+                                )}
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                                <Badge variant={lead.scoreBadge.toLowerCase() as any}>{lead.scoreBadge}</Badge>
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                                <span className="text-[10px] font-black uppercase bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-600 dark:text-gray-400">
+                                    {lead.status}
+                                </span>
+                            </td>
+                            <td className="px-6 py-4 text-right">
+                                <div className="flex justify-end gap-2">
+                                    {lead.website && (
+                                        <button onClick={() => window.open(lead.website, '_blank')} className="p-2 text-gray-400 hover:text-blue-600">
+                                            <Globe className="w-4 h-4" />
+                                        </button>
+                                    )}
+                                    <Link href={`/lead/${lead._id}`}>
+                                        <Button variant="outline" size="sm" className="font-bold text-xs h-8 px-3">
+                                            Profile
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
 
-            {data.leads.length === 0 && (
-                <div className="text-center py-20 bg-gray-50 dark:bg-gray-900 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-800">
-                    <p className="text-gray-500">No leads found matching your criteria.</p>
-                </div>
-            )}
+        {(!loading && data.leads.length === 0) && (
+            <div className="text-center py-20 bg-gray-50/30">
+                <p className="text-gray-500 font-medium">No leads found matching your criteria.</p>
+            </div>
+        )}
+      </div>
 
-            {data.pages > 1 && (
-                <div className="flex items-center justify-between pt-6">
-                    <p className="text-sm text-gray-500">
-                        Showing {data.leads.length} of {data.total} leads
-                    </p>
-                    <div className="flex gap-2">
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            disabled={page === 1}
-                            onClick={() => setPage(p => p - 1)}
-                        >
-                            <ChevronLeft className="w-4 h-4 mr-1" /> Previous
-                        </Button>
-                        <div className="flex gap-1">
-                            {[...Array(data.pages)].map((_, i) => (
-                                <Button
-                                    key={i}
-                                    variant={page === i + 1 ? 'primary' : 'outline'}
-                                    size="sm"
-                                    className="w-8"
-                                    onClick={() => setPage(i + 1)}
-                                >
-                                    {i + 1}
-                                </Button>
-                            ))}
-                        </div>
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            disabled={page === data.pages}
-                            onClick={() => setPage(p => p + 1)}
-                        >
-                            Next <ChevronRight className="w-4 h-4 ml-1" />
-                        </Button>
-                    </div>
-                </div>
-            )}
-        </>
+      {/* Pagination */}
+      {data.pages > 1 && (
+          <div className="flex items-center justify-between pt-6">
+              <p className="text-xs text-gray-500 font-medium">
+                  Showing <span className="text-gray-900 font-bold">{data.leads.length}</span> of <span className="text-gray-900 font-bold">{data.total}</span> leads
+              </p>
+              <div className="flex gap-2">
+                  <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={page === 1}
+                      onClick={() => setPage(p => p - 1)}
+                      className="h-8"
+                  >
+                      <ChevronLeft className="w-4 h-4 mr-1" /> Previous
+                  </Button>
+                  <div className="flex gap-1">
+                      {[...Array(Math.min(5, data.pages))].map((_, i) => (
+                          <Button
+                              key={i}
+                              variant={page === i + 1 ? 'primary' : 'outline'}
+                              size="sm"
+                              className="w-8 h-8 font-bold"
+                              onClick={() => setPage(i + 1)}
+                          >
+                              {i + 1}
+                          </Button>
+                      ))}
+                  </div>
+                  <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={page === data.pages}
+                      onClick={() => setPage(p => p + 1)}
+                      className="h-8"
+                  >
+                      Next <ChevronRight className="w-4 h-4 ml-1" />
+                  </Button>
+              </div>
+          </div>
       )}
     </div>
   )
@@ -263,7 +293,7 @@ function LeadsList() {
 
 export default function LeadsPage() {
     return (
-        <Suspense fallback={<div>Loading leads...</div>}>
+        <Suspense fallback={<div className="p-8 text-center animate-pulse">Loading leads view...</div>}>
             <LeadsList />
         </Suspense>
     )

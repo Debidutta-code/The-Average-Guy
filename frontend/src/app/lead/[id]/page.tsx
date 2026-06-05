@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import { Card, CardHeader, CardContent } from "@/components/ui/Card"
 import { Button } from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge"
-import { ArrowLeft, Phone, Mail, MessageCircle, Calendar, Edit2, Trash2, Star, Globe, ExternalLink, MapPin, Save, Clock, CheckCircle2 } from "lucide-react"
+import { ArrowLeft, Phone, Mail, MessageCircle, Calendar, Edit2, Trash2, Star, Globe, ExternalLink, MapPin, Clock, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
 import api from "@/utils/api"
 import { format } from "date-fns"
@@ -18,8 +18,6 @@ export default function LeadProfilePage() {
   const [lead, setLead] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [note, setNote] = useState("")
-  const [editingField, setEditingField] = useState<string | null>(null)
-  const [editValue, setEditValue] = useState("")
 
   const fetchLead = useCallback(async () => {
     try {
@@ -29,6 +27,8 @@ export default function LeadProfilePage() {
     } catch (err) {
       console.error(err)
     } finally {
+      // Simulate slow load for skeleton verification
+      // await new Promise(r => setTimeout(r, 2000));
       setLoading(false)
     }
   }, [id])
@@ -41,7 +41,6 @@ export default function LeadProfilePage() {
     try {
       const res = await api.patch(`/leads/${id}/update-field`, { field, value })
       setLead(res.data)
-      setEditingField(null)
     } catch (err) {
       console.error(err)
     }
@@ -86,7 +85,7 @@ export default function LeadProfilePage() {
     }
   }
 
-  if (loading) return <div className="flex items-center justify-center h-screen"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div></div>
+  if (loading) return <LeadProfileSkeleton />
   if (!lead) return <div className="p-8 text-center">Lead not found. <Link href="/dashboard/leads" className="text-blue-600 underline">Back to leads</Link></div>
 
   return (
@@ -108,7 +107,6 @@ export default function LeadProfilePage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Column */}
         <div className="lg:col-span-2 space-y-8">
           <Card className="border-none shadow-sm overflow-hidden">
             <div className="h-32 bg-gradient-to-r from-blue-600 to-indigo-700" />
@@ -177,17 +175,13 @@ export default function LeadProfilePage() {
                             </div>
                         </div>
                     ))}
-                    {(!lead.activityTimeline || lead.activityTimeline.length === 0) && (
-                        <p className="text-center text-gray-500 py-4 text-sm">No activity recorded yet.</p>
-                    )}
                 </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Sidebar Column */}
         <div className="space-y-8">
-          <Card className="bg-blue-600 text-white border-none">
+          <Card className="bg-blue-600 text-white border-none shadow-lg">
             <CardHeader title="CRM Status" />
             <CardContent className="space-y-6">
                 <div>
@@ -254,21 +248,36 @@ export default function LeadProfilePage() {
                 <Button className="w-full gap-2" onClick={handleAddNote}>
                     <CheckCircle2 className="w-4 h-4" /> Save Note
                 </Button>
-
-                <div className="space-y-4 pt-4 border-t border-gray-100 dark:border-gray-800">
-                    {lead.notes?.slice().reverse().map((n: any, i: number) => (
-                        <div key={i} className="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl text-sm">
-                            <p>{n.text}</p>
-                            <p className="text-[10px] text-gray-400 mt-2 font-bold uppercase tracking-wider">{format(new Date(n.createdAt), 'PPp')}</p>
-                        </div>
-                    ))}
-                </div>
             </CardContent>
           </Card>
         </div>
       </div>
     </div>
   )
+}
+
+function LeadProfileSkeleton() {
+    return (
+        <div className="space-y-6 pb-20 animate-pulse">
+            <div className="flex justify-between items-center">
+                <div className="h-10 w-24 bg-gray-200 dark:bg-gray-800 rounded-lg" />
+                <div className="h-10 w-32 bg-gray-200 dark:bg-gray-800 rounded-lg" />
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2 space-y-8">
+                    <div className="h-64 bg-gray-200 dark:bg-gray-800 rounded-2xl" />
+                    <div className="h-80 bg-gray-200 dark:bg-gray-800 rounded-2xl" />
+                    <div className="h-64 bg-gray-200 dark:bg-gray-800 rounded-2xl" />
+                </div>
+                <div className="space-y-8">
+                    <div className="h-64 bg-gray-200 dark:bg-gray-800 rounded-2xl" />
+                    <div className="h-48 bg-gray-200 dark:bg-gray-800 rounded-2xl" />
+                    <div className="h-64 bg-gray-200 dark:bg-gray-800 rounded-2xl" />
+                </div>
+            </div>
+        </div>
+    )
 }
 
 function EditableField({ label, value, onSave }: { label: string, value: string, onSave: (v: string) => void }) {

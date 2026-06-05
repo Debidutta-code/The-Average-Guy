@@ -28,9 +28,32 @@ Scores are calculated purely from clinical data:
 - **Smart XLSX Merge:** Import leads via XLSX. The system automatically merges duplicates (matched by phone or name+city+address) and updates missing fields without creating duplicates.
 
 ### 4. Automated Google Maps Scraper (Enrichment Engine)
-- **Live Scraping:** Directly search Google Maps for new clinics by Specialty and City from the dashboard.
-- **Smart Deduplication:** Scraped leads are automatically matched against existing CRM data. New leads are created, and existing ones are enriched with updated ratings or missing clinical data.
-- **Real-time Feed:** Monitor the scraping progress with a live status tracker showing leads found, inserted, and merged.
+The automated scraper collects fresh doctor and clinic leads directly from Google Maps. It handles searching, scrolling, and data extraction autonomously.
+
+- **How it works:** Uses Puppeteer to automate a browser, navigates to Google Maps, searches for `{Specialty} in {City}`, and scrolls through the results to collect business details.
+- **Data Extracted:** Name, Rating, Review Count, Address, Google Maps Link, and Phone Number (where available).
+- **Smart Deduplication:** Scraped leads are automatically matched against existing CRM data using Phone Numbers or Name + Address. New leads are created, and existing ones are enriched with missing data.
+- **Real-time Feed:** Monitor progress via a live status tracker showing leads found, inserted, and merged.
+
+#### 🚀 Correct Usage
+1. Navigate to the **Scraper** tab in the Sidebar.
+2. Enter a **Specialty** (e.g., "Dermatologist") and a **City** (e.g., "Mumbai").
+3. Set a **Result Limit** (max 500 per run).
+4. Click **Launch Scraper**.
+5. Once complete, click **View in CRM** to start outreach.
+
+#### 🔧 Troubleshooting & Debugging
+If the scraper returns `found: 0` or empty results, follow these steps:
+- **Check Selectors:** Google Maps updates its UI frequently. If elements like `.qBF1Pd` (Name) or `.m6QErb` (Container) change, update `backend/scraper/googleMapsScraper.js`.
+- **Wait Timing:** Slow internet can cause timeouts. Increase the delay in `await new Promise(r => setTimeout(r, 2500))` inside the auto-scroll loop.
+- **Google Blocking:** Frequent scraping from the same IP may trigger CAPTCHAs. Use a VPN or proxy if necessary.
+- **Browser Launch:** Ensure the environment has dependencies for Puppeteer (`--no-sandbox` is enabled by default in this system).
+
+#### 📊 Expected Output Format
+The API returns a summary of the run:
+- `found`: Total unique businesses identified on the page.
+- `inserted`: New leads added to the database.
+- `merged`: Existing leads updated with new information.
 
 ### 5. Integrated Outreach
 - **WhatsApp Generator:** Pre-filled templates for instant intro or follow-up messages.

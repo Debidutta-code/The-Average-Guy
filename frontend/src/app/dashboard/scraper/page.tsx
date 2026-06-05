@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react"
 import { Card, CardHeader, CardContent } from "@/components/ui/Card"
 import { Button } from "@/components/ui/Button"
+import { Badge } from "@/components/ui/Badge"
 import { Search, MapPin, Play, Loader2, CheckCircle, Copy, AlertTriangle, List, ArrowRight } from "lucide-react"
 import api from "@/utils/api"
 import Link from "next/link"

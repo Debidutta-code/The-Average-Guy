@@ -2,7 +2,7 @@ const Lead = require('../models/Lead');
 const { calculateScore } = require('../services/scoringService');
 const { sendColdEmail } = require('../services/emailService');
 
-const getLeads = async (req, res) => {
+const getLeads = async (req, res, next) => {
   try {
     const { city, specialty, scoreBadge, status, hasPhone, search, page = 1, limit = 20 } = req.query;
     let query = {};
@@ -35,11 +35,11 @@ const getLeads = async (req, res) => {
       pages: Math.ceil(total / limit)
     });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(err);
   }
 };
 
-const createLead = async (req, res) => {
+const createLead = async (req, res, next) => {
   try {
     const leadData = req.body;
     const { score, badge } = calculateScore(leadData);
@@ -52,11 +52,11 @@ const createLead = async (req, res) => {
     await lead.save();
     res.status(201).json(lead);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(err);
   }
 };
 
-const updateLead = async (req, res) => {
+const updateLead = async (req, res, next) => {
   try {
     const lead = await Lead.findById(req.params.id);
     if (!lead) return res.status(404).json({ message: 'Lead not found' });
@@ -66,7 +66,6 @@ const updateLead = async (req, res) => {
 
     Object.assign(lead, req.body);
 
-    // Log status change
     if (req.body.status && req.body.status !== oldStatus) {
         lead.activityTimeline.push({
             action: 'Status Changed',
@@ -74,7 +73,6 @@ const updateLead = async (req, res) => {
         });
     }
 
-    // Log follow-up change
     if (req.body.followUpDate && req.body.followUpDate !== oldFollowUp) {
         lead.activityTimeline.push({
             action: 'Follow-up Scheduled',
@@ -89,11 +87,11 @@ const updateLead = async (req, res) => {
     await lead.save();
     res.json(lead);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(err);
   }
 };
 
-const updateField = async (req, res) => {
+const updateField = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { field, value } = req.body;
@@ -108,7 +106,6 @@ const updateField = async (req, res) => {
             details: `${field} changed from "${oldValue}" to "${value}"`
         });
 
-        // Recalculate score if relevant fields changed
         if (['rating', 'reviewCount', 'mobileNumber'].includes(field)) {
             const { score, badge } = calculateScore(lead);
             lead.score = score;
@@ -118,29 +115,29 @@ const updateField = async (req, res) => {
         await lead.save();
         res.json(lead);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     }
 }
 
-const getLeadById = async (req, res) => {
+const getLeadById = async (req, res, next) => {
   try {
     const lead = await Lead.findById(req.params.id);
     res.json(lead);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(err);
   }
 };
 
-const deleteLead = async (req, res) => {
+const deleteLead = async (req, res, next) => {
   try {
     await Lead.findByIdAndDelete(req.params.id);
     res.json({ message: 'Lead deleted' });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(err);
   }
 };
 
-const getStats = async (req, res) => {
+const getStats = async (req, res, next) => {
   try {
     const totalLeads = await Lead.countDocuments();
     const hotLeads = await Lead.countDocuments({ scoreBadge: 'Hot' });
@@ -153,11 +150,11 @@ const getStats = async (req, res) => {
 
     res.json({ totalLeads, hotLeads, warmLeads, coldLeads, statusCounts });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(err);
   }
 }
 
-const sendEmailToLead = async (req, res) => {
+const sendEmailToLead = async (req, res, next) => {
     try {
       const { id } = req.params;
       const { subject, text, html } = req.body;
@@ -178,7 +175,7 @@ const sendEmailToLead = async (req, res) => {
 
       res.json({ message: 'Email sent successfully', lead });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      next(err);
     }
   };
 

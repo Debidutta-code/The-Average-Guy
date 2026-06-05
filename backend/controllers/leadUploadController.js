@@ -3,7 +3,7 @@ const { parseXLSX } = require('../utils/xlsxParser');
 const { calculateScore } = require('../services/scoringService');
 const fs = require('fs');
 
-const uploadXLSX = async (req, res) => {
+const uploadXLSX = async (req, res, next) => {
   if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
 
   try {
@@ -26,7 +26,6 @@ const uploadXLSX = async (req, res) => {
         details: item.details,
       };
 
-      // Match by phoneNumber OR name + city + address
       let existing = null;
       if (leadData.mobileNumber) {
         existing = await Lead.findOne({ mobileNumber: leadData.mobileNumber });
@@ -43,7 +42,6 @@ const uploadXLSX = async (req, res) => {
       const { score, badge } = calculateScore(leadData);
 
       if (existing) {
-        // Merge records: Update missing fields only
         let updated = false;
         for (let key in leadData) {
             if (!existing[key] && leadData[key]) {
@@ -82,7 +80,7 @@ const uploadXLSX = async (req, res) => {
       missingMobile: missingMobileCount
     });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(err);
   }
 };
 

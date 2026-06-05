@@ -12,7 +12,7 @@ let scrapingStatus = {
   results: [] // Store last few for preview
 };
 
-const runScraper = async (req, res) => {
+const runScraper = async (req, res, next) => {
   const { businessType, city, limit = 50 } = req.body;
 
   if (scrapingStatus.active) {
@@ -39,6 +39,7 @@ const runScraper = async (req, res) => {
             fullAddress: leadData.fullAddress,
             rating: leadData.rating,
             reviewCount: leadData.reviewCount,
+            mobileNumber: leadData.phoneNumber, // Correctly map scraped phone number
             source: 'Google Maps',
             createdFrom: 'google_maps_scraper',
             status: 'New'
@@ -100,7 +101,7 @@ const runScraper = async (req, res) => {
   }
 };
 
-const getScraperStatus = (req, res) => {
+const getScraperStatus = (req, res, next) => {
   res.json(scrapingStatus);
 };
 

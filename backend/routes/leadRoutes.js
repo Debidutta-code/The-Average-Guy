@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const leadController = require('../controllers/leadController');
 const leadUploadController = require('../controllers/leadUploadController');
+const scraperController = require('../controllers/scraperController');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const jwt = require('jsonwebtoken');
@@ -27,7 +28,8 @@ router.put('/:id', auth, leadController.updateLead);
 router.patch('/:id/update-field', auth, leadController.updateField);
 router.delete('/:id', auth, leadController.deleteLead);
 router.post('/:id/email', auth, leadController.sendEmailToLead);
-router.post('/import', auth, upload.single('file'), leadController.importLeadsCSV);
 router.post('/upload-xlsx', auth, upload.single('file'), leadUploadController.uploadXLSX);
+router.post('/scrape', auth, scraperController.runScraper);
+router.get('/scrape/status', auth, scraperController.getScraperStatus);
 
 module.exports = router;

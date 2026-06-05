@@ -124,8 +124,8 @@ export default function UploadXlsxPage() {
                     />
                     <SummaryCard
                         icon={<Copy className="w-5 h-5" />}
-                        label="Duplicates Skipped"
-                        value={summary.duplicates}
+                        label="Duplicates Merged"
+                        value={summary.merged}
                         color="orange"
                     />
                     <SummaryCard

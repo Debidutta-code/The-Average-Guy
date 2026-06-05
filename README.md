@@ -27,7 +27,12 @@ Scores are calculated purely from clinical data:
 - **Backend-Driven Filters:** Filter by status, score, city, and phone availability. Filters persist in the URL for easy sharing.
 - **Smart XLSX Merge:** Import leads via XLSX. The system automatically merges duplicates (matched by phone or name+city+address) and updates missing fields without creating duplicates.
 
-### 3. Integrated Outreach
+### 4. Automated Google Maps Scraper (Enrichment Engine)
+- **Live Scraping:** Directly search Google Maps for new clinics by Specialty and City from the dashboard.
+- **Smart Deduplication:** Scraped leads are automatically matched against existing CRM data. New leads are created, and existing ones are enriched with updated ratings or missing clinical data.
+- **Real-time Feed:** Monitor the scraping progress with a live status tracker showing leads found, inserted, and merged.
+
+### 5. Integrated Outreach
 - **WhatsApp Generator:** Pre-filled templates for instant intro or follow-up messages.
 - **Email System:** Cold email integration using Nodemailer templates.
 - **Activity Tracking:** Add notes and track status changes for every lead.

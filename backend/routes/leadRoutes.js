@@ -1,0 +1,35 @@
+const express = require('express');
+const router = express.Router();
+const leadController = require('../controllers/leadController');
+const leadUploadController = require('../controllers/leadUploadController');
+const scraperController = require('../controllers/scraperController');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+const jwt = require('jsonwebtoken');
+
+// Middleware to verify JWT
+const auth = (req, res, next) => {
+  const token = req.header('Authorization')?.replace('Bearer ', '');
+  if (!token) return res.status(401).json({ message: 'No token, authorization denied' });
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
+    req.user = decoded;
+    next();
+  } catch (err) {
+    res.status(401).json({ message: 'Token is not valid' });
+  }
+};
+
+router.get('/', auth, leadController.getLeads);
+router.get('/stats', auth, leadController.getStats);
+router.post('/', auth, leadController.createLead);
+router.get('/:id', auth, leadController.getLeadById);
+router.put('/:id', auth, leadController.updateLead);
+router.patch('/:id/update-field', auth, leadController.updateField);
+router.delete('/:id', auth, leadController.deleteLead);
+router.post('/:id/email', auth, leadController.sendEmailToLead);
+router.post('/upload-xlsx', auth, upload.single('file'), leadUploadController.uploadXLSX);
+router.post('/scrape', auth, scraperController.runScraper);
+router.get('/scrape/status', auth, scraperController.getScraperStatus);
+
+module.exports = router;

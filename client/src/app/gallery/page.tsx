@@ -68,36 +68,38 @@ export default function GalleryPage() {
   const filteredCases = filter === 'All' ? cases : cases.filter(c => c.category === filter);
 
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-40 pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 space-y-4">
-          <h1 className="text-4xl md:text-6xl font-playfair font-bold text-slate-900">Patient Success Stories</h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">Real results from real patients. Explore our transformation gallery across various treatments.</p>
+        <div className="text-center mb-20 space-y-6">
+          <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs">Visual Results</span>
+          <h1 className="text-4xl md:text-7xl font-playfair font-bold text-slate-900 leading-tight">Patient <span className="text-primary italic">Transformations</span></h1>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium">Real results from real patients. Explore our transformation gallery across various treatments.</p>
         </div>
 
-        <div className="flex justify-center flex-wrap gap-4 mb-12">
+        <div className="flex justify-center flex-wrap gap-3 mb-20">
           {['All', 'Acne', 'Anti-Aging', 'Pigmentation'].map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-8 py-3 rounded-full font-bold transition-all ${filter === f ? 'bg-primary text-white shadow-lg shadow-primary/30' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+              className={`px-8 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all ${filter === f ? 'bg-primary text-white shadow-lg shadow-primary/30' : 'bg-slate-50 text-slate-500 border border-slate-100 hover:border-primary hover:text-primary'}`}
             >
               {f}
             </button>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           {filteredCases.map((c) => (
             <ComparisonSlider key={c.id} before={c.before} after={c.after} label={c.label} />
           ))}
         </div>
 
-        <div className="mt-24 bg-primary rounded-[40px] p-12 md:p-20 text-white text-center">
-          <h2 className="text-3xl md:text-5xl font-playfair font-bold mb-8 italic">Ready for Your Own Transformation?</h2>
-          <p className="text-xl text-primary-100 mb-12 max-w-xl mx-auto">Join thousands of happy patients who have achieved their dream skin with our expert guidance.</p>
-          <Link href="/book" className="bg-white text-primary px-12 py-5 rounded-full text-xl font-bold hover:bg-slate-50 transition-all inline-block shadow-2xl">
-            Book a Free Consultation
+        <div className="mt-32 bg-primary rounded-[3rem] p-12 md:p-24 text-white text-center shadow-2xl shadow-primary/20 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32" />
+          <h2 className="text-3xl md:text-5xl font-playfair font-bold mb-8 italic relative z-10 leading-tight">Ready for Your Own Transformation?</h2>
+          <p className="text-xl text-primary-100 mb-12 max-w-xl mx-auto relative z-10 font-medium">Join thousands of happy patients who have achieved their dream skin with our expert guidance.</p>
+          <Link href="/book" className="bg-white text-primary px-12 py-5 rounded-full text-xl font-bold hover:bg-slate-50 transition-all inline-block shadow-2xl relative z-10">
+            Book Consultation
           </Link>
         </div>
       </div>

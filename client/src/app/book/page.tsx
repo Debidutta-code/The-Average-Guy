@@ -66,47 +66,50 @@ export default function BookingPage() {
   }
 
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-40 pb-32 bg-slate-50/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          <div className="lg:col-span-5 space-y-8">
-            <h1 className="text-4xl md:text-6xl font-playfair font-bold text-slate-900">Schedule Your Visit</h1>
-            <p className="text-xl text-slate-600 leading-relaxed">
-              Take the first step towards your skin goals. Our specialists are here to provide personalized care tailored to your needs.
-            </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
+          <div className="lg:col-span-5 space-y-10 lg:sticky lg:top-40">
+            <div>
+              <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs">Easy Booking</span>
+              <h1 className="text-4xl md:text-7xl font-playfair font-bold text-slate-900 leading-[1.1] mt-6">Schedule Your <span className="text-primary italic">Visit</span></h1>
+              <p className="text-xl text-slate-600 leading-relaxed font-medium mt-6">
+                Take the first step towards your skin goals. Our specialists are here to provide personalized care tailored to your needs.
+              </p>
+            </div>
 
-            <div className="space-y-6 pt-8">
-               <div className="flex items-center space-x-4 p-6 bg-slate-50 rounded-2xl border border-slate-200">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-sm">
-                    <User size={24} />
+            <div className="space-y-6 pt-4">
+               <div className="flex items-center space-x-5 p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm">
+                  <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shadow-sm">
+                    <User size={28} />
                   </div>
                   <div>
                     <p className="font-bold text-slate-900">Expert Consultation</p>
-                    <p className="text-sm text-slate-500">Detailed analysis of your skin concerns.</p>
+                    <p className="text-sm text-slate-500 font-medium">Detailed analysis of your skin concerns.</p>
                   </div>
                </div>
-               <div className="flex items-center space-x-4 p-6 bg-slate-50 rounded-2xl border border-slate-200">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-sm">
-                    <CalendarIcon size={24} />
+               <div className="flex items-center space-x-5 p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm">
+                  <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 shadow-sm">
+                    <CalendarIcon size={28} />
                   </div>
                   <div>
                     <p className="font-bold text-slate-900">Flexible Scheduling</p>
-                    <p className="text-sm text-slate-500">Choose a time that works best for you.</p>
+                    <p className="text-sm text-slate-500 font-medium">Choose a time that works best for you.</p>
                   </div>
                </div>
             </div>
           </div>
 
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-[40px] shadow-2xl border border-slate-100 overflow-hidden">
-              <div className="flex h-2 bg-slate-100">
+            <div className="bg-white rounded-[3rem] shadow-2xl shadow-slate-200 border border-slate-100 overflow-hidden">
+              <div className="flex h-3 bg-slate-50">
                 <div
-                  className="bg-primary transition-all duration-500"
+                  className="bg-primary transition-all duration-500 shadow-[0_0_15px_rgba(47,128,237,0.5)]"
                   style={{ width: `${(step / 3) * 100}%` }}
                 />
               </div>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="p-8 md:p-12">
+              <form onSubmit={handleSubmit(onSubmit)} className="p-10 md:p-16">
                 {step === 1 && (
                   <div className="space-y-8 animate-in fade-in slide-in-from-right duration-500">
                     <h3 className="text-2xl font-playfair font-bold">Personal Information</h3>

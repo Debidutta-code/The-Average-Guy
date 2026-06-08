@@ -26,7 +26,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="pt-32 pb-24">
+    <div className="pb-24">
       <JSONLD data={localBusinessSchema} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

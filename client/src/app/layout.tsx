@@ -81,10 +81,12 @@ export default function RootLayout({
         </Script>
 
         <Navbar />
-        <Breadcrumbs />
-        <main className="flex-grow">
-          {children}
-        </main>
+        <div className="flex flex-col min-h-screen">
+          <Breadcrumbs />
+          <main className="flex-grow">
+            {children}
+          </main>
+        </div>
         <FloatingActions />
         <Footer />
       </body>

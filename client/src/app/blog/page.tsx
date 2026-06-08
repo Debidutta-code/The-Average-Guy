@@ -26,7 +26,7 @@ export default async function BlogListing({
   });
 
   return (
-    <div className="pt-32 pb-24">
+    <div className="pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 space-y-4">
           <h1 className="text-4xl md:text-6xl font-playfair font-bold text-slate-900">Skin Health Blog</h1>

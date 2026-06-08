@@ -20,7 +20,11 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function BlogDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug) || blogPosts[0];
+  const post = blogPosts.find((p) => p.slug === slug);
+
+  if (!post) {
+    notFound();
+  }
 
   const articleSchema = {
     "@context": "https://schema.org",

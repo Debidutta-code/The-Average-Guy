@@ -13,7 +13,7 @@ export default function TreatmentsListing() {
   const categories = Array.from(new Set(treatments.map(t => t.category)));
 
   return (
-    <div className="pt-40 pb-32">
+    <div className="pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20 space-y-6">
           <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs">Medical & Aesthetic</span>

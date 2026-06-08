@@ -50,7 +50,7 @@ export default function BookingPage() {
 
   if (submitted) {
     return (
-      <div className="pt-32 pb-24 flex items-center justify-center px-4">
+      <div className="pb-24 flex items-center justify-center px-4">
         <div className="max-w-xl w-full bg-white rounded-[40px] p-12 text-center shadow-2xl border border-slate-100">
           <div className="w-24 h-24 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-8">
             <CheckCircle2 size={48} />
@@ -66,7 +66,7 @@ export default function BookingPage() {
   }
 
   return (
-    <div className="pt-40 pb-32 bg-slate-50/50">
+    <div className="pb-32 bg-slate-50/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
           <div className="lg:col-span-5 space-y-10 lg:sticky lg:top-40">

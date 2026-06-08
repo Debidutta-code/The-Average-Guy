@@ -52,7 +52,7 @@ export default function Home() {
       <JSONLD data={medicalClinicSchema} />
 
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center pt-24 pb-12 bg-gradient-to-br from-blue-50 to-white overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-center pt-32 pb-12 bg-gradient-to-br from-blue-50 to-white overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 -skew-x-12 transform origin-top-right hidden lg:block" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">

@@ -12,7 +12,7 @@ const Breadcrumbs = () => {
   const pathSegments = pathname.split('/').filter(segment => segment !== '');
 
   return (
-    <nav className="bg-slate-50 py-4 border-b border-slate-200">
+    <nav className="bg-slate-50 pt-28 pb-6 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ol className="flex items-center space-x-2 text-sm font-medium">
           <li>

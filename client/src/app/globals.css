@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair);
+  }
+}
+
+.prose h2, .prose h3 {
+  font-family: var(--font-playfair);
+  @apply font-bold text-slate-900 mt-12 mb-6;
+}
+
+.prose p {
+  @apply text-slate-600 leading-relaxed mb-6;
+}

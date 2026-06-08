@@ -3,14 +3,24 @@ import Link from "next/link";
 import Image from "next/image";
 import { treatments } from "@/data/siteData";
 import { ArrowRight, Filter } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export const metadata = {
   title: "Treatments | SkinCare Clinic",
   description: "Explore our wide range of dermatology and cosmetic treatments including acne treatment, laser hair reduction, and anti-aging solutions.",
 };
 
-export default function TreatmentsListing() {
+export default async function TreatmentsListing({
+  searchParams
+}: {
+  searchParams: Promise<{ category?: string }>
+}) {
+  const { category = "All" } = await searchParams;
   const categories = Array.from(new Set(treatments.map(t => t.category)));
+
+  const filteredTreatments = treatments.filter(t =>
+    category === "All" || t.category === category
+  );
 
   return (
     <div className="pb-32">
@@ -29,11 +39,26 @@ export default function TreatmentsListing() {
                 <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest">Filters</h3>
               </div>
               <div className="space-y-2">
-                <button className="block w-full text-left px-5 py-3 rounded-xl bg-primary text-white text-xs font-bold uppercase tracking-widest shadow-lg shadow-primary/20">All Treatments</button>
+                <Link
+                  href="/treatments"
+                  className={cn(
+                    "block w-full text-left px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-lg shadow-primary/20",
+                    category === "All" ? "bg-primary text-white" : "bg-white text-slate-500 hover:text-primary"
+                  )}
+                >
+                  All Treatments
+                </Link>
                 {categories.map((cat, i) => (
-                  <button key={i} className="block w-full text-left px-5 py-3 rounded-xl hover:bg-white border border-transparent hover:border-slate-100 text-slate-500 hover:text-primary text-xs font-bold uppercase tracking-widest transition-all">
+                  <Link
+                    key={i}
+                    href={`/treatments?category=${cat}`}
+                    className={cn(
+                      "block w-full text-left px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-lg shadow-primary/20",
+                      category === cat ? "bg-primary text-white" : "bg-white text-slate-500 hover:text-primary"
+                    )}
+                  >
                     {cat}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -41,7 +66,7 @@ export default function TreatmentsListing() {
 
           <div className="lg:w-3/4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {treatments.map((treatment) => (
+              {filteredTreatments.map((treatment) => (
                 <div key={treatment.id} className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                   <div className="relative h-64">
                     <Image

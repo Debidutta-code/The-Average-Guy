@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { blogPosts } from "@/data/siteData";
 import { Calendar, Clock, Share2, Facebook, Twitter, Linkedin, HelpCircle } from "lucide-react";
 import JSONLD from "@/components/JSONLD";

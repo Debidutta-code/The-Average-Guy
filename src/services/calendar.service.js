@@ -1,7 +1,5 @@
 const { google } = require('googleapis');
-const dotenv = require('dotenv');
-
-dotenv.config();
+const config = require('../config/env');
 
 const createCalendarEvent = async (appointmentData) => {
   const {
@@ -13,9 +11,9 @@ const createCalendarEvent = async (appointmentData) => {
   } = appointmentData;
 
   const auth = new google.auth.JWT(
-    process.env.GOOGLE_CLIENT_EMAIL,
+    config.google.clientEmail,
     null,
-    process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    config.google.privateKey.replace(/\\n/g, '\n'),
     ['https://www.googleapis.com/auth/calendar']
   );
 
@@ -40,7 +38,7 @@ const createCalendarEvent = async (appointmentData) => {
 
   try {
     const response = await calendar.events.insert({
-      calendarId: process.env.GOOGLE_CALENDAR_ID,
+      calendarId: config.google.calendarId,
       resource: event,
     });
     console.log('Calendar event created: ' + response.data.htmlLink);

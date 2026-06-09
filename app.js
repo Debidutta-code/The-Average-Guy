@@ -1,10 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
+const config = require('./src/config/env');
 const connectDB = require('./src/config/db');
 const appointmentRoutes = require('./src/routes/appointment.routes');
-
-dotenv.config();
 
 const app = express();
 
@@ -19,7 +17,7 @@ app.get('/', (req, res) => {
   res.send('Clinic Appointment Automation API is running...');
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = config.port;
 
 const startServer = async () => {
   await connectDB();

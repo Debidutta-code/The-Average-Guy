@@ -1,7 +1,5 @@
 const twilio = require('twilio');
-const dotenv = require('dotenv');
-
-dotenv.config();
+const config = require('../config/env');
 
 const sendWhatsAppMessage = async (appointmentData) => {
   const {
@@ -14,7 +12,7 @@ const sendWhatsAppMessage = async (appointmentData) => {
     reason
   } = appointmentData;
 
-  const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
+  const client = twilio(config.twilio.sid, config.twilio.authToken);
 
   const messageBody = `*New Appointment Booked*
 
@@ -28,7 +26,7 @@ const sendWhatsAppMessage = async (appointmentData) => {
   try {
     const message = await client.messages.create({
       body: messageBody,
-      from: `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER}`,
+      from: `whatsapp:${config.twilio.whatsappNumber}`,
       to: `whatsapp:${doctorWhatsapp}`
     });
     console.log('WhatsApp message sent: ' + message.sid);

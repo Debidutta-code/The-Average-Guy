@@ -1,7 +1,5 @@
 const nodemailer = require('nodemailer');
-const dotenv = require('dotenv');
-
-dotenv.config();
+const config = require('../config/env');
 
 const sendEmail = async (appointmentData) => {
   const {
@@ -17,13 +15,13 @@ const sendEmail = async (appointmentData) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
+      user: config.email.user,
+      pass: config.email.pass
     }
   });
 
   const mailOptions = {
-    from: `"Clinic Appointment Service" <${process.env.EMAIL_USER}>`,
+    from: `"Clinic Appointment Service" <${config.email.user}>`,
     to: doctorEmail,
     subject: `New Appointment Booked - ${clinicName}`,
     html: `

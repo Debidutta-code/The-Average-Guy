@@ -9,10 +9,6 @@ const appointmentLogSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  doctorWhatsapp: {
-    type: String,
-    required: true
-  },
   patientName: {
     type: String,
     required: true
@@ -39,11 +35,6 @@ const appointmentLogSchema = new mongoose.Schema({
     default: 'processing'
   },
   emailStatus: {
-    type: String,
-    enum: ['pending', 'sent', 'failed'],
-    default: 'pending'
-  },
-  whatsappStatus: {
     type: String,
     enum: ['pending', 'sent', 'failed'],
     default: 'pending'

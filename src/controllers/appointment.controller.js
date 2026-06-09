@@ -1,13 +1,11 @@
 const AppointmentLog = require('../models/AppointmentLog');
 const { sendEmail } = require('../services/email.service');
-const { sendWhatsAppMessage } = require('../services/whatsapp.service');
 const { createCalendarEvent } = require('../services/calendar.service');
 
 const triggerAppointment = async (req, res) => {
   const {
     clinicName,
     doctorEmail,
-    doctorWhatsapp,
     patientName,
     patientPhone,
     date,
@@ -19,7 +17,6 @@ const triggerAppointment = async (req, res) => {
   const log = new AppointmentLog({
     clinicName,
     doctorEmail,
-    doctorWhatsapp,
     patientName,
     patientPhone,
     date,
@@ -31,23 +28,20 @@ const triggerAppointment = async (req, res) => {
   try {
     await log.save();
 
-    // 2. Trigger services (with retry logic as a placeholder or simple execution)
+    // 2. Trigger services
     const emailPromise = sendEmail(req.body);
-    const whatsappPromise = sendWhatsAppMessage(req.body);
     const calendarPromise = createCalendarEvent(req.body);
 
-    const [emailRes, whatsappRes, calendarRes] = await Promise.all([
+    const [emailRes, calendarRes] = await Promise.all([
       emailPromise,
-      whatsappPromise,
       calendarPromise
     ]);
 
     // 3. Update log with results
     log.emailStatus = emailRes.success ? 'sent' : 'failed';
-    log.whatsappStatus = whatsappRes.success ? 'sent' : 'failed';
     log.calendarStatus = calendarRes.success ? 'created' : 'failed';
 
-    log.status = (emailRes.success && whatsappRes.success && calendarRes.success)
+    log.status = (emailRes.success && calendarRes.success)
       ? 'success'
       : 'failed';
 
@@ -59,7 +53,6 @@ const triggerAppointment = async (req, res) => {
       logId: log._id,
       details: {
         email: log.emailStatus,
-        whatsapp: log.whatsappStatus,
         calendar: log.calendarStatus
       }
     });

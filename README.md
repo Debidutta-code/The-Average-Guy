@@ -4,7 +4,6 @@ A private reusable automation engine for clinic websites to handle appointment b
 
 ## Features
 - **Email Notifications:** Sends structured emails to doctors using Nodemailer (Gmail).
-- **WhatsApp Notifications:** Sends WhatsApp messages to doctors via Twilio.
 - **Google Calendar Integration:** Creates events in the doctor's calendar using a Service Account.
 - **Logging:** All requests and service statuses are logged in MongoDB.
 - **Security:** Simple API Secret validation.
@@ -13,7 +12,6 @@ A private reusable automation engine for clinic websites to handle appointment b
 - Node.js + Express
 - MongoDB (Mongoose)
 - Nodemailer
-- Twilio WhatsApp API
 - Google Calendar API
 
 ## Project Structure
@@ -26,7 +24,6 @@ A private reusable automation engine for clinic websites to handle appointment b
     AppointmentLog.js  # Mongoose schema for logs
   /services
     email.service.js   # Nodemailer integration
-    whatsapp.service.js# Twilio integration
     calendar.service.js# Google Calendar integration
   /middleware
     auth.middleware.js # API Secret validation
@@ -38,23 +35,7 @@ app.js                 # Entry point
 ```
 
 ## Environment Variables (.env)
-```env
-PORT=5000
-MONGO_URI=your_mongodb_uri
-
-CLINIC_SECRET=your_master_secret
-
-EMAIL_USER=your_gmail@gmail.com
-EMAIL_PASS=your_gmail_app_password
-
-TWILIO_SID=your_twilio_sid
-TWILIO_AUTH_TOKEN=your_twilio_auth_token
-TWILIO_WHATSAPP_NUMBER=your_twilio_whatsapp_number
-
-GOOGLE_CLIENT_EMAIL=your_service_account_email
-GOOGLE_PRIVATE_KEY="your_private_key"
-GOOGLE_CALENDAR_ID=your_calendar_id
-```
+See `env.example` for the required environment variables.
 
 ## API Endpoint
 ### Trigger Appointment
@@ -66,7 +47,6 @@ GOOGLE_CALENDAR_ID=your_calendar_id
   "apiSecret": "your_master_secret",
   "clinicName": "ABC Dental Clinic",
   "doctorEmail": "doctor@gmail.com",
-  "doctorWhatsapp": "91xxxxxxxxxx",
   "patientName": "John Doe",
   "patientPhone": "9999999999",
   "date": "2026-06-10",
@@ -78,8 +58,8 @@ GOOGLE_CALENDAR_ID=your_calendar_id
 ## Deployment Guide (Render/VPS)
 1. Clone the repository.
 2. Install dependencies: `npm install`.
-3. Set up environment variables in the hosting provider's dashboard.
-4. Start the server: `node app.js`.
+3. Set up environment variables based on `env.example`.
+4. Start the server: `npm start`.
 
 ## Sample Frontend Integration
 ```javascript

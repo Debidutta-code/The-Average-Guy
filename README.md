@@ -16,6 +16,27 @@ A private reusable automation engine for clinic websites to handle appointment b
 - Twilio WhatsApp API
 - Google Calendar API
 
+## Project Structure
+```text
+/src
+  /config
+    db.js              # Database connection
+    env.js             # Centralized environment variables
+  /models
+    AppointmentLog.js  # Mongoose schema for logs
+  /services
+    email.service.js   # Nodemailer integration
+    whatsapp.service.js# Twilio integration
+    calendar.service.js# Google Calendar integration
+  /middleware
+    auth.middleware.js # API Secret validation
+  /controllers
+    appointment.controller.js # Core logic
+  /routes
+    appointment.routes.js     # API routes
+app.js                 # Entry point
+```
+
 ## Environment Variables (.env)
 ```env
 PORT=5000

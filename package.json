@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/Debidutta-code/The-Average-Guy#readme",
   "dependencies": {
-    "cors": "^2.8.6",
-    "dotenv": "^16.6.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^5.0.1",
     "googleapis": "^144.0.0",
-    "mongoose": "^8.24.0",
+    "mongoose": "^8.10.0",
     "nodemailer": "^6.10.1"
   }
 }

@@ -50,6 +50,6 @@ const appointmentLogSchema = new mongoose.Schema({
   }
 });
 
-const AppointmentLog = mongoose.model('AppointmentLog', appointmentLogSchema);
+const AppointmentLog = mongoose.model('AppointmentLog', appointmentLogSchema, 'appointment_logs');
 
 module.exports = AppointmentLog;

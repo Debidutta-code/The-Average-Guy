@@ -1,0 +1,30 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Debidutta-code/The-Average-Guy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Debidutta-code/The-Average-Guy/issues"
+  },
+  "homepage": "https://github.com/Debidutta-code/The-Average-Guy#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.0.1",
+    "googleapis": "^144.0.0",
+    "mongoose": "^8.10.0",
+    "nodemailer": "^6.10.1"
+  }
+}

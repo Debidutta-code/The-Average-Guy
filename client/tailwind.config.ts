@@ -15,6 +15,7 @@ export default {
           DEFAULT: "#2F80ED", // Soft Blue
           dark: "#1c5dbd",
           light: "#ebf3fe",
+          foreground: "#ffffff",
         },
         secondary: {
           DEFAULT: "#008080", // Medical Teal

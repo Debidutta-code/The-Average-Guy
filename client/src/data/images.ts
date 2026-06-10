@@ -18,12 +18,14 @@ export const images = {
     {
       before: "https://images.unsplash.com/photo-1516062423079-7ca13cdc7f5a?q=80&w=2070&auto=format&fit=crop",
       after: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2070&auto=format&fit=crop",
-      title: "Dental Implant Transformation"
+      title: "Dental Implant Transformation",
+      description: "Advanced dental implant procedure restored full functionality and natural aesthetic for our patient."
     },
     {
       before: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2070&auto=format&fit=crop",
       after: "https://images.unsplash.com/photo-1445527815219-ecbfec67492e?q=80&w=2070&auto=format&fit=crop",
-      title: "Teeth Whitening Result"
+      title: "Teeth Whitening Result",
+      description: "Professional whitening treatment delivered 8 shades brighter results in just a single session."
     }
   ],
   doctors: {

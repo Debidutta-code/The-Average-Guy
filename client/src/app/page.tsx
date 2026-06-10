@@ -50,8 +50,9 @@ export default function Home() {
   const handleBookingSubmit = async (data: AppointmentFormData) => {
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/trigger-appointment", {
-        apiSecret: "SECRET_KEY_FOR_JWT",
+      const apiUrl = process.env.NEXT_PUBLIC_APPOINTMENT_API_URL || "http://localhost:5000/api/trigger-appointment";
+      const response = await axios.post(apiUrl, {
+        apiSecret: process.env.NEXT_PUBLIC_API_SECRET || "SECRET_KEY_FOR_JWT",
         clinicName: "MO Dental Clinic",
         doctorEmail: "debiduttaacharya.dev@gmail.com",
         patientName: data.patientName,

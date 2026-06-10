@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-clinical-white: #FFFFFF;
+  --color-clinical-charcoal: #1A1A1A;
+  --color-clinical-slate: #334155;
+  --color-clinical-obsidian: #0F172A;
+
+  --font-inter: var(--font-inter);
+  --font-playfair: var(--font-playfair);
+}
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), ui-sans-serif, system-ui;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), ui-serif, Georgia;
+  font-weight: 700;
+}
+
+@layer base {
+  * {
+    @apply border-clinical-slate/20;
+  }
+}
+
+.before-after-slider-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.before-after-slider-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: white;
+  cursor: ew-resize;
+  z-index: 10;
+}

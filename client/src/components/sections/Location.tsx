@@ -3,7 +3,7 @@ import { Button } from "../ui/Button";
 
 export const Location = () => {
   return (
-    <section id="contact" className="section-padding">
+    <section id="location" className="section-padding">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>

@@ -21,13 +21,13 @@ export const Footer = () => {
               Leading dental care clinic in Bhubaneswar providing painless treatments with modern technology and personalized care.
             </p>
             <div className="flex items-center space-x-4">
-              <a href="#" className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all">
+              <a href="#" aria-label="Facebook" className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all">
                 <Facebook size={18} />
               </a>
-              <a href="#" className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all">
+              <a href="#" aria-label="Instagram" className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all">
                 <Instagram size={18} />
               </a>
-              <a href="#" className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all">
+              <a href="#" aria-label="Twitter" className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all">
                 <Twitter size={18} />
               </a>
             </div>
@@ -37,10 +37,16 @@ export const Footer = () => {
           <div>
             <h4 className="font-display font-bold text-lg mb-6">Quick Links</h4>
             <ul className="space-y-4">
-              {["About Us", "Our Services", "Clinic Gallery", "Patient Reviews", "Book Appointment"].map((link) => (
-                <li key={link}>
-                  <Link href="#" className="text-foreground/60 hover:text-primary transition-colors">
-                    {link}
+              {[
+                { name: "About Us", href: "/#about" },
+                { name: "Our Services", href: "/#services" },
+                { name: "Clinic Gallery", href: "/#gallery" },
+                { name: "Patient Reviews", href: "/#reviews" },
+                { name: "Book Appointment", href: "/#book" },
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link href={link.href} className="text-foreground/60 hover:text-primary transition-colors">
+                    {link.name}
                   </Link>
                 </li>
               ))}
@@ -51,10 +57,16 @@ export const Footer = () => {
           <div>
             <h4 className="font-display font-bold text-lg mb-6">Services</h4>
             <ul className="space-y-4">
-              {["Dental Implants", "Root Canal Treatment", "Braces & Aligners", "Teeth Whitening", "Kids Dentistry"].map((service) => (
-                <li key={service}>
-                  <Link href="#" className="text-foreground/60 hover:text-primary transition-colors">
-                    {service}
+              {[
+                { name: "Dental Implants", href: "/services/dental-implants-bhubaneswar" },
+                { name: "Root Canal Treatment", href: "/services/root-canal-treatment-bhubaneswar" },
+                { name: "Braces & Aligners", href: "/services/braces-treatment-bhubaneswar" },
+                { name: "Teeth Whitening", href: "/services/teeth-whitening-bhubaneswar" },
+                { name: "Smile Designing", href: "/services/smile-designing-bhubaneswar" },
+              ].map((service) => (
+                <li key={service.name}>
+                  <Link href={service.href} className="text-foreground/60 hover:text-primary transition-colors">
+                    {service.name}
                   </Link>
                 </li>
               ))}

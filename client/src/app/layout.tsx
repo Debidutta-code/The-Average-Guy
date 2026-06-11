@@ -5,6 +5,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
+import { FloatingActions } from "@/components/layout/FloatingActions";
 import { JSONLD } from "@/components/seo/JSONLD";
 import { siteConfig } from "@/data/siteConfig";
 
@@ -85,6 +86,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <StickyMobileCTA />
+        <FloatingActions />
       </body>
     </html>
   );

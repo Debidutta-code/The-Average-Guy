@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Input } from "../ui/Input";
 import { services } from "@/data/services";
+import { siteConfig } from "@/data/siteConfig";
 import { User, Phone, Mail, MessageSquare, Calendar, Clock, CheckCircle2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
@@ -45,8 +46,8 @@ export const BookingForm = () => {
         body: JSON.stringify({
           ...data,
           apiSecret: process.env.NEXT_PUBLIC_API_SECRET || "SECRET_KEY_FOR_JWT",
-          clinicName: "Smile Planet Dental Care",
-          doctorEmail: "smileplanetdental@gmail.com",
+          clinicName: siteConfig.name,
+          doctorEmail: siteConfig.contact.email,
         }),
       });
 
@@ -87,7 +88,7 @@ export const BookingForm = () => {
   }
 
   return (
-    <section id="book" className="py-12 md:py-20 bg-[#F8FAFC] relative overflow-hidden min-h-[800px] flex items-center">
+    <section id="book" className="py-12 md:py-16 bg-[#F8FAFC] relative overflow-hidden lg:min-h-[800px] flex items-center">
       {/* Decorative Elements */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4" />
@@ -107,8 +108,8 @@ export const BookingForm = () => {
             </p>
           </div>
 
-          <div className="bg-white rounded-[32px] md:rounded-[40px] p-6 md:p-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] border border-slate-100">
-            <form onSubmit={handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-x-8 gap-y-5">
+          <div className="bg-white rounded-[32px] md:rounded-[40px] p-6 md:p-8 lg:p-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] border border-slate-100">
+            <form onSubmit={handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-x-6 lg:gap-x-8 gap-y-4 lg:gap-y-5">
               <div className="relative group">
                 <Input
                   label="Patient Name"

@@ -6,12 +6,12 @@ import { Menu, X, Phone } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 
 const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Gallery", href: "#gallery" },
-  { name: "Reviews", href: "#reviews" },
-  { name: "FAQ", href: "#faq" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "/#about" },
+  { name: "Services", href: "/#services" },
+  { name: "Gallery", href: "/#gallery" },
+  { name: "Reviews", href: "/#reviews" },
+  { name: "FAQ", href: "/#faq" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export const Navbar = () => {
@@ -53,7 +53,7 @@ export const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <Link href="#book" className="btn btn-primary !py-2.5 !px-6 text-sm">
+          <Link href="/#book" className="btn btn-primary !py-2.5 !px-6 text-sm">
             Book Appointment
           </Link>
         </div>
@@ -82,7 +82,7 @@ export const Navbar = () => {
             </Link>
           ))}
           <Link
-            href="#book"
+            href="/#book"
             className="btn btn-primary w-full"
             onClick={() => setIsOpen(false)}
           >

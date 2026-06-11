@@ -1,161 +1,114 @@
-"use client";
-
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { SectionHeading } from "../ui/SectionHeading";
-import { Card } from "../ui/Card";
-import { Button } from "../ui/Button";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
-
-const contactSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  subject: z.string().min(5, "Subject must be at least 5 characters"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
+import { MapPin, Phone, MessageCircle, Clock, Navigation, Send } from "lucide-react";
+import { siteConfig } from "@/data/siteConfig";
 
 export const Contact = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-  });
-
-  const onSubmit = async (data: ContactFormData) => {
-    // Simulate API call
-    console.log("Contact form submitted:", data);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    alert("Message sent successfully! We will get back to you soon.");
-    reset();
-  };
-
   return (
-    <section id="contact" className="section-padding">
-      <div className="container mx-auto px-4 md:px-6">
-        <SectionHeading
-          title="Get In Touch"
-          subtitle="Have questions? Reach out to us and we'll be happy to assist you with your dental concerns."
-        />
+    <section id="contact" className="section-padding bg-white relative">
+      <div className="container-custom">
+        <div className="grid lg:grid-cols-2 gap-20 items-stretch">
+          {/* Contact Details */}
+          <div className="flex flex-col justify-between py-4">
+            <div className="space-y-6 mb-12">
+              <div className="inline-flex items-center space-x-2 bg-accent/10 text-secondary px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+                <Send size={14} className="mb-0.5" />
+                <span>Contact Us</span>
+              </div>
+              <h3 className="text-4xl md:text-6xl font-display font-bold leading-tight">
+                Have questions? <br />
+                <span className="text-primary italic">Reach out to us</span>
+              </h3>
+              <p className="text-foreground/60 text-lg md:text-xl leading-relaxed max-w-xl">
+                Reach out to us and we&apos;ll be happy to assist you with your dental concerns. Our team is always here to help.
+              </p>
+            </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <Card className="p-8 border-none bg-primary/5 dark:bg-primary/10">
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-primary shadow-sm shrink-0">
-                    <Phone size={24} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-slate-500 mb-1">Call Us</p>
-                    <p className="text-lg font-bold">7008520133</p>
-                  </div>
+            <div className="grid gap-8 mb-12">
+              <div className="flex items-start space-x-6 group">
+                <div className="w-16 h-16 bg-slate-50 border border-slate-100 rounded-3xl flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  <MapPin size={30} />
                 </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-primary shadow-sm shrink-0">
-                    <Mail size={24} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-slate-500 mb-1">Email Us</p>
-                    <p className="text-lg font-bold">contact@modentalclinic.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-primary shadow-sm shrink-0">
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-slate-500 mb-1">Visit Us</p>
-                    <p className="text-lg font-bold leading-snug">
-                      Plot No. 2405, Infront of Apollo Pharmacy,<br />
-                      Golakha, Mancheswar, Bhubaneswar, 751010
-                    </p>
-                  </div>
+                <div>
+                  <h4 className="text-sm font-bold uppercase tracking-widest text-foreground/40 mb-2">Our Clinic</h4>
+                  <p className="text-xl font-bold leading-relaxed max-w-xs">
+                    {siteConfig.contact.address}
+                  </p>
                 </div>
               </div>
-            </Card>
 
-            <div className="p-1 bg-slate-100 dark:bg-slate-800 rounded-[32px] overflow-hidden h-64 shadow-inner">
-               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.578843930303!2d85.86125527420148!3d20.31769241182302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190b84243e8da3%3A0xf52b34d4b754727f!2sMO%20DENTAL%20CLINIC!5e0!3m2!1sen!2sin!4v1781091415684!5m2!1sen!2sin"
-                className="w-full h-full rounded-[28px]"
-                loading="lazy"
-              ></iframe>
+              <div className="flex items-start space-x-6 group">
+                <div className="w-16 h-16 bg-slate-50 border border-slate-100 rounded-3xl flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  <Phone size={30} />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold uppercase tracking-widest text-foreground/40 mb-2">Call Us</h4>
+                  <p className="text-2xl md:text-3xl font-display font-bold text-primary">
+                    {siteConfig.contact.phone}
+                  </p>
+                  <p className="text-foreground/60 font-medium mt-1 uppercase text-xs tracking-widest">Available 10:00 AM - 09:00 PM</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-6 group">
+                <div className="w-16 h-16 bg-slate-50 border border-slate-100 rounded-3xl flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  <Clock size={30} />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold uppercase tracking-widest text-foreground/40 mb-2">Working Hours</h4>
+                  <ul className="space-y-1 text-lg font-bold">
+                    {siteConfig.contact.businessHours.map((hour, i) => (
+                      <li key={i} className="flex items-center space-x-3">
+                        <span className="text-foreground/40 font-medium w-36 text-sm">{hour.day}</span>
+                        <span className="text-foreground/80">{hour.time}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <a
+                href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+                className="btn btn-primary h-16 px-10 space-x-3 text-lg"
+              >
+                <Phone size={22} />
+                <span>Call Now</span>
+              </a>
+              <a
+                href={siteConfig.links.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn bg-emerald-500 text-white hover:bg-emerald-600 h-16 px-10 space-x-3 shadow-xl shadow-emerald-500/20 text-lg border-0"
+              >
+                <MessageCircle size={22} />
+                <span>WhatsApp</span>
+              </a>
+              <a
+                href={siteConfig.contact.googleMaps}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline h-16 px-10 space-x-3 text-lg border-slate-200 text-foreground hover:bg-slate-50"
+              >
+                <Navigation size={22} />
+                <span>Directions</span>
+              </a>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <Card className="p-8 md:p-10">
-            <h3 className="text-2xl font-bold mb-8">Send Us a Message</h3>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Full Name</label>
-                  <input
-                    {...register("name")}
-                    className={`w-full px-4 py-3 rounded-xl border ${errors.name ? 'border-red-500' : 'border-slate-200 dark:border-slate-700'} bg-transparent focus:ring-2 focus:ring-primary/20 outline-none transition-all`}
-                    placeholder="John Doe"
-                  />
-                  {errors.name && <p className="text-red-500 text-xs">{errors.name.message}</p>}
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Email Address</label>
-                  <input
-                    {...register("email")}
-                    className={`w-full px-4 py-3 rounded-xl border ${errors.email ? 'border-red-500' : 'border-slate-200 dark:border-slate-700'} bg-transparent focus:ring-2 focus:ring-primary/20 outline-none transition-all`}
-                    placeholder="john@example.com"
-                  />
-                  {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Phone Number</label>
-                  <input
-                    {...register("phone")}
-                    className={`w-full px-4 py-3 rounded-xl border ${errors.phone ? 'border-red-500' : 'border-slate-200 dark:border-slate-700'} bg-transparent focus:ring-2 focus:ring-primary/20 outline-none transition-all`}
-                    placeholder="9998887776"
-                  />
-                  {errors.phone && <p className="text-red-500 text-xs">{errors.phone.message}</p>}
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Subject</label>
-                  <input
-                    {...register("subject")}
-                    className={`w-full px-4 py-3 rounded-xl border ${errors.subject ? 'border-red-500' : 'border-slate-200 dark:border-slate-700'} bg-transparent focus:ring-2 focus:ring-primary/20 outline-none transition-all`}
-                    placeholder="General Inquiry"
-                  />
-                  {errors.subject && <p className="text-red-500 text-xs">{errors.subject.message}</p>}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Message</label>
-                <textarea
-                  {...register("message")}
-                  rows={4}
-                  className={`w-full px-4 py-3 rounded-xl border ${errors.message ? 'border-red-500' : 'border-slate-200 dark:border-slate-700'} bg-transparent focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none`}
-                  placeholder="How can we help you?"
-                ></textarea>
-                {errors.message && <p className="text-red-500 text-xs">{errors.message.message}</p>}
-              </div>
-
-              <Button type="submit" className="w-full h-12 gap-2" disabled={isSubmitting}>
-                {isSubmitting ? "Sending..." : <><Send size={18} /> Send Message</>}
-              </Button>
-            </form>
-          </Card>
+          {/* Map Embed */}
+          <div className="relative min-h-[500px] lg:h-auto w-full rounded-[40px] md:rounded-[60px] overflow-hidden shadow-[0_32px_80px_-20px_rgba(0,0,0,0.12)] border-8 border-slate-50">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.592759230015!2d85.8354554!3d20.2757175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a19a7597c4369e9%3A0xa33c63e848bcbbeb!2sSmile%20Planet%20Dental%20Care!5e0!3m2!1sen!2sin!4v1781105045922!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0, minHeight: '500px' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Smile Planet Dental Care Location"
+              className="absolute inset-0 h-full w-full"
+            />
+          </div>
         </div>
       </div>
     </section>

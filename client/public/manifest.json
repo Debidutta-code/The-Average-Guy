@@ -1,0 +1,16 @@
+{
+  "name": "Smile Planet Dental Care",
+  "short_name": "Smile Planet",
+  "description": "Professional dental care and modern technology at Smile Planet Dental Care, Bhubaneswar.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#14B8A6",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

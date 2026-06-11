@@ -87,28 +87,28 @@ export const BookingForm = () => {
   }
 
   return (
-    <section id="book" className="section-padding bg-[#F8FAFC] relative overflow-hidden">
+    <section id="book" className="py-12 md:py-20 bg-[#F8FAFC] relative overflow-hidden min-h-[800px] flex items-center">
       {/* Decorative Elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/4" />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4" />
 
       <div className="container-custom relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-20 space-y-4">
-            <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
-              <Calendar size={14} className="mb-0.5" />
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8 md:mb-12 space-y-2">
+            <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+              <Calendar size={12} className="mb-0.5" />
               <span>Online Booking</span>
             </div>
-            <h3 className="text-4xl md:text-6xl font-display font-bold">
+            <h3 className="text-3xl md:text-5xl font-display font-bold">
               Reserve Your <span className="text-primary italic">Visit</span>
             </h3>
-            <p className="text-foreground/50 text-lg md:text-xl max-w-2xl mx-auto">
-              Fill out the form below and we&apos;ll handle the rest. Professional care is just a few clicks away.
+            <p className="text-foreground/50 text-base md:text-lg max-w-2xl mx-auto">
+              Quickly fill out the form below and we&apos;ll handle the rest.
             </p>
           </div>
 
-          <div className="bg-white rounded-[40px] md:rounded-[60px] p-8 md:p-16 shadow-[0_32px_80px_-20px_rgba(0,0,0,0.08)] border border-slate-100">
-            <form onSubmit={handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-x-10 gap-y-8">
+          <div className="bg-white rounded-[32px] md:rounded-[40px] p-6 md:p-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] border border-slate-100">
+            <form onSubmit={handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-x-8 gap-y-5">
               <div className="relative group">
                 <Input
                   label="Patient Name"
@@ -116,7 +116,7 @@ export const BookingForm = () => {
                   {...register("patientName")}
                   error={errors.patientName?.message}
                 />
-                <User className="absolute right-6 top-[54px] text-slate-300 group-focus-within:text-primary transition-colors" size={20} />
+                <User className="absolute right-5 top-[44px] text-slate-300 group-focus-within:text-primary transition-colors" size={18} />
               </div>
 
               <div className="relative group">
@@ -126,7 +126,7 @@ export const BookingForm = () => {
                   {...register("patientPhone")}
                   error={errors.patientPhone?.message}
                 />
-                <Phone className="absolute right-6 top-[54px] text-slate-300 group-focus-within:text-primary transition-colors" size={20} />
+                <Phone className="absolute right-5 top-[44px] text-slate-300 group-focus-within:text-primary transition-colors" size={18} />
               </div>
 
               <div className="relative group">
@@ -137,7 +137,7 @@ export const BookingForm = () => {
                   {...register("email")}
                   error={errors.email?.message}
                 />
-                <Mail className="absolute right-6 top-[54px] text-slate-300 group-focus-within:text-primary transition-colors" size={20} />
+                <Mail className="absolute right-5 top-[44px] text-slate-300 group-focus-within:text-primary transition-colors" size={18} />
               </div>
 
               <div className="relative group">
@@ -154,8 +154,8 @@ export const BookingForm = () => {
                   ))}
                   <option value="General Consultation">General Consultation</option>
                 </Input>
-                <div className="absolute right-6 top-[54px] pointer-events-none">
-                   <Sparkles className="text-slate-300 group-focus-within:text-primary transition-colors" size={20} />
+                <div className="absolute right-5 top-[44px] pointer-events-none">
+                   <Sparkles className="text-slate-300 group-focus-within:text-primary transition-colors" size={18} />
                 </div>
               </div>
 
@@ -166,7 +166,7 @@ export const BookingForm = () => {
                   {...register("date")}
                   error={errors.date?.message}
                 />
-                <Calendar className="absolute right-6 top-[54px] text-slate-300 group-focus-within:text-primary transition-colors" size={20} />
+                <Calendar className="absolute right-5 top-[44px] text-slate-300 group-focus-within:text-primary transition-colors" size={18} />
               </div>
 
               <div className="relative group">
@@ -188,27 +188,28 @@ export const BookingForm = () => {
                   <option value="07:00 PM">07:00 PM</option>
                   <option value="08:00 PM">08:00 PM</option>
                 </Input>
-                <div className="absolute right-6 top-[54px] pointer-events-none">
-                  <Clock className="text-slate-300 group-focus-within:text-primary transition-colors" size={20} />
+                <div className="absolute right-5 top-[44px] pointer-events-none">
+                  <Clock className="text-slate-300 group-focus-within:text-primary transition-colors" size={18} />
                 </div>
               </div>
 
               <div className="md:col-span-2 relative group">
                 <Input
                   as="textarea"
-                  label="Tell us about your concern"
-                  placeholder="How can we help you today?"
+                  label="Message (Optional)"
+                  placeholder="How can we help?"
+                  className="min-h-[80px]"
                   {...register("message")}
                   error={errors.message?.message}
                 />
-                <MessageSquare className="absolute right-6 top-[54px] text-slate-300 group-focus-within:text-primary transition-colors" size={20} />
+                <MessageSquare className="absolute right-5 top-[44px] text-slate-300 group-focus-within:text-primary transition-colors" size={18} />
               </div>
 
-              <div className="md:col-span-2 pt-6">
+              <div className="md:col-span-2 pt-2">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn btn-primary w-full h-20 text-xl font-bold shadow-2xl shadow-primary/30 transition-all hover:shadow-primary/40 hover:-translate-y-1 active:translate-y-0"
+                  className="btn btn-primary w-full h-16 text-lg font-bold shadow-xl shadow-primary/20 transition-all hover:shadow-primary/30 hover:-translate-y-0.5 active:translate-y-0"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center space-x-3">

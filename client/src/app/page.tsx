@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/Hero";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { Services } from "@/components/sections/Services";
+import { CTA } from "@/components/sections/CTA";
 import { Transformations } from "@/components/sections/Transformations";
 import { MeetDoctor } from "@/components/sections/MeetDoctor";
 import { Gallery } from "@/components/sections/Gallery";
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <WhyChooseUs />
       <Services />
+      <CTA />
       <Transformations />
       <MeetDoctor />
       <Gallery />

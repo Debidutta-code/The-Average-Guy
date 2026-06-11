@@ -20,8 +20,8 @@ export const Input = React.forwardRef<HTMLInputElement & HTMLTextAreaElement & H
           <Component
             ref={ref}
             className={cn(
-              "w-full bg-slate-50 border-2 border-slate-100 rounded-[20px] px-6 py-4 text-foreground placeholder:text-slate-400 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none transition-all duration-300",
-              as === "textarea" && "min-h-[140px] resize-none",
+              "w-full bg-slate-50 border-2 border-slate-100 rounded-[18px] px-5 py-3.5 text-foreground placeholder:text-slate-400 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none transition-all duration-300 text-sm",
+              as === "textarea" && "min-h-[120px] resize-none",
               error && "border-rose-200 bg-rose-50/50 focus:border-rose-400 focus:ring-rose-500/5",
               className
             )}

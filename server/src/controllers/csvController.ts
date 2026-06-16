@@ -37,11 +37,17 @@ export const importLeads = async (req: AuthRequest, res: Response) => {
   }
 
   try {
+    // 1. Get existing phone numbers for this user to prevent duplicates
+    const existingLeads = await Lead.find({ user: req.user._id }).select('phoneNumber');
+    const existingPhoneNumbers = new Set(existingLeads.map(l => l.phoneNumber.trim()));
+
     // Handle both Windows (\r\n) and Unix (\n) line endings
     const lines = csvData.replace(/\r\n/g, '\n').trim().split('\n');
     console.log(`[CSV Import] Total lines found: ${lines.length}`);
 
     const leadsToCreate = [];
+    const processedInFile = new Set();
+    let duplicateCount = 0;
 
     for (let i = 1; i < lines.length; i++) {
       if (!lines[i].trim()) continue;
@@ -65,18 +71,27 @@ export const importLeads = async (req: AuthRequest, res: Response) => {
       }
       values.push(current.trim());
 
-      console.log(`[CSV Import] Line ${i} parsed values:`, values);
-
       if (values.length < 4) {
           console.log(`[CSV Import] Warning: Line ${i} has insufficient fields.`);
           continue;
       }
 
+      const phoneNumber = values[2]?.trim() || 'No Phone';
+
+      // 2. Check if phone number already exists for this user or is duplicate in this file
+      if (existingPhoneNumbers.has(phoneNumber) || processedInFile.has(phoneNumber)) {
+          console.log(`[CSV Import] Skipping duplicate phone number: ${phoneNumber}`);
+          duplicateCount++;
+          continue;
+      }
+
+      processedInFile.add(phoneNumber);
+
       leadsToCreate.push({
         user: req.user._id,
         clinicName: values[0] || 'Unknown Clinic',
         contactPerson: values[1] || 'Unknown Person',
-        phoneNumber: values[2] || 'No Phone',
+        phoneNumber: phoneNumber,
         city: values[3] || 'Unknown City',
         status: values[4] || 'New Lead',
         priority: (values[5] || 'Medium') as 'High' | 'Medium' | 'Low',
@@ -85,14 +100,16 @@ export const importLeads = async (req: AuthRequest, res: Response) => {
       });
     }
 
-    console.log(`[CSV Import] Attempting to insert ${leadsToCreate.length} leads`);
+    console.log(`[CSV Import] Attempting to insert ${leadsToCreate.length} leads. Skipped ${duplicateCount} duplicates.`);
 
     if (leadsToCreate.length > 0) {
         await Lead.insertMany(leadsToCreate);
     }
 
-    console.log(`[CSV Import] Successfully imported ${leadsToCreate.length} leads`);
-    res.status(201).json({ message: `${leadsToCreate.length} leads imported successfully` });
+    res.status(201).json({
+        message: `${leadsToCreate.length} leads imported successfully.`,
+        skipped: duplicateCount
+    });
   } catch (error: any) {
     console.error('[CSV Import] Critical Error:', error.message);
     res.status(500).json({ message: error.message });

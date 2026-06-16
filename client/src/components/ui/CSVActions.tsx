@@ -1,12 +1,28 @@
 import React from 'react';
 import api from '../../lib/api';
 import { Button } from './Button';
-import { Download, Upload, ShieldCheck } from 'lucide-react';
+import { Download, Upload, ShieldCheck, FileSpreadsheet } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
 
 const CSVActions: React.FC = () => {
     const queryClient = useQueryClient();
     const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+    const handleDownloadTemplate = async () => {
+        try {
+            const response = await api.get('/csv/template', { responseType: 'blob' });
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'lead-template.csv');
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        } catch (error) {
+            console.error('Template download failed', error);
+            alert('Failed to download template');
+        }
+    };
 
     const handleBackup = async () => {
         try {
@@ -61,6 +77,9 @@ const CSVActions: React.FC = () => {
 
     return (
         <div className="flex gap-2 flex-wrap">
+            <Button variant="outline" size="sm" onClick={handleDownloadTemplate} className="gap-2 text-blue-600 border-blue-200">
+                <FileSpreadsheet className="h-4 w-4" /> Template
+            </Button>
             <Button variant="outline" size="sm" onClick={handleExport} className="gap-2">
                 <Download className="h-4 w-4" /> Export
             </Button>

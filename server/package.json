@@ -11,6 +11,7 @@
     "seed": "node --loader ts-node/esm src/seed.ts"
   },
   "dependencies": {
+    "@types/morgan": "^1.9.10",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -18,6 +19,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb-memory-server": "^9.4.0",
     "mongoose": "^8.4.1",
+    "morgan": "^1.11.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

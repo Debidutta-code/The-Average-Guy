@@ -1,0 +1,16 @@
+{
+  "name": "Lead Follow-Up CRM",
+  "short_name": "LeadCRM",
+  "description": "Solo Freelancer CRM for Lead Follow-Ups",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
